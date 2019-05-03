@@ -1,0 +1,57 @@
+﻿<UserControl x:Class="QLK_Dn.UserControls_Pages.Menu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{StaticResource vm_menu}">
+    <Grid>
+        <ListView x:Name="menu" Foreground="#FF313131" FontFamily="Champagne &amp; Limousines" FontSize="18">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <i:InvokeCommandAction Command="{Binding SelectionChanged_Command}"
+                                           CommandParameter="{Binding ElementName=menu}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            <ListViewItem Uid="1" Height="45" Padding="0" Opacity="0.7" Cursor="Hand">
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <MaterialDesign:PackIcon Kind="BoxVariant" Width="20" Height="20" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="Mặt hàng" Margin="10"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Uid="2" Height="45" Padding="0" Opacity="0.7" Cursor="Hand">
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <MaterialDesign:PackIcon Kind="HumanHandsdown" Width="20" Height="20" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="Khách hàng" Margin="10"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Uid="3" Height="45" Padding="0" Opacity="0.7" Cursor="Hand">
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <MaterialDesign:PackIcon Kind="Contacts" Width="20" Height="20" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock  Text="Nhà cung cấp" Margin="10"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Uid="5" Height="45" Padding="0" Opacity="0.7" Cursor="Hand">
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <MaterialDesign:PackIcon Kind="Account" Width="20" Height="20" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="Nhân viên" Margin="10"/>    
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Uid="4" Height="45" Padding="0" Opacity="0.7" Cursor="Hand">
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <MaterialDesign:PackIcon Kind="Settings" Width="20" Height="20" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="Hệ thống" Margin="10"/>
+                </StackPanel>
+            </ListViewItem>
+            <ListViewItem Uid="6" Height="45" Padding="0" Opacity="0.7" Cursor="Hand">
+                <StackPanel Orientation="Horizontal" Margin="10 0">
+                    <MaterialDesign:PackIcon Kind="Recycle" Width="20" Height="20" Foreground="Black" Margin="5" VerticalAlignment="Center"/>
+                    <TextBlock Text="Bị xóa" Margin="10"/>
+                </StackPanel>
+            </ListViewItem>
+        </ListView>
+    </Grid>
+</UserControl>
