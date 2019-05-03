@@ -1,0 +1,482 @@
+﻿<Window x:Class="QLK_Dn.View.View_Thukho.Thongke"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        Title="Thống kê" Height="650" Width="1000"
+        MaxHeight="750"
+        WindowState="Maximized"
+        xmlns:UC="clr-namespace:QLK_Dn.UserControls_Pages"
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
+        fw:AcrylicWindow.ShowTitleBar="False"
+        fw:AcrylicWindow.Enabled="True"
+        ResizeMode="CanResizeWithGrip"
+        WindowStyle="None"
+        DataContext="{StaticResource vm_thongke}">
+    <Window.Resources>
+        <Storyboard x:Key="CloseMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Storyboard x:Key="OpenMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="GridMenu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="300"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonClose">
+            <BeginStoryboard x:Name="CloseMenu_BeginStoryboard" Storyboard="{StaticResource CloseMenu}"/>
+        </EventTrigger>
+        <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonOpen">
+            <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <UC:ControlBar Height="30"/>
+        </Grid>
+
+
+        <Grid Grid.Row="1" Background="White">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="ButtonOpen" Visibility="Visible"
+                        Content="{MaterialDesign:PackIcon Kind=Menu, Size=30}"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ToolTip="Mở"
+                        Foreground="Black"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"></Button>
+                    <Button x:Name="ButtonClose" Visibility="Hidden"
+                        Content="{MaterialDesign:PackIcon Kind=Menu, Size=30}"
+                        Background="{x:Null}"
+                        BorderBrush="{x:Null}"
+                        ToolTip="Đóng"
+                        Foreground="Black"
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"></Button>
+                    <UC:LowControlbar_Tk Grid.Column="2"></UC:LowControlbar_Tk>
+                </Grid>
+                <Separator Grid.Row="1" Background="Black" Height="3"></Separator>
+            </Grid>
+
+            <Grid Grid.Row="1">
+                <Grid x:Name="GridMain">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="20"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid x:Name="grid_bangthongke" Grid.Row="0">
+                            <!--Dialog-->
+                            <MaterialDesign:DialogHost x:Name="dil_delete"
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        Background="White"
+                                        IsOpen="{Binding IsOpen,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                <MaterialDesign:DialogHost.DialogContent>
+                                    <Grid Width="auto" Height="200">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="45"/>
+                                            <RowDefinition/>
+                                            <RowDefinition/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+                                        <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
+                                            <TextBlock Width="5"/>
+                                            <MaterialDesign:PackIcon Kind="Warning" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
+                                            <TextBlock FontSize="15" Text="  Thông báo" VerticalAlignment="Center" Foreground="White"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                            <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Content,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                        </StackPanel>
+                                        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Margin="0 8 8 0"
+                                                    Command="{Binding Delete_Command}">
+                                                XÁC NHẬN
+                                            </Button>
+                                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Margin="0 8 8 0"
+                                                    Command="{Binding CloseDialog_Command}"
+                                                    CommandParameter="{Binding ElementName=dil_delete}">
+                                                HỦY
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </MaterialDesign:DialogHost.DialogContent>
+                            </MaterialDesign:DialogHost>
+                            <!--end-->
+                            <Border
+                                x:Name="bd_table"
+                                BorderBrush="Gray"
+                                BorderThickness="2"
+                                Height="500"
+                                VerticalAlignment="Top">
+                                <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
+                                    <ListView x:Name="lv_hienthi"
+                                              ItemsSource="{Binding List}">
+                                        <ListView.View>
+                                            <GridView>
+                                                <GridViewColumn Width="auto">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Grid.Column="0" Kind="CheckboxMarkedOutline"/>
+                                                                <TextBlock Grid.Column="1" Text=" Chọn"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <CheckBox Uid="{Binding mathang.ma_mathang}" x:Name="cb_id" Cursor="Pen">
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="Checked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.AddDeleteList_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_id}"/>
+                                                                    </i:EventTrigger>
+                                                                    <i:EventTrigger EventName="Unchecked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.RemoveDeleteList_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_id}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                            </CheckBox>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="130" DisplayMemberBinding="{Binding mathang.ma_mathang}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="Qrcode"/>
+                                                                <TextBlock Grid.Column="1" Text=" Mã mặt hàng"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.ten_mathang}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="BoxVariant"/>
+                                                                <TextBlock Grid.Column="1" Text=" Tên mặt hàng"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.NHACUNGCAP.ten_nhacungcap}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="Contacts"/>
+                                                                <TextBlock Grid.Column="1" Text=" Nhà cung cấp"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongnhap}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="ArrowDownBoldCircleOutline"/>
+                                                                <TextBlock Grid.Column="1" Text=" Số lượng nhập"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongxuat}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="ArrowUpBoldCircleOutline"/>
+                                                                <TextBlock Grid.Column="1" Text=" Số lượng xuất"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding tonkho}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="MinusCircleOutline"/>
+                                                                <TextBlock Grid.Column="1" Text=" Tồn kho"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="150" DisplayMemberBinding="{Binding mathang.DONVITINH.ten_donvi}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="Animation"/>
+                                                                <TextBlock Grid.Column="1" Text=" Đơn vị tính"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="200">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition/>
+                                                                    <ColumnDefinition  Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <TextBlock Grid.Column="0" Text="{Binding DataContext.Date_Start,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                <TextBlock Grid.Column="1" Text=" - "/>
+                                                                <TextBlock Grid.Column="2" Text="{Binding DataContext.Date_End,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                    <GridViewColumn.CellTemplate>
+                                                        <DataTemplate>
+                                                            <TextBlock Text="{Binding mathang}" Visibility="Hidden"/>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.CellTemplate>
+                                                </GridViewColumn>
+
+                                            </GridView>
+                                        </ListView.View>
+                                    </ListView>
+                                </ScrollViewer>
+                            </Border>
+                        </Grid>
+
+                        <Grid x:Name="grid_chucnang" Grid.Row="1">
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                <Button Margin="5" Style="{DynamicResource RoundButton}"
+                                        Command="{Binding Statistic_Command}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <MaterialDesign:PackIcon Kind="ChartArc" Width="30" Height="30"/>
+                                        <TextBlock Text=" Thống kê" VerticalAlignment="Center" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Margin="5" Style="{DynamicResource RoundButton}"
+                                        Command="{Binding DeleteShow_Command}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <MaterialDesign:PackIcon Kind="DeleteSweep" Width="30" Height="30"/>
+                                        <TextBlock Text=" Xóa" VerticalAlignment="Center" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Margin="5" Style="{DynamicResource RoundButton}"
+                                        Command="{Binding Excel_Command}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <MaterialDesign:PackIcon Kind="FileExcel" Width="30" Height="30"/>
+                                        <TextBlock Text=" Xuất báo cáo" VerticalAlignment="Center" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+
+                    <Grid Grid.Column="3" Background="WhiteSmoke">
+                        <ScrollViewer  VerticalScrollBarVisibility="Auto" 
+                                       HorizontalScrollBarVisibility="Hidden">
+                            <StackPanel Orientation="Vertical">
+
+                                <Expander x:Name="ex_date"
+                                          HorizontalAlignment="Stretch"
+                                          Header="Lọc theo ngày"
+                                          Background="WhiteSmoke">
+                                    <StackPanel
+                                      Orientation="Vertical" 
+                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                        <DatePicker ToolTip="Không được để trống" Margin="5"
+                                                        FontSize="15" Width="250" MaterialDesign:HintAssist.Hint="Chọn ngày bắt đầu"
+                                                        Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                        <TextBlock Width="30"/>
+                                        <DatePicker ToolTip="Không được để trống"  Margin="5"
+                                                        FontSize="15" Width="250" MaterialDesign:HintAssist.Hint="Chọn ngày kết thúc"
+                                                        Text="{Binding Date_End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    </StackPanel>
+                                </Expander>
+
+                                <Expander x:Name="ex_supplier"
+                                          HorizontalAlignment="Stretch"
+                                          Header="Lọc theo nhà cung cấp"
+                                          Background="WhiteSmoke">
+                                    <StackPanel
+                                      Orientation="Vertical"
+                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                        <ListView x:Name="cb_supplier" Margin="5"
+                                              FontSize="15" Width="300" HorizontalAlignment="Left"
+                                              MaterialDesign:HintAssist.Hint="Chọn nhà cung cấp"
+                                              ItemsSource="{Binding List_nhacungcap}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border x:Name="Border" Padding="8">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto"/>
+                                                                <ColumnDefinition Width="5"/>
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <CheckBox Grid.Column="0" Cursor="Pen" x:Name="cb_ncc" Uid="{Binding ma_nhacungcap}">
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="Checked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.AddtoFilterNCC_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_ncc}"/>
+                                                                    </i:EventTrigger>
+                                                                    <i:EventTrigger EventName="Unchecked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.DeletefromFilterNCC_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_ncc}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                            </CheckBox>
+                                                            <StackPanel Grid.Column="2">
+                                                                <TextBlock  Text="{Binding ten_nhacungcap}" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                </Expander>
+
+                                <Expander x:Name="ex_items"
+                                          HorizontalAlignment="Stretch"
+                                          Header="Lọc theo loại mặt hàng"
+                                          Background="WhiteSmoke">
+                                    <StackPanel
+                                      Orientation="Vertical"
+                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                        <ListView x:Name="cb_type" Margin="5"
+                                              FontSize="15" Width="300"
+                                              MaterialDesign:HintAssist.Hint="Chọn loại mặt hàng"
+                                              ItemsSource="{Binding List_loaihang}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border x:Name="Border" Padding="8">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto"/>
+                                                                <ColumnDefinition Width="5"/>
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <CheckBox Grid.Column="0" Cursor="Pen" x:Name="cb_lh" Uid="{Binding ma_loaihang}">
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="Checked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.AddtoFilterLH_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_lh}"/>
+                                                                    </i:EventTrigger>
+                                                                    <i:EventTrigger EventName="Unchecked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.DeletefromFilterLH_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_lh}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                            </CheckBox>
+                                                            <StackPanel Grid.Column="2">
+                                                                <TextBlock  Text="{Binding ten_loaihang}" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                </Expander>
+                                <TextBlock Height="100"/>
+                                <Separator Background="Black" Height="1.5"/>
+                            </StackPanel>
+                        </ScrollViewer>
+                    </Grid>
+                </Grid>
+
+
+                <Grid x:Name="GridMenu" Background="WhiteSmoke"
+                  Margin="-300 0 0 0"
+                  RenderTransformOrigin="0.5,0.5" Width="300" 
+                  HorizontalAlignment="Left">
+                    <Grid.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </Grid.RenderTransform>
+                    <StackPanel>
+                        <UC:Menu_Tk></UC:Menu_Tk>
+                    </StackPanel>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>
+
