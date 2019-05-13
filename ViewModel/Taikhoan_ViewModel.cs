@@ -492,32 +492,51 @@ namespace QLK_Dn.ViewModel
 
             Send_Command = new RelayCommand<Button>(p =>
             {
-                if (string.IsNullOrEmpty(Tendangnhap))
-                    return false;
-
                 return true;
             }, p =>
             {
-                var result = Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.ten_taikhoan == Tendangnhap).Count();
-                if (result != 0)
+                if (!string.IsNullOrEmpty(Tendangnhap))
                 {
-                    Model.TAIKHOAN TK = Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.ten_taikhoan == Tendangnhap).SingleOrDefault();
-                    Makhoiphuc = GuiMail(TK);
-
-                    Khoiphuctk view = new Khoiphuctk();
-                    view.Show();
-
-                    Window w = getWindowParent(p) as Window;
-                    if (w != null)
+                    var result = Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.ten_taikhoan == Tendangnhap).Count();
+                    if (result != 0)
                     {
-                        w.Close();
+                        Model.TAIKHOAN TK = Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.ten_taikhoan == Tendangnhap).SingleOrDefault();
+                        try
+                        {
+                            Makhoiphuc = GuiMail(TK);
+
+                            Khoiphuctk view = new Khoiphuctk();
+                            view.Show();
+
+                            Window w = getWindowParent(p) as Window;
+                            if (w != null)
+                            {
+                                w.Close();
+                            }
+
+                            Active = true;
+                            Message = "Đã gửi mã xác thực !!! Vui lòng kiểm tra email ";
+                        }
+                        catch (Exception)
+                        {
+                            Active = true;
+                            Message = "Không thể gửi mã !!! ";
+                        }
+
+                    }
+                    else
+                    {
+                        Active = true;
+                        Message = "Tên đăng nhập không tồn tại !!!";
                     }
                 }
+
                 else
                 {
                     Active = true;
-                    Message = "Tên đăng nhập không tồn tại";
+                    Message = "Vui lòng điền tên đăng nhập !!!";
                 }
+
             });
 
             Check_Command = new RelayCommand<Button>(p =>
@@ -637,33 +656,26 @@ namespace QLK_Dn.ViewModel
 
             string from = "ctythietbiyte.vietnhat@gmail.com";
             string frompass = "vnisdabest";
-            try
+            if (!string.IsNullOrEmpty(mail))
             {
-                if (!string.IsNullOrEmpty(mail))
-                {
-                    var mess = "Mã xác thực : " + makhoiphuc;
+                var mess = "Mã xác thực : " + makhoiphuc;
 
 
-                    MailMessage messenge = new MailMessage(from, mail, ("Xin chào " + TK.ten_taikhoan), mess);
-                    SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
-                    client.EnableSsl = true;
+                MailMessage messenge = new MailMessage(from, mail, ("Xin chào " + TK.ten_taikhoan), mess);
+                SmtpClient client = new SmtpClient("smtp.gmail.com", 587);
+                client.EnableSsl = true;
 
-                    client.Credentials = new NetworkCredential(from, frompass);
+                client.Credentials = new NetworkCredential(from, frompass);
 
-                    client.Send(messenge);
+                client.Send(messenge);
 
-                }
-                else
-                {
-                    Active = true;
-                    Message = "Tài khoản này không có E-Mail khôi phục";
-                }
             }
-            catch (Exception)
+            else
             {
                 Active = true;
-                Message = "Gửi Mã xác thực thất bại !!! Kiểm tra lại kết nối mạng";
+                Message = "Tài khoản này không có E-Mail khôi phục";
             }
+
 
             return makhoiphuc;
         }

@@ -47,6 +47,7 @@ namespace QLK_Dn.ViewModel
         public ICommand RestoreShow_Command { get; set; }
         public ICommand DelShow_Command { get; set; }
         public ICommand ResShow_Command { get; set; }
+        public ICommand Search_Command { get; set; }
 
         #endregion
 
@@ -249,6 +250,45 @@ namespace QLK_Dn.ViewModel
                 RDList = new ObservableCollection<Model.MATHANG>();
                 Opendel = false;
             });
+            #endregion
+
+            #region Phan tim kiem
+
+            Search_Command = new RelayCommand<TextBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string str = p.Text;
+                List = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == true));
+
+                if (!string.IsNullOrEmpty(str))
+                {
+                    var filterlist = List.Where(x => x.ma_mathang.Contains(str) || x.ten_mathang.Contains(str) || x.NHACUNGCAP.ten_nhacungcap.Contains(str)
+                        || x.LOAIHANG.ten_loaihang.Contains(str) || x.hang.Contains(str) || x.dong.Contains(str));
+
+                    for (int i = 0; i < List.Count(); i++)
+                    {
+                        while (!filterlist.Contains(List[i]))
+                        {
+                            if (List[i] == List[List.Count() - 1])
+                            {
+                                List.Remove(List[i]);
+                                break;
+                            }
+                            else
+                            {
+                                List.Remove(List[i]);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == true));
+                }
+            });
+
             #endregion
         }
 

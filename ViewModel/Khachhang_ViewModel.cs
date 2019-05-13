@@ -91,6 +91,7 @@ namespace QLK_Dn.ViewModel
         public ICommand Delete_Command { get; set; }
         public ICommand DeleteShow_Command { get; set; }
         public ICommand Reset_Command { get; set; }
+        public ICommand Search_Command { get; set; }
         #endregion
 
         #region Message
@@ -317,6 +318,44 @@ namespace QLK_Dn.ViewModel
                 Diachi = "";
                 Sodienthoai = "";
             });
+            #endregion
+
+            #region Phan tim kiem
+
+            Search_Command = new RelayCommand<TextBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string str = p.Text;
+                List = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
+
+                if (!string.IsNullOrEmpty(str))
+                {
+                    var filterlist = List.Where(x => x.ten_khachhang.Contains(str)||x.diachi.Contains(str)||x.sodienthoai.Contains(str));
+
+                    for (int i = 0; i < List.Count(); i++)
+                    {
+                        while (!filterlist.Contains(List[i]))
+                        {
+                            if (List[i] == List[List.Count() - 1])
+                            {
+                                List.Remove(List[i]);
+                                break;
+                            }
+                            else
+                            {
+                                List.Remove(List[i]);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
+                }
+            });
+
             #endregion
         }
 

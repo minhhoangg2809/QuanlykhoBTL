@@ -154,6 +154,8 @@ namespace QLK_Dn.ViewModel
         public ICommand Delete_Command { get; set; }
         public ICommand DeleteShow_Command { get; set; }
         public ICommand Reset_Command { get; set; }
+        public ICommand Search_Command { get; set; }
+
         #endregion
 
         #region Message
@@ -300,16 +302,16 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
-               Model.MATHANG UpdateItem = new Model.MATHANG() 
-                {
-                    ten_mathang=Tenmathang,
-                    dong=_Dong,
-                    hang=_Hang,
-                    LOAIHANG=SLoai,
-                    NHACUNGCAP=SNhacungcap,
-                    DONVITINH=SDonvi,
-                    mota = (string.IsNullOrEmpty(Mota)) ? null : Mota
-                };
+                Model.MATHANG UpdateItem = new Model.MATHANG()
+                 {
+                     ten_mathang = Tenmathang,
+                     dong = _Dong,
+                     hang = _Hang,
+                     LOAIHANG = SLoai,
+                     NHACUNGCAP = SNhacungcap,
+                     DONVITINH = SDonvi,
+                     mota = (string.IsNullOrEmpty(Mota)) ? null : Mota
+                 };
                 Model.Mathang_Service.Update(UpdateItem, Mamathang);
 
                 for (int i = 0; i < List.Count(); i++)
@@ -385,13 +387,52 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
-                    RemoveIteminDb();
-                    RemoveIteminList();
+                RemoveIteminDb();
+                RemoveIteminList();
 
-                    DeleteList = new ObservableCollection<Model.MATHANG>();
-                    IsOpen = false;
-                    SelectedItem = null;
+                DeleteList = new ObservableCollection<Model.MATHANG>();
+                IsOpen = false;
+                SelectedItem = null;
             });
+            #endregion
+
+            #region Phan tim kiem
+
+            Search_Command = new RelayCommand<TextBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string str = p.Text;
+                List = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+
+                if (!string.IsNullOrEmpty(str))
+                {
+                    var filterlist = List.Where(x => x.ma_mathang.Contains(str) || x.ten_mathang.Contains(str) || x.NHACUNGCAP.ten_nhacungcap.Contains(str)
+                        || x.LOAIHANG.ten_loaihang.Contains(str) || x.hang.Contains(str) || x.dong.Contains(str));
+
+                    for (int i = 0; i < List.Count(); i++)
+                    {
+                        while (!filterlist.Contains(List[i]))
+                        {
+                            if (List[i] == List[List.Count() - 1])
+                            {
+                                List.Remove(List[i]);
+                                break;
+                            }
+                            else
+                            {
+                                List.Remove(List[i]);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+                }
+            });
+
             #endregion
         }
 

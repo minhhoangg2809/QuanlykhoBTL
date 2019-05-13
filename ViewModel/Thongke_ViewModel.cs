@@ -34,6 +34,26 @@ namespace QLK_Dn.ViewModel
             set { _DeleteList = value; OnPropertyChanged(); }
         }
 
+        #region MATHANG
+
+        private ObservableCollection<Model.MATHANG> _List_mathang;
+
+        public ObservableCollection<Model.MATHANG> List_mathang
+        {
+            get { return _List_mathang; }
+            set { _List_mathang = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<Model.MATHANG> _FilterList_mathang;
+
+        public ObservableCollection<Model.MATHANG> FilterList_mathang
+        {
+            get { return _FilterList_mathang; }
+            set { _FilterList_mathang = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
         #region NHA CUNG CAP
 
         private ObservableCollection<Model.NHACUNGCAP> _List_nhacungcap;
@@ -74,6 +94,26 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
+        #region DON VI
+
+        private ObservableCollection<Model.DONVITINH> _List_donvi;
+
+        public ObservableCollection<Model.DONVITINH> List_donvi
+        {
+            get { return _List_donvi; }
+            set { _List_donvi = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<Model.DONVITINH> _FilterList_donvi;
+
+        public ObservableCollection<Model.DONVITINH> FilterList_donvi
+        {
+            get { return _FilterList_donvi; }
+            set { _FilterList_donvi = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
         #region NGAY THANG
 
         private string _Date_Start;
@@ -100,6 +140,10 @@ namespace QLK_Dn.ViewModel
         public ICommand DeletefromFilterNCC_Command { get; set; }
         public ICommand AddtoFilterLH_Command { get; set; }
         public ICommand DeletefromFilterLH_Command { get; set; }
+        public ICommand AddtoFilterDV_Command { get; set; }
+        public ICommand DeletefromFilterDV_Command { get; set; }
+        public ICommand AddtoFilterMH_Command { get; set; }
+        public ICommand DeletefromFilterMH_Command { get; set; }
 
         #endregion
 
@@ -148,6 +192,13 @@ namespace QLK_Dn.ViewModel
 
             List_loaihang = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
             FilterList_loaihang = new ObservableCollection<Model.LOAIHANG>();
+
+            List_donvi = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
+            FilterList_donvi = new ObservableCollection<Model.DONVITINH>();
+
+            List_mathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+            FilterList_mathang = new ObservableCollection<Model.MATHANG>();
+
 
             IsOpen = false;
 
@@ -207,6 +258,58 @@ namespace QLK_Dn.ViewModel
                 var item = List_loaihang.Where(x => x.ma_loaihang == id).SingleOrDefault();
 
                 FilterList_loaihang.Remove(item);
+            });
+
+            #endregion
+
+            #region Them / xoa khoi FilterList_donvi
+
+            AddtoFilterDV_Command = new RelayCommand<CheckBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string id = p.Uid.ToString();
+                var item = List_donvi.Where(x => x.ma_donvi == id).SingleOrDefault();
+
+                FilterList_donvi.Add(item);
+            });
+
+            DeletefromFilterDV_Command = new RelayCommand<CheckBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string id = p.Uid.ToString();
+                var item = List_donvi.Where(x => x.ma_donvi == id).SingleOrDefault();
+
+                FilterList_donvi.Remove(item);
+            });
+
+            #endregion
+
+            #region Them / xoa khoi FilterList_mathang
+
+            AddtoFilterMH_Command = new RelayCommand<CheckBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string id = p.Uid.ToString();
+                var item = List_mathang.Where(x => x.ma_mathang == id).SingleOrDefault();
+
+                FilterList_mathang.Add(item);
+            });
+
+            DeletefromFilterMH_Command = new RelayCommand<CheckBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string id = p.Uid.ToString();
+                var item = List_mathang.Where(x => x.ma_mathang == id).SingleOrDefault();
+
+                FilterList_mathang.Remove(item);
             });
 
             #endregion
@@ -296,9 +399,19 @@ namespace QLK_Dn.ViewModel
                     Filter_nhacungcap();
                 }
 
-                if (FilterList_loaihang.Count()!=0)
+                if (FilterList_loaihang.Count() != 0)
                 {
                     Filter_loaimathang();
+                }
+
+                if (FilterList_donvi.Count() != 0)
+                {
+                    Filter_donvi();
+                }
+
+                if (FilterList_mathang.Count != 0)
+                {
+                    Filter_mathang();
                 }
             });
             #endregion
@@ -360,6 +473,7 @@ namespace QLK_Dn.ViewModel
                                                 (Date_Start+" - "+Date_End),
                                                 "Mã mặt hàng",
                                                 "Tên mặt hàng",
+                                                "Loại mặt hàng",
                                                 "Nhà cung cấp",
                                                 "Số lượng nhập",
                                                 "Số lượng xuất",
@@ -424,6 +538,8 @@ namespace QLK_Dn.ViewModel
 
                             ws.Cells[rowIndex, colIndex++].Value = item.mathang.ten_mathang;
 
+                            ws.Cells[rowIndex, colIndex++].Value = item.mathang.LOAIHANG.ten_loaihang;
+
                             ws.Cells[rowIndex, colIndex++].Value = item.mathang.NHACUNGCAP.ten_nhacungcap;
 
                             ws.Cells[rowIndex, colIndex++].Value = item.soluongnhap;
@@ -476,6 +592,28 @@ namespace QLK_Dn.ViewModel
             }
         }
 
+        private void Filter_mathang()
+        {
+            if (List.Count() != 0)
+            {
+                for (int i = 0; i < List.Count(); i++)
+                {
+                    while (FilterList_mathang.Where(x => x == List[i].mathang).Count() == 0)
+                    {
+                        if (List[i] == List[List.Count() - 1])
+                        {
+                            List.Remove(List[i]);
+                            break;
+                        }
+                        else
+                        {
+                            List.Remove(List[i]);
+                        }
+                    }
+                }
+            }
+        }
+
         private void Filter_loaimathang()
         {
             if (List.Count() != 0)
@@ -483,6 +621,28 @@ namespace QLK_Dn.ViewModel
                 for (int i = 0; i < List.Count(); i++)
                 {
                     while (FilterList_loaihang.Where(x => x == List[i].mathang.LOAIHANG).Count() == 0)
+                    {
+                        if (List[i] == List[List.Count() - 1])
+                        {
+                            List.Remove(List[i]);
+                            break;
+                        }
+                        else
+                        {
+                            List.Remove(List[i]);
+                        }
+                    }
+                }
+            }
+        }
+
+        private void Filter_donvi()
+        {
+            if (List.Count() != 0)
+            {
+                for (int i = 0; i < List.Count(); i++)
+                {
+                    while (FilterList_donvi.Where(x => x == List[i].mathang.DONVITINH).Count() == 0)
                     {
                         if (List[i] == List[List.Count() - 1])
                         {
@@ -511,8 +671,8 @@ namespace QLK_Dn.ViewModel
 
             foreach (var item in list_mathang)
             {
-                var list_phieunhap = Model.DataProvider.Ins.DB.CHITIETPHIEUNHAPs.Where(x => x.MATHANG.ma_mathang == item.ma_mathang).ToList();
-                var list_phieuxuat = Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.CHITIETPHIEUNHAP.MATHANG.ma_mathang == item.ma_mathang).ToList();
+                var list_phieunhap = Model.DataProvider.Ins.DB.CHITIETPHIEUNHAPs.Where(x => x.MATHANG.ma_mathang == item.ma_mathang && x.IsDeleted == false).ToList();
+                var list_phieuxuat = Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.CHITIETPHIEUNHAP.MATHANG.ma_mathang == item.ma_mathang && x.IsDeleted == false).ToList();
 
                 if (list_phieunhap != null)
                 {
@@ -523,10 +683,21 @@ namespace QLK_Dn.ViewModel
                        && MyStaticMethods.ConvertStringtoDate(x.PHIEUNHAP.ngaynhap) <= date_end).Sum(x => x.soluongton);
                 }
 
+                else
+                {
+                    tongnhap = 0;
+                    tonkho = 0;
+                }
+
                 if (list_phieuxuat != null)
                 {
                     tongxuat = list_phieuxuat.Where(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat) >= date_start
                       && MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat) <= date_end).Sum(x => x.soluongthucxuat);
+                }
+
+                else
+                {
+                    tongxuat = 0;
                 }
 
                 Model.Thongke obj = new Model.Thongke(item, tongnhap, tongxuat, tonkho);

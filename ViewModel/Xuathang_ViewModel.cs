@@ -140,12 +140,12 @@ namespace QLK_Dn.ViewModel
 
         #region Filter data
 
-        private ObservableCollection<Model.CHITIETPHIEUXUAT> _ListPhieu_Filter;
+        private ObservableCollection<Model.LOAIHANG> _ListLoai_Filter;
 
-        public ObservableCollection<Model.CHITIETPHIEUXUAT> ListPhieu_Filter
+        public ObservableCollection<Model.LOAIHANG> ListLoai_Filter
         {
-            get { return _ListPhieu_Filter; }
-            set { _ListPhieu_Filter = value; OnPropertyChanged(); }
+            get { return _ListLoai_Filter; }
+            set { _ListLoai_Filter = value; OnPropertyChanged(); }
         }
 
 
@@ -173,12 +173,12 @@ namespace QLK_Dn.ViewModel
             set { _SKhachhang_Filter = value; OnPropertyChanged(); }
         }
 
-        Model.CHITIETPHIEUXUAT _SPhieuxuat_Filter;
+        Model.LOAIHANG _SLoai_Filter;
 
-        public Model.CHITIETPHIEUXUAT SPhieuxuat_Filter
+        public Model.LOAIHANG SLoai_Filter
         {
-            get { return _SPhieuxuat_Filter; }
-            set { _SPhieuxuat_Filter = value; OnPropertyChanged(); }
+            get { return _SLoai_Filter; }
+            set { _SLoai_Filter = value; OnPropertyChanged(); }
         }
 
         private Model.MATHANG _SMathang_Filter;
@@ -210,8 +210,8 @@ namespace QLK_Dn.ViewModel
         #region Filter Commands
         public ICommand Filter_Command { get; set; }
         public ICommand ResetFilter_Command { get; set; }
-        public ICommand FilterPhieu_Command { get; set; }
-        public ICommand FilterKhachhang_Command { get; set; }
+        public ICommand FilterLoai_Command { get; set; }
+
         #endregion
 
         #region Commands
@@ -224,6 +224,8 @@ namespace QLK_Dn.ViewModel
         public ICommand Delete_Command { get; set; }
         public ICommand DeleteShow_Command { get; set; }
         public ICommand Reset_Command { get; set; }
+        public ICommand Search_Command { get; set; }
+
         #endregion
 
         #region Message
@@ -280,7 +282,7 @@ namespace QLK_Dn.ViewModel
 
         public Xuathang_ViewModel()
         {
-            List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).OrderByDescending(x => x.ma_phieuxuat));
+            List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).ToList().OrderByDescending(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat)));
             DeleteList = new ObservableCollection<Model.CHITIETPHIEUXUAT>();
 
             ListMathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
@@ -481,7 +483,6 @@ namespace QLK_Dn.ViewModel
                 RemoveIteminList();
 
                 DeleteList = new ObservableCollection<Model.CHITIETPHIEUXUAT>();
-                ListPhieu_Filter = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false));
                 IsOpen = false;
                 SelectedItem = null;
 
@@ -512,36 +513,38 @@ namespace QLK_Dn.ViewModel
 
             #region Phan loc
 
-            ListPhieu_Filter = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false));
+            ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
             ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
             ListKhachhang_Filter = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
 
-            FilterPhieu_Command = new RelayCommand<ComboBox>(p =>
+            FilterLoai_Command = new RelayCommand<ComboBox>(p =>
             {
-                if (SPhieuxuat_Filter == null)
-                    return false;
-
                 return true;
             }, p =>
             {
-                string mamathang = SPhieuxuat_Filter.CHITIETPHIEUNHAP.MATHANG.ma_mathang;
+                if (SLoai_Filter != null)
+                {
+                    FilterMathangby_Loai(SLoai_Filter.ma_loaihang);
+                }
+                else
+                {
+                    ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+                }
 
-                FilterPhieu(mamathang);
             });
-
 
             ResetFilter_Command = new RelayCommand<Button>(p =>
             {
                 return true;
             }, p =>
             {
-                ListPhieu_Filter = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false));
+                ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
                 ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
                 ListKhachhang_Filter = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
 
                 SKhachhang_Filter = null;
                 SMathang_Filter = null;
-                SPhieuxuat_Filter = null;
+                SLoai_Filter = null;
                 Date_Start = String.Empty;
                 Date_End = String.Empty;
 
@@ -560,7 +563,7 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
-                List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).OrderByDescending(x => x.ma_phieuxuat));
+                List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).ToList().OrderByDescending(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat)));
 
                 DateTime date_start = Convert.ToDateTime(Date_Start);
                 DateTime date_end = Convert.ToDateTime(Date_End);
@@ -577,11 +580,50 @@ namespace QLK_Dn.ViewModel
                     FindByKH(SKhachhang_Filter.ma_khachhang);
                 }
 
-                if (SPhieuxuat_Filter != null)
+                if (SLoai_Filter != null)
                 {
-                    FindByPH(SPhieuxuat_Filter.ma_ctphieuxuat);
+                    FindByLOAI(SLoai_Filter.ma_loaihang);
                 }
             });
+            #endregion
+
+            #region Phan tim kiem
+
+            Search_Command = new RelayCommand<TextBox>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                string str = p.Text;
+                List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).ToList().OrderByDescending(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat)));
+
+                if (!string.IsNullOrEmpty(str))
+                {
+                    var filterlist = List.Where(x => x.CHITIETPHIEUNHAP.MATHANG.ten_mathang.Contains(str) || x.CHITIETPHIEUNHAP.MATHANG.NHACUNGCAP.ten_nhacungcap.Contains(str)
+                                     || x.CHITIETPHIEUNHAP.MATHANG.DONVITINH.ten_donvi.Contains(str) || x.CHITIETPHIEUNHAP.MATHANG.LOAIHANG.ten_loaihang.Contains(str) || x.PHIEUXUAT.ngayxuat.Contains(str));
+
+                    for (int i = 0; i < List.Count(); i++)
+                    {
+                        while (!filterlist.Contains(List[i]))
+                        {
+                            if (List[i] == List[List.Count() - 1])
+                            {
+                                List.Remove(List[i]);
+                                break;
+                            }
+                            else
+                            {
+                                List.Remove(List[i]);
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false));
+                }
+            });
+
             #endregion
 
         }
@@ -645,11 +687,11 @@ namespace QLK_Dn.ViewModel
             }
         }
 
-        private void FindByPH(string mactphieu)
+        private void FindByLOAI(string ma)
         {
             for (int i = 0; i < List.Count(); i++)
             {
-                while (List[i].ma_ctphieuxuat != mactphieu)
+                while (List[i].CHITIETPHIEUNHAP.MATHANG.LOAIHANG.ma_loaihang != ma)
                 {
                     if (List[i] == List[List.Count() - 1])
                     {
@@ -664,55 +706,13 @@ namespace QLK_Dn.ViewModel
             }
         }
 
-        private void FilterMathang(string makh, string mamathang = null)
-        {
-            ListKhachhang_Filter = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
-
-            for (int i = 0; i < ListKhachhang_Filter.Count(); i++)
-            {
-                while (ListKhachhang_Filter[i].ma_khachhang != makh)
-                {
-                    if (ListKhachhang_Filter[i] == ListKhachhang_Filter[ListKhachhang_Filter.Count() - 1])
-                    {
-                        ListKhachhang_Filter.Remove(ListKhachhang_Filter[i]);
-                        break;
-                    }
-                    else
-                    {
-                        ListKhachhang_Filter.Remove(ListKhachhang_Filter[i]);
-                    }
-                };
-            }
-
-            if (mamathang != null)
-            {
-                ListPhieu_Filter = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false));
-
-                for (int i = 0; i < ListPhieu_Filter.Count(); i++)
-                {
-                    while (ListPhieu_Filter[i].CHITIETPHIEUNHAP.ma_mathang != mamathang)
-                    {
-                        if (ListPhieu_Filter[i] == ListPhieu_Filter[ListPhieu_Filter.Count() - 1])
-                        {
-                            ListPhieu_Filter.Remove(ListPhieu_Filter[i]);
-                            break;
-                        }
-                        else
-                        {
-                            ListPhieu_Filter.Remove(ListPhieu_Filter[i]);
-                        }
-                    };
-                }
-            }
-        }
-
-        private void FilterPhieu(string mamathang)
+        private void FilterMathangby_Loai(string maloai)
         {
             ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
 
             for (int i = 0; i < ListMathang_Filter.Count(); i++)
             {
-                while (ListMathang_Filter[i].ma_mathang != mamathang)
+                while (ListMathang_Filter[i].ma_loaihang != maloai)
                 {
                     if (ListMathang_Filter[i] == ListMathang_Filter[ListMathang_Filter.Count() - 1])
                     {
