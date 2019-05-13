@@ -26,7 +26,7 @@ namespace QLK_Dn.View.View_Thukho
             ButtonOpen.Click += ButtonOpen_Click;
 
             this.DataContext = new ViewModel.Donvi_ViewModel();
-            tb_Search.TextChanged += tb_Search_TextChanged;
+            //tb_Search.TextChanged += tb_Search_TextChanged;
         }
 
         #region Phan tim kiem

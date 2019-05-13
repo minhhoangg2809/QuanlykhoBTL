@@ -25,7 +25,7 @@ namespace QLK_Dn.View.View_Quanly
             ButtonOpen.Click += ButtonOpen_Click;
             ButtonClose.Click += ButtonClose_Click;
 
-            this.DataContext = new ViewModel.Mathang_ViewModel();
+            this.DataContext = new ViewModel.Mathang_Quanly_ViewModel();
             tb_Search.TextChanged+=tb_Search_TextChanged;
         }
 
@@ -40,13 +40,11 @@ namespace QLK_Dn.View.View_Quanly
             {
                 try
                 {
-                    return ((Model.MATHANG)item).ma_mathang.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).ten_mathang.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).hang.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).dong.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).NHACUNGCAP.ten_nhacungcap.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).DONVITINH.ten_donvi.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).LOAIHANG.ten_loaihang.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+                    return ((Model.Thongke)item).mathang.ma_mathang.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.Thongke)item).mathang.ten_mathang.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.Thongke)item).mathang.NHACUNGCAP.ten_nhacungcap.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.Thongke)item).mathang.DONVITINH.ten_donvi.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.Thongke)item).mathang.LOAIHANG.ten_loaihang.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
 
                 }
                 catch (Exception)

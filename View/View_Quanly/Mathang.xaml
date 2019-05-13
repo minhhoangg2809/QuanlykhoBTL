@@ -11,7 +11,7 @@
         fw:AcrylicWindow.Enabled="True"
         ResizeMode="CanResizeWithGrip"
         WindowStyle="None"
-        DataContext="{StaticResource vm_mathang}">
+        DataContext="{StaticResource vm_mathangql}">
     <Window.Resources>
         <Storyboard x:Key="CloseMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="GridMenu">
@@ -110,11 +110,10 @@
                                Style="{DynamicResource ListviewBorder}">
                                 <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
                                     <ListView x:Name="lv_hienthi"
-                                              ItemsSource="{Binding List}"
-                                              SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                              ItemsSource="{Binding List}">
                                         <ListView.View>
                                             <GridView>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding ma_mathang}">
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.ma_mathang}">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>
                                                             <Grid>
@@ -128,7 +127,7 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding ten_mathang}">
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.ten_mathang}">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>
                                                             <Grid>
@@ -142,35 +141,7 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding hang}">
-                                                    <GridViewColumn.HeaderTemplate>
-                                                        <DataTemplate>
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="auto"/>
-                                                                    <ColumnDefinition/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <MaterialDesign:PackIcon Kind="Factory"/>
-                                                                <TextBlock Grid.Column="1" Text=" Hãng"/>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.HeaderTemplate>
-                                                </GridViewColumn>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding dong}">
-                                                    <GridViewColumn.HeaderTemplate>
-                                                        <DataTemplate>
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="auto"/>
-                                                                    <ColumnDefinition/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <MaterialDesign:PackIcon Kind="Dns"/>
-                                                                <TextBlock Grid.Column="1" Text=" Dòng"/>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.HeaderTemplate>
-                                                </GridViewColumn>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding LOAIHANG.ten_loaihang}">
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.LOAIHANG.ten_loaihang}">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>
                                                             <Grid>
@@ -184,7 +155,7 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding NHACUNGCAP.ten_nhacungcap}">
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.NHACUNGCAP.ten_nhacungcap}">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>
                                                             <Grid>
@@ -198,7 +169,22 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding DONVITINH.ten_donvi}">
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding tonkho}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="MinusCircleOutline"/>
+                                                                <TextBlock Grid.Column="1" Text=" Tồn kho"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.DONVITINH.ten_donvi}">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>
                                                             <Grid>
@@ -212,20 +198,7 @@
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
                                                 </GridViewColumn>
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mota}">
-                                                    <GridViewColumn.HeaderTemplate>
-                                                        <DataTemplate>
-                                                            <Grid>
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition Width="auto"/>
-                                                                    <ColumnDefinition/>
-                                                                </Grid.ColumnDefinitions>
-                                                                <MaterialDesign:PackIcon Kind="BorderColor"/>
-                                                                <TextBlock Grid.Column="1" Text=" Mô tả"/>
-                                                            </Grid>
-                                                        </DataTemplate>
-                                                    </GridViewColumn.HeaderTemplate>
-                                                </GridViewColumn>
+                                            
                                                 <GridViewColumn Width="auto">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>

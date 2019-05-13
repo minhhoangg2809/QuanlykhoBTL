@@ -64,6 +64,23 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
+                    <MaterialDesign:Chip Grid.Column="1" 
+                                         Style="{DynamicResource ResourceKey=SearchboxBorder}">
+                        <TextBox x:Name="tb_Search"
+                                 Width="800" 
+                                 BorderBrush="{x:Null}"
+                                 BorderThickness="0"
+                                 FontSize="15"
+                                 MaterialDesign:TextFieldAssist.DecorationVisibility="Hidden">
+                            <MaterialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Opacity="0.8">
+                                    <MaterialDesign:PackIcon Height="21" Kind="Search"/>
+                                    <TextBlock Width="5"/>
+                                    <TextBlock Text="Tìm kiếm"/>
+                                </StackPanel>
+                            </MaterialDesign:HintAssist.Hint>
+                        </TextBox>
+                    </MaterialDesign:Chip>
                     <Button x:Name="ButtonOpen" Visibility="Visible"
                         Content="{MaterialDesign:PackIcon Kind=Menu, Size=30}"
                         Background="{x:Null}"
@@ -211,6 +228,21 @@
                                                     </GridViewColumn.HeaderTemplate>
                                                 </GridViewColumn>
 
+                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.LOAIHANG.ten_loaihang}">
+                                                    <GridViewColumn.HeaderTemplate>
+                                                        <DataTemplate>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="auto"/>
+                                                                    <ColumnDefinition/>
+                                                                </Grid.ColumnDefinitions>
+                                                                <MaterialDesign:PackIcon Kind="Buffer"/>
+                                                                <TextBlock Grid.Column="1" Text=" Loại mặt hàng"/>
+                                                            </Grid>
+                                                        </DataTemplate>
+                                                    </GridViewColumn.HeaderTemplate>
+                                                </GridViewColumn>
+
                                                 <GridViewColumn Width="200" DisplayMemberBinding="{Binding mathang.NHACUNGCAP.ten_nhacungcap}">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>
@@ -326,18 +358,18 @@
                                 </Button>
 
                                 <Button Margin="5" Style="{DynamicResource RoundButton}"
-                                        Command="{Binding DeleteShow_Command}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <MaterialDesign:PackIcon Kind="DeleteSweep" Width="30" Height="30"/>
-                                        <TextBlock Text=" Xóa" VerticalAlignment="Center" FontSize="14"/>
-                                    </StackPanel>
-                                </Button>
-
-                                <Button Margin="5" Style="{DynamicResource RoundButton}"
                                         Command="{Binding Excel_Command}">
                                     <StackPanel Orientation="Horizontal">
                                         <MaterialDesign:PackIcon Kind="FileExcel" Width="30" Height="30"/>
                                         <TextBlock Text=" Xuất báo cáo" VerticalAlignment="Center" FontSize="14"/>
+                                    </StackPanel>
+                                </Button>
+
+                                <Button Margin="5" Style="{DynamicResource RoundButton}"
+                                        Command="{Binding DeleteShow_Command}">
+                                    <StackPanel Orientation="Horizontal">
+                                        <MaterialDesign:PackIcon Kind="DeleteSweep" Width="30" Height="30"/>
+                                        <TextBlock Text=" Xóa" VerticalAlignment="Center" FontSize="14"/>
                                     </StackPanel>
                                 </Button>
                             </StackPanel>
@@ -451,6 +483,93 @@
                                         </ListView>
                                     </StackPanel>
                                 </Expander>
+
+                                <Expander x:Name="ex_unit"
+                                          HorizontalAlignment="Stretch"
+                                          Header="Lọc theo đơn vị tính"
+                                          Background="WhiteSmoke">
+                                    <StackPanel
+                                      Orientation="Vertical"
+                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                        <ListView x:Name="cb_unit" Margin="5"
+                                              FontSize="15" Width="300"
+                                              MaterialDesign:HintAssist.Hint="Chọn đơn vị tính"
+                                              ItemsSource="{Binding List_donvi}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border x:Name="Border" Padding="8">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto"/>
+                                                                <ColumnDefinition Width="5"/>
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <CheckBox Grid.Column="0" Cursor="Pen" x:Name="cb_dv" Uid="{Binding ma_donvi}">
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="Checked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.AddtoFilterDV_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_dv}"/>
+                                                                    </i:EventTrigger>
+                                                                    <i:EventTrigger EventName="Unchecked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.DeletefromFilterDV_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_dv}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                            </CheckBox>
+                                                            <StackPanel Grid.Column="2">
+                                                                <TextBlock  Text="{Binding ten_donvi}" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                </Expander>
+
+                                <Expander x:Name="ex_supp"
+                                          HorizontalAlignment="Stretch"
+                                          Header="Lọc theo mặt hàng"
+                                          Background="WhiteSmoke">
+                                    <StackPanel
+                                      Orientation="Vertical"
+                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                        <ListView x:Name="cb_supp" Margin="5"
+                                              FontSize="15" Width="300"
+                                              MaterialDesign:HintAssist.Hint="Chọn mặt hàng"
+                                              ItemsSource="{Binding List_mathang}">
+                                            <ListView.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Border x:Name="Border" Padding="8">
+                                                        <Grid>
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="auto"/>
+                                                                <ColumnDefinition Width="5"/>
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <CheckBox Grid.Column="0" Cursor="Pen" x:Name="cb_mh" Uid="{Binding ma_mathang}">
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="Checked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.AddtoFilterMH_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_mh}"/>
+                                                                    </i:EventTrigger>
+                                                                    <i:EventTrigger EventName="Unchecked">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.DeletefromFilterMH_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                                               CommandParameter="{Binding ElementName=cb_mh}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                            </CheckBox>
+                                                            <StackPanel Grid.Column="2">
+                                                                <TextBlock  Text="{Binding ma_mathang}" />
+                                                            </StackPanel>
+                                                        </Grid>
+                                                    </Border>
+                                                </DataTemplate>
+                                            </ListView.ItemTemplate>
+                                        </ListView>
+                                    </StackPanel>
+                                </Expander>
+                                
                                 <TextBlock Height="100"/>
                                 <Separator Background="Black" Height="1.5"/>
                             </StackPanel>

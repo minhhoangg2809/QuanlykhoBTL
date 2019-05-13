@@ -79,6 +79,12 @@
                                     <TextBlock Text="Tìm kiếm"/>
                                 </StackPanel>
                             </MaterialDesign:HintAssist.Hint>
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="TextChanged">
+                                    <i:InvokeCommandAction Command="{Binding Search_Command}"
+                                                           CommandParameter="{Binding ElementName=tb_Search}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </TextBox>
                     </MaterialDesign:Chip>
                     <Button x:Name="ButtonOpen" Visibility="Visible"

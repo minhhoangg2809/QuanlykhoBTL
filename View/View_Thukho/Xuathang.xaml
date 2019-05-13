@@ -136,46 +136,37 @@
                                         <StackPanel Grid.Column="1"
                                                     Orientation="Horizontal"
                                                     HorizontalAlignment="Right">
-                                            <ComboBox x:Name="cb_CTXuat"
-                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Mã phiếu"
-                                                      ItemsSource="{Binding ListPhieu_Filter}"
-                                                      SelectedItem="{Binding SPhieuxuat_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                      DisplayMemberPath="ma_ctphieuxuat">
+                                            <ComboBox x:Name="cb_Khachhang"
+                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Khách hàng"
+                                                      ItemsSource="{Binding ListKhachhang_Filter}"
+                                                      SelectedItem="{Binding SKhachhang_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                      DisplayMemberPath="ten_khachhang">
+                                            </ComboBox>
+                                            <TextBlock Width="30"/>
+                                            
+                                            <ComboBox x:Name="cb_Loai"
+                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Loại hàng"
+                                                      ItemsSource="{Binding ListLoai_Filter}"
+                                                      SelectedItem="{Binding SLoai_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                      DisplayMemberPath="ten_loaihang">
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="SelectionChanged">
-                                                        <i:InvokeCommandAction Command="{Binding FilterPhieu_Command}"
-                                                                               CommandParameter="{Binding ElementName=cb_CTNhap}"/>
+                                                        <i:InvokeCommandAction Command="{Binding FilterLoai_Command}"
+                                                                               CommandParameter="{Binding ElementName=cb_Loai}"/>
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
                                             </ComboBox>
                                             <TextBlock Width="30"/>
+                                            
                                             <ComboBox x:Name="cb_Mathang"
                                                       ToolTip="{Binding SMathang_Filter.ten_mathang}"
                                                       IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Mã mặt hàng"
                                                       ItemsSource="{Binding ListMathang_Filter}"
                                                       SelectedItem="{Binding SMathang_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                       DisplayMemberPath="ma_mathang">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="SelectionChanged">
-                                                        <i:InvokeCommandAction Command="{Binding FilterMathang_Command}"
-                                                                               CommandParameter="{Binding ElementName=cb_Mathang}"/>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
                                             </ComboBox>
                                             <TextBlock Width="30"/>
-                                            <ComboBox x:Name="cb_Khachhang"
-                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Khách hàng"
-                                                      ItemsSource="{Binding ListKhachhang_Filter}"
-                                                      SelectedItem="{Binding SKhachhang_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                      DisplayMemberPath="ten_khachhang">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="SelectionChanged">
-                                                        <i:InvokeCommandAction Command="{Binding FilterKhachhang_Command}"
-                                                                               CommandParameter="{Binding ElementName=cb_Khachhang}"/>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </ComboBox>
-                                            <TextBlock Width="30"/>
+                                           
                                             <DatePicker ToolTip="Không được để trống"
                                                         FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Ngày bắt đầu"
                                                         Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
