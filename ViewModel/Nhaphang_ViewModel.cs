@@ -554,7 +554,7 @@ namespace QLK_Dn.ViewModel
 
                 if (SLoai_Filter != null)
                 {
-                    FindByPH(SLoai_Filter.ma_loaihang);
+                    FindByLOAI(SLoai_Filter.ma_loaihang);
                 }
             });
             #endregion
@@ -644,25 +644,6 @@ namespace QLK_Dn.ViewModel
             for (int i = 0; i < List.Count(); i++)
             {
                 while (List[i].MATHANG.ma_mathang != mamathang)
-                {
-                    if (List[i] == List[List.Count() - 1])
-                    {
-                        List.Remove(List[i]);
-                        break;
-                    }
-                    else
-                    {
-                        List.Remove(List[i]);
-                    }
-                };
-            }
-        }
-
-        private void FindByPH(string mactphieu)
-        {
-            for (int i = 0; i < List.Count(); i++)
-            {
-                while (List[i].ma_ctphieunhap != mactphieu)
                 {
                     if (List[i] == List[List.Count() - 1])
                     {
