@@ -172,13 +172,7 @@
     <Style x:Key="Underline_But" TargetType="{x:Type Rectangle}">
         <Setter Property="Height" Value="3.5"></Setter>
         <Setter Property="Opacity" Value="1"></Setter>
-        <Setter Property="Fill">
-            <Setter.Value>
-                <RadialGradientBrush>
-                    <GradientStop Color="Black" Offset="0.75"/>
-                    <GradientStop Color="WhiteSmoke" Offset="1"/>
-                </RadialGradientBrush>
-            </Setter.Value>
+        <Setter Property="Fill" Value="Gray">
         </Setter>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">

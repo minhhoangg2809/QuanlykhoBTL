@@ -25,4 +25,5 @@
     <viewmodel:Xuathang_ViewModel x:Key="vm_xuathang"></viewmodel:Xuathang_ViewModel>
     <viewmodel:Xuathang_Deleted_ViewModel x:Key="vm_xuathangdlt"></viewmodel:Xuathang_Deleted_ViewModel>
     <viewmodel:Thongke_ViewModel x:Key="vm_thongke"></viewmodel:Thongke_ViewModel>
+    <viewmodel:Mathang_Quanly_ViewModel x:Key="vm_mathangql"></viewmodel:Mathang_Quanly_ViewModel>
 </ResourceDictionary>
