@@ -20,6 +20,7 @@ namespace QLK_Dn.Model
         public string email { get; set; }
         public string ma_nhanvien { get; set; }
         public Nullable<bool> IsDeleted { get; set; }
+        public Nullable<bool> IsLogin { get; set; }
     
         public virtual NHANVIEN NHANVIEN { get; set; }
     }

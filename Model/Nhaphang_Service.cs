@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QLK_Dn.Model
 {
-    public class Nhaphang_Service
+    public class Nhaphang_Service : CHITIETPHIEUNHAP
     {
         public static void Insert(Model.CHITIETPHIEUNHAP item)
         {

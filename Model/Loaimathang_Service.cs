@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace QLK_Dn.Model
 {
-    public class Loaimathang_Service
+    public class Loaimathang_Service : LOAIHANG
     {
         public static void Insert(Model.LOAIHANG item)
         {

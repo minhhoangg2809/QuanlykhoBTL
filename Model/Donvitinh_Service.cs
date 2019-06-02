@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace QLK_Dn.Model
 {
-    public class Donvitinh_Service
+    public class Donvitinh_Service : DONVITINH
     {
         public static void Insert(Model.DONVITINH item)
         {

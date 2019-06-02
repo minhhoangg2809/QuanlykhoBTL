@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 
 namespace QLK_Dn.Model
 {
-    public class Khachhang_Service
+    public class Khachhang_Service : KHACHHANG
     {
         public static void Insert(Model.KHACHHANG item)
         {

@@ -142,6 +142,7 @@
           <Property Name="email" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="ma_nhanvien" Type="varchar" MaxLength="255" />
           <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsLogin" Type="bit" />
         </EntityType>
         <Association Name="fk_CHITIETPHIEUNHAP_ma_mathang">
           <End Role="MATHANG" Type="Self.MATHANG" Multiplicity="0..1" />
@@ -536,6 +537,7 @@
           <Property Name="ma_nhanvien" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="IsDeleted" Type="Boolean" />
           <NavigationProperty Name="NHANVIEN" Relationship="QuanlyKhoDoanhNghiepModel.fk_TAIKHOAN_nhanvien" FromRole="TAIKHOAN" ToRole="NHANVIEN" />
+          <Property Name="IsLogin" Type="Boolean" />
         </EntityType>
         <Association Name="fk_CHITIETPHIEUNHAP_ma_mathang">
           <End Type="QuanlyKhoDoanhNghiepModel.MATHANG" Role="MATHANG" Multiplicity="0..1" />
@@ -807,6 +809,7 @@
           <EntitySetMapping Name="TAIKHOANs">
             <EntityTypeMapping TypeName="QuanlyKhoDoanhNghiepModel.TAIKHOAN">
               <MappingFragment StoreEntitySet="TAIKHOAN">
+                <ScalarProperty Name="IsLogin" ColumnName="IsLogin" />
                 <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
                 <ScalarProperty Name="ma_nhanvien" ColumnName="ma_nhanvien" />
                 <ScalarProperty Name="email" ColumnName="email" />

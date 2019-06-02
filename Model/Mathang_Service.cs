@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QLK_Dn.Model
 {
-    public class Mathang_Service
+    public class Mathang_Service : MATHANG
     {
         public static void Insert(Model.MATHANG item)
         {
