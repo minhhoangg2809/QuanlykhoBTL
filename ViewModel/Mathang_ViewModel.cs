@@ -395,7 +395,7 @@ namespace QLK_Dn.ViewModel
                 SelectedItem = null;
             });
             #endregion
-
+            
             #region Phan tim kiem
 
             Search_Command = new RelayCommand<TextBox>(p =>

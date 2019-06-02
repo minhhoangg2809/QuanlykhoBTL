@@ -87,6 +87,10 @@ namespace QLK_Dn.ViewModel
                  return true;
              }, p =>
              {
+                 if (ViewModel.Taikhoan_ViewModel.Glo_CurrentUser != null)
+                 {
+                     ViewModel.Taikhoan_ViewModel.Chuyentrangthai_Dong(ViewModel.Taikhoan_ViewModel.Glo_CurrentUser);
+                 }
                  Application.Current.Shutdown();
              });
 

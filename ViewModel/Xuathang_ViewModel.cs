@@ -354,7 +354,6 @@ namespace QLK_Dn.ViewModel
 
             #endregion
 
-
             #region Them moi
 
             InsertShow_Command = new RelayCommand<object>(p =>

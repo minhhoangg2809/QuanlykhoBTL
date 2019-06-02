@@ -10,6 +10,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Net.Mail;
 using System.Net;
+using System.Threading;
+using System.Windows.Controls.Primitives;
 
 namespace QLK_Dn.ViewModel
 {
@@ -23,6 +25,14 @@ namespace QLK_Dn.ViewModel
         {
             get { return _List; }
             set { _List = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<Model.TAIKHOAN> _List_Tinhtrang;
+
+        public ObservableCollection<Model.TAIKHOAN> List_Tinhtrang
+        {
+            get { return _List_Tinhtrang; }
+            set { _List_Tinhtrang = value; OnPropertyChanged(); }
         }
 
         private ObservableCollection<Model.NHANVIEN> _List_Nhanvien;
@@ -66,6 +76,14 @@ namespace QLK_Dn.ViewModel
         {
             get { return _Matkhaumoi; }
             set { _Matkhaumoi = value; OnPropertyChanged(); }
+        }
+
+        private string _XacnhanMatkhaumoi;
+
+        public string XacnhanMatkhaumoi
+        {
+            get { return _XacnhanMatkhaumoi; }
+            set { _XacnhanMatkhaumoi = value; OnPropertyChanged(); }
         }
 
         private Model.TAIKHOAN _CurrentUser;
@@ -165,6 +183,18 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
+        #region Tinh trang prop
+
+        private bool _IsToggleChecked;
+
+        public bool IsToggleChecked
+        {
+            get { return _IsToggleChecked; }
+            set { _IsToggleChecked = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
         #region Command
 
         #region Command Phan quan tri he thong
@@ -189,8 +219,16 @@ namespace QLK_Dn.ViewModel
 
         #region Command Thay doi thong tin
         public ICommand getNewCurrentPass_Command { get; set; }
+        public ICommand getNewCurrentRePass_Command { get; set; }
         public ICommand Update_Command { get; set; }
         public ICommand Back_Command { get; set; }
+
+        #endregion
+
+        #region Command Tinh trang ng dung
+        public ICommand Status_Command { get; set; }
+        public ICommand Refesh_State_Command { get; set; }
+        public ICommand Update_Auto_Command { get; set; }
 
         #endregion
 
@@ -284,6 +322,20 @@ namespace QLK_Dn.ViewModel
                 Matkhaumoi = p.Password;
             });
 
+            getNewCurrentRePass_Command = new RelayCommand<PasswordBox>(p =>
+            {
+                if (p.Password.Length < 5)
+                    return false;
+
+                if (string.IsNullOrEmpty(p.Password))
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                XacnhanMatkhaumoi = p.Password;
+            });
+
             Active = false;
             IsOpen = false;
 
@@ -305,6 +357,8 @@ namespace QLK_Dn.ViewModel
             {
                 IsOpen = false;
             });
+
+            IsToggleChecked = false;
 
             #region Them tai khoan
 
@@ -333,7 +387,8 @@ namespace QLK_Dn.ViewModel
                             email = Emailkhoiphuc,
                             matkhau = MyStaticMethods.MD5Hash(MyStaticMethods.Base64Encode(Matkhautaikhoan)),
                             NHANVIEN = SNhanvien,
-                            IsDeleted = false
+                            IsDeleted = false,
+                            IsLogin = false
                         };
 
                         Model.DataProvider.Ins.DB.TAIKHOANs.Add(newItem);
@@ -478,6 +533,8 @@ namespace QLK_Dn.ViewModel
                     {
                         w.Close();
                     }
+
+                    Chuyentrangthai_Mo(CurrentUser);
                 }
                 else
                 {
@@ -575,6 +632,8 @@ namespace QLK_Dn.ViewModel
                     {
                         w.Close();
                     }
+
+                    Chuyentrangthai_Mo(CurrentUser);
                 }
                 else
                 {
@@ -599,9 +658,13 @@ namespace QLK_Dn.ViewModel
             {
                 if (!Kiemtratendangnhap(Tentkmoi))
                 {
-                    if (!string.IsNullOrEmpty(Matkhaumoi))
+                    if (!string.IsNullOrEmpty(Matkhaumoi) && !string.IsNullOrEmpty(XacnhanMatkhaumoi))
                     {
-                        CurrentUser.matkhau = MyStaticMethods.MD5Hash(MyStaticMethods.Base64Encode(Matkhaumoi));
+                        if (Matkhaumoi == XacnhanMatkhaumoi)
+                        {
+                            CurrentUser.matkhau = MyStaticMethods.MD5Hash(MyStaticMethods.Base64Encode(Matkhaumoi));
+                        }
+
                     }
 
                     CurrentUser.ten_taikhoan = Tentkmoi;
@@ -612,15 +675,18 @@ namespace QLK_Dn.ViewModel
                 }
                 else
                 {
-                    if (!string.IsNullOrEmpty(Matkhaumoi))
+                    if (!string.IsNullOrEmpty(Matkhaumoi) && !string.IsNullOrEmpty(XacnhanMatkhaumoi))
                     {
-                        CurrentUser.matkhau = MyStaticMethods.MD5Hash(MyStaticMethods.Base64Encode(Matkhaumoi));
+                        if (Matkhaumoi == XacnhanMatkhaumoi)
+                        {
+                            CurrentUser.matkhau = MyStaticMethods.MD5Hash(MyStaticMethods.Base64Encode(Matkhaumoi));
+                        }
                     }
 
                     Model.DataProvider.Ins.DB.SaveChanges();
 
                     Active = true;
-                    Message = "Đã cập nhật thông tin !!! Không thể sửa tên đăng nhập";
+                    Message = "Đã cập nhật thông tin !!! Không sửa tên đăng nhập";
                 }
 
             });
@@ -640,9 +706,76 @@ namespace QLK_Dn.ViewModel
 
             #endregion
 
+            #region Phan tinh trang
+
+            Status_Command = new RelayCommand<object>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                View.View_Quanly.Tinhtrang_nguoidung view = new View.View_Quanly.Tinhtrang_nguoidung();
+                view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+                view.ShowDialog();
+            });
+
+            Refesh_State_Command = new RelayCommand<object>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                if (p != null)
+                {
+                    if (p.GetType() == typeof(Button))
+                    {
+                        IsToggleChecked = false;
+                    }
+                }
+
+                Capnhattrangthai();
+            });
+
+            Update_Auto_Command = new RelayCommand<object>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                Thread thr = new Thread(t => Capnhattrangthai());
+
+                if (IsToggleChecked == true)
+                {
+                    thr.Start();
+                    Thread.Sleep(1000);
+                }
+                else
+                {
+                    thr.Abort();
+                }
+
+            });
+
+            #endregion
+
         }
 
         #region Methods
+
+        public void Capnhattrangthai()
+        {
+            Model.QuanlyKhoDoanhNghiepEntities UpdateStatus = new Model.QuanlyKhoDoanhNghiepEntities();
+            List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(UpdateStatus.TAIKHOANs.Where(x => x.IsDeleted == false));
+        }
+
+        public static void Chuyentrangthai_Mo(Model.TAIKHOAN taikhoan)
+        {
+            taikhoan.IsLogin = true;
+            Model.DataProvider.Ins.DB.SaveChanges();
+        }
+
+        public static void Chuyentrangthai_Dong(Model.TAIKHOAN taikhoan)
+        {
+            taikhoan.IsLogin = false;
+            Model.DataProvider.Ins.DB.SaveChanges();
+        }
 
         public static string getCurrent()
         {

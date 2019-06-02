@@ -92,15 +92,21 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
+                if (ViewModel.Taikhoan_ViewModel.Glo_CurrentUser != null)
+                {
+                    ViewModel.Taikhoan_ViewModel.Chuyentrangthai_Dong(ViewModel.Taikhoan_ViewModel.Glo_CurrentUser);
+                }
+
                 IsOpen = false;
                 Dangnhap dangnhap = new Dangnhap();
                 dangnhap.Show();
-
+                
                 Window windowparent = getParent(p) as Window;
                 if (windowparent != null)
                 {
                     windowparent.Close();
                 }
+               
             });
 
             LogoutShow_Command = new RelayCommand<UserControl>(p => 

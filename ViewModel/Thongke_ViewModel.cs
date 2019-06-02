@@ -34,6 +34,14 @@ namespace QLK_Dn.ViewModel
             set { _DeleteList = value; OnPropertyChanged(); }
         }
 
+        private bool _IscheckAll;
+
+        public bool IscheckAll
+        {
+            get { return _IscheckAll; }
+            set { _IscheckAll = value; OnPropertyChanged(); }
+        }
+
         #region MATHANG
 
         private ObservableCollection<Model.MATHANG> _List_mathang;
@@ -134,7 +142,7 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
-        #region Commands add/remove items in FilterList
+        #region Commands add/remove items FilterLists
 
         public ICommand AddtoFilterNCC_Command { get; set; }
         public ICommand DeletefromFilterNCC_Command { get; set; }
@@ -199,8 +207,9 @@ namespace QLK_Dn.ViewModel
             List_mathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
             FilterList_mathang = new ObservableCollection<Model.MATHANG>();
 
-
+            IscheckAll = true;
             IsOpen = false;
+
 
             CloseDialog_Command = new RelayCommand<MaterialDesignThemes.Wpf.DialogHost>(p =>
             {
@@ -394,6 +403,11 @@ namespace QLK_Dn.ViewModel
                 List = new ObservableCollection<Model.Thongke>();
                 Filter_ngaythang(MyStaticMethods.FormatDateString(Date_Start), MyStaticMethods.FormatDateString(Date_End));
 
+                if (IscheckAll == false) 
+                {
+                    UncheckAll_Filter();
+                }
+
                 if (FilterList_nhacungcap.Count() != 0)
                 {
                     Filter_nhacungcap();
@@ -569,6 +583,28 @@ namespace QLK_Dn.ViewModel
         }
 
         #region Methods
+
+        private void UncheckAll_Filter()
+        {
+            if (List.Count() != 0)
+            {
+                for (int i = 0; i < List.Count(); i++)
+                {
+                    while (List[i].soluongnhap == 0 && List[i].soluongxuat == 0 && List[i].tonkho == 0)
+                    {
+                        if (List[i] == List[List.Count() - 1])
+                        {
+                            List.Remove(List[i]);
+                            break;
+                        }
+                        else
+                        {
+                            List.Remove(List[i]);
+                        }
+                    }
+                }
+            }
+        }
 
         private void Filter_nhacungcap()
         {
