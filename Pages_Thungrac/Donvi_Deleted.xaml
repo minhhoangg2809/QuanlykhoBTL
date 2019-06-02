@@ -59,6 +59,12 @@
                                 <TextBlock Text="Tìm kiếm" Foreground="Black" VerticalAlignment="Center"/>
                             </StackPanel>
                         </MaterialDesign:HintAssist.Hint>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="TextChanged">
+                                <i:InvokeCommandAction Command="{Binding Search_Command}"
+                                                       CommandParameter="{Binding ElementName=tb_Search}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                     </TextBox>
                 </StackPanel>
             </MaterialDesign:Card>
@@ -295,7 +301,7 @@
                                 <GridViewColumn Width="150">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
-                                            <Grid>
+                                            <Grid ToolTip="{Binding ElementName=lv_hienthi,Path=Items.Count}">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition/>

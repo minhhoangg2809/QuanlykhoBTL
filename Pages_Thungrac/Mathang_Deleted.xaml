@@ -378,7 +378,7 @@
                                 <GridViewColumn Width="150">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
-                                            <Grid>
+                                            <Grid ToolTip="{Binding ElementName=lv_hienthi,Path=Items.Count}">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition/>
