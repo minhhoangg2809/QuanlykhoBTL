@@ -8,9 +8,9 @@
         xmlns:UC="clr-namespace:QLK_Dn.UserControls_Pages"
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-        fw:AcrylicWindow.ShowTitleBar="False"
+        fw:AcrylicWindow.ShowTitleBar="False" 
         fw:AcrylicWindow.Enabled="True"
-        ResizeMode="CanResizeWithGrip"
+        ResizeMode="CanResizeWithGrip" 
         WindowStyle="None"
         DataContext="{StaticResource vm_mathang}">
     <Window.Resources>
@@ -129,39 +129,8 @@
                                          Height="24"
                                          Width="24" />
                                 </Button>
+                                
                                 <Grid Grid.Row="0">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBox Grid.Column="0"
-                                         Width="300" Margin="5"
-                                         VerticalAlignment="Bottom"
-                                         HorizontalAlignment="Left"
-                                         FontSize="15"
-                                         MaterialDesign:HintAssist.Hint="Tên mặt hàng"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Tenmathang,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                                    <TextBox Grid.Column="1"
-                                         Width="300" Margin="5"
-                                         VerticalAlignment="Bottom"
-                                         HorizontalAlignment="Left"
-                                         FontSize="15"
-                                         MaterialDesign:HintAssist.Hint="Hãng"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Hang,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                                    <TextBox Grid.Column="2"
-                                         Width="300" Margin="5"
-                                         VerticalAlignment="Bottom"
-                                         HorizontalAlignment="Left"
-                                         FontSize="15"
-                                         MaterialDesign:HintAssist.Hint="Dòng"
-                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                                         Text="{Binding Dong,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                                </Grid>
-
-                                <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
@@ -201,6 +170,39 @@
                                          SelectedItem="{Binding SDonvi,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                          DisplayMemberPath="ten_donvi"/>
                                 </Grid>
+                                
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBox Grid.Column="0"
+                                         Width="300" Margin="5"
+                                         VerticalAlignment="Bottom"
+                                         HorizontalAlignment="Left"
+                                         FontSize="15"
+                                         MaterialDesign:HintAssist.Hint="Tên mặt hàng"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Tenmathang,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    <TextBox Grid.Column="1"
+                                         Width="300" Margin="5"
+                                         VerticalAlignment="Bottom"
+                                         HorizontalAlignment="Left"
+                                         FontSize="15"
+                                         MaterialDesign:HintAssist.Hint="Hãng"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Hang,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                    <TextBox Grid.Column="2"
+                                         Width="300" Margin="5"
+                                         VerticalAlignment="Bottom"
+                                         HorizontalAlignment="Left"
+                                         FontSize="15"
+                                         MaterialDesign:HintAssist.Hint="Dòng"
+                                         Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                                         Text="{Binding Dong,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                </Grid>
+                                
                                 <Grid Grid.Row="2">
                                     <TextBox 
                                          Width="1230" Margin="5"
@@ -409,7 +411,7 @@
                                                     <GridViewColumn Width="auto">
                                                         <GridViewColumn.HeaderTemplate>
                                                             <DataTemplate>
-                                                                <Grid>
+                                                                <Grid ToolTip="{Binding ElementName=lv_hienthi,Path=Items.Count}">
                                                                     <Grid.ColumnDefinitions>
                                                                         <ColumnDefinition Width="auto"/>
                                                                         <ColumnDefinition/>

@@ -1,0 +1,145 @@
+﻿<Window x:Class="QLK_Dn.View.View_Quanly.Tinhtrang_nguoidung"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Tình trạng người dùng" Height="500" Width="800"
+        MaxHeight="500" MaxWidth="1000"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        BorderBrush="Gray"
+        BorderThickness="2"
+        DataContext="{StaticResource vm_Taikhoan}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Refesh_State_Command}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <MaterialDesign:ColorZone
+                Mode="PrimaryLight"
+                Padding="16"
+                Background="WhiteSmoke">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Padding="5" FontSize="20" Text="TÌNH TRẠNG NGƯỜI DÙNG"/>
+                    <TextBlock Width="350"/>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="auto">
+                        <ToggleButton x:Name="tg_btn_update" Visibility="Hidden"
+                            IsChecked="{Binding IsToggleChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                            Cursor="Hand"
+                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
+                            ToolTip="Tự động cập nhật">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Checked">
+                                    <i:InvokeCommandAction Command="{Binding Update_Auto_Command}"/>
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="Unchecked">
+                                    <i:InvokeCommandAction Command="{Binding Update_Auto_Command}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ToggleButton>
+                        <TextBlock Width="10"/>
+                        <Button x:Name="btn_refresh"
+                                HorizontalAlignment="Right"
+                                Height="auto" Width="auto"
+                                Background="{x:Null}"
+                                BorderBrush="{x:Null}"
+                                ToolTip="Cập nhật tình trạng"
+                                Command="{Binding Refesh_State_Command}"
+                                CommandParameter="{Binding ElementName=btn_refresh}">
+                            <MaterialDesign:PackIcon 
+                                Kind="BellRingOutline" 
+                                Foreground="Black"
+                                Height="30" Width="30"/>
+                        </Button>
+                        <Button x:Name="btn_close"
+                                HorizontalAlignment="Right" 
+                                Height="auto" Width="auto"
+                                Background="{x:Null}"
+                                BorderBrush="{x:Null}"
+                                ToolTip="Đóng"
+                                Click="btn_close_Click">
+                            <MaterialDesign:PackIcon
+                                Kind="CloseOutline"
+                                Foreground="Black"
+                                Height="30" Width="30"/>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </MaterialDesign:ColorZone>
+        </Grid>
+        <Separator VerticalAlignment="Bottom" Height="5" Background="Black"/>
+
+        <Grid x:Name="Grid_Main" Grid.Row="1">
+            <Border
+                x:Name="bd_table" Margin="10" BorderBrush="Gray" BorderThickness="1.5">
+                <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
+                    <ListView x:Name="lv_hienthi"
+                              ItemsSource="{Binding List_Tinhtrang}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding ten_taikhoan}">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <MaterialDesign:PackIcon Kind="AccountBox"/>
+                                                <TextBlock Grid.Column="1" Text=" Tên tài khoản"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding NHANVIEN.ten_nhanvien}">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <MaterialDesign:PackIcon Kind="Account"/>
+                                                <TextBlock Grid.Column="1" Text=" Tên nhân viên"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Width="200">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto"/>
+                                                    <ColumnDefinition/>
+                                                </Grid.ColumnDefinitions>
+                                                <MaterialDesign:PackIcon Kind="Face"/>
+                                                <TextBlock Grid.Column="1" Text=" Tình trạng"/>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <RadioButton IsChecked="{Binding IsLogin}"
+                                                         IsEnabled="False"
+                                                         Opacity="1"
+                                                         Background="Green"/>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </Border>
+        </Grid>
+
+    </Grid>
+</Window>

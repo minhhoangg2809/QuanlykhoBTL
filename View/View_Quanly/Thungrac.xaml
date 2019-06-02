@@ -98,12 +98,12 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="1" Orientation="Vertical">
-                            <Button x:Name="btn_tab1" VerticalAlignment="Top" 
+                            <Button x:Name="btn_tab1" VerticalAlignment="Top" KeyboardNavigation.TabIndex="0"
                             Height="50" BorderBrush="{x:Null}" 
                             FontSize="20" FontWeight="SemiBold"
                             Foreground="Gray"
                             Style="{StaticResource MaterialDesignFlatButton}"
-                            Cursor="Hand" Click="btn_tab_Click" Uid="t1">
+                            Cursor="Hand" Click="btn_tab_Click" Uid="t1" Background="White">
                                 KHÁCH HÀNG
                             </Button>
                             <Rectangle x:Name="rec1" 
@@ -112,7 +112,7 @@
 
                         </StackPanel>
                         <StackPanel Grid.Column="2" Orientation="Vertical">
-                            <Button x:Name="btn_tab2" 
+                            <Button x:Name="btn_tab2" KeyboardNavigation.TabIndex="1"
                             Foreground="Gray"
                             Style="{Binding Path=Style,ElementName=btn_tab1}"
                             Height="{Binding Path=Height,ElementName=btn_tab1}"
@@ -120,7 +120,7 @@
                             BorderBrush="{Binding Path=BorderBrush,ElementName=btn_tab1}"
                             Cursor="{Binding Path=Cursor,ElementName=btn_tab1}"
                             FontWeight="{Binding Path=FontWeight,ElementName=btn_tab1}"
-                            Click="btn_tab_Click" Uid="t2">
+                            Click="btn_tab_Click" Uid="t2" Background="{Binding Path=Background,ElementName=btn_tab1}">
                                 NHÀ CUNG CẤP
                             </Button>
                             <Rectangle x:Name="rec2"  
@@ -129,7 +129,7 @@
                         </StackPanel>
                         
                         <StackPanel Grid.Column="3" Orientation="Vertical">
-                            <Button x:Name="btn_tab3"
+                            <Button x:Name="btn_tab3" KeyboardNavigation.TabIndex="2"
                             Foreground="Gray"
                              Style="{Binding Path=Style,ElementName=btn_tab1}"
                              Height="{Binding Path=Height,ElementName=btn_tab1}"
@@ -137,7 +137,7 @@
                             BorderBrush="{Binding Path=BorderBrush,ElementName=btn_tab1}"
                             Cursor="{Binding Path=Cursor,ElementName=btn_tab1}"
                             FontWeight="{Binding Path=FontWeight,ElementName=btn_tab1}"
-                            Click="btn_tab_Click" Uid="t3">
+                            Click="btn_tab_Click" Uid="t3" Background="{Binding Path=Background,ElementName=btn_tab1}">
                                 NHÂN VIÊN
                             </Button>
                             <Rectangle x:Name="rec3" 

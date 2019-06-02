@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -89,6 +90,7 @@ namespace QLK_Dn.View.View_Thukho
         private void btn_tab_Click(object sender, RoutedEventArgs e)
         {
             Button btn = (Button)sender;
+
             showunderline(btn, rec1);
             showunderline(btn, rec2);
             showunderline(btn, rec3);
@@ -96,6 +98,7 @@ namespace QLK_Dn.View.View_Thukho
             showunderline(btn, rec5);
 
             selecttab(btn, Main);
+            
         }
     }
 }

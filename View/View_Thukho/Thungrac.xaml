@@ -88,7 +88,7 @@
                         <RowDefinition Height="10"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    
+
                     <Grid Grid.Row="0">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="0"/>
@@ -99,21 +99,21 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <StackPanel Grid.Column="1" Orientation="Vertical">
-                            <Button x:Name="btn_tab1" VerticalAlignment="Top" 
+                            <Button x:Name="btn_tab1" VerticalAlignment="Top" KeyboardNavigation.TabIndex="0"
                             Height="50" BorderBrush="{x:Null}" 
                             FontSize="20" FontWeight="SemiBold"
                             Foreground="Gray"
                             Style="{StaticResource MaterialDesignFlatButton}"
-                            Cursor="Hand" Click="btn_tab_Click" Uid="t1">
+                            Cursor="Hand" Click="btn_tab_Click" Uid="t1" Background="White">
                                 MẶT HÀNG
                             </Button>
                             <Rectangle x:Name="rec1" Height="3.5" 
                                        Visibility="Visible" Uid="t1"
                                        Style="{DynamicResource Underline_But}"/>
                         </StackPanel>
-                        
+
                         <StackPanel Grid.Column="2" Orientation="Vertical">
-                            <Button x:Name="btn_tab2" 
+                            <Button x:Name="btn_tab2" KeyboardNavigation.TabIndex="1"
                             Foreground="Gray"
                             Style="{Binding Path=Style,ElementName=btn_tab1}"
                             Height="{Binding Path=Height,ElementName=btn_tab1}"
@@ -121,15 +121,15 @@
                             BorderBrush="{Binding Path=BorderBrush,ElementName=btn_tab1}"
                             Cursor="{Binding Path=Cursor,ElementName=btn_tab1}"
                             FontWeight="{Binding Path=FontWeight,ElementName=btn_tab1}"
-                            Click="btn_tab_Click" Uid="t2">
+                            Click="btn_tab_Click" Uid="t2" Background="{Binding Path=Background,ElementName=btn_tab1}">
                                 LOẠI MẶT HÀNG
                             </Button>
                             <Rectangle x:Name="rec2"  Visibility="Hidden" Uid="t2"
                                        Style="{DynamicResource Underline_But}"/>
                         </StackPanel>
-                        
+
                         <StackPanel Grid.Column="3" Orientation="Vertical">
-                            <Button x:Name="btn_tab3"
+                            <Button x:Name="btn_tab3" KeyboardNavigation.TabIndex="2"
                             Foreground="Gray"
                              Style="{Binding Path=Style,ElementName=btn_tab1}"
                              Height="{Binding Path=Height,ElementName=btn_tab1}"
@@ -137,15 +137,15 @@
                             BorderBrush="{Binding Path=BorderBrush,ElementName=btn_tab1}"
                             Cursor="{Binding Path=Cursor,ElementName=btn_tab1}"
                             FontWeight="{Binding Path=FontWeight,ElementName=btn_tab1}"
-                            Click="btn_tab_Click" Uid="t3">
+                            Click="btn_tab_Click" Uid="t3" Background="{Binding Path=Background,ElementName=btn_tab1}">
                                 ĐƠN VỊ
                             </Button>
                             <Rectangle x:Name="rec3"  Visibility="Hidden" Uid="t3"
                                        Style="{DynamicResource Underline_But}"/>
                         </StackPanel>
-                        
+
                         <StackPanel Grid.Column="4" Orientation="Vertical">
-                            <Button x:Name="btn_tab4"
+                            <Button x:Name="btn_tab4" KeyboardNavigation.TabIndex="3"
                             Foreground="Gray"
                             Style="{Binding Path=Style,ElementName=btn_tab1}"
                             Height="{Binding Path=Height,ElementName=btn_tab1}"
@@ -153,15 +153,15 @@
                             BorderBrush="{Binding Path=BorderBrush,ElementName=btn_tab1}"
                             Cursor="{Binding Path=Cursor,ElementName=btn_tab1}"
                             FontWeight="{Binding Path=FontWeight,ElementName=btn_tab1}"
-                            Click="btn_tab_Click" Uid="t4">
+                            Click="btn_tab_Click" Uid="t4" Background="{Binding Path=Background,ElementName=btn_tab1}">
                                 XUẤT HÀNG
                             </Button>
                             <Rectangle x:Name="rec4"  Visibility="Hidden" Uid="t4"
                                        Style="{DynamicResource Underline_But}"/>
                         </StackPanel>
-                        
+
                         <StackPanel Grid.Column="5" Orientation="Vertical">
-                            <Button x:Name="btn_tab5"
+                            <Button x:Name="btn_tab5" KeyboardNavigation.TabIndex="4"
                             Foreground="Gray"
                             Style="{Binding Path=Style,ElementName=btn_tab1}"
                             Height="{Binding Path=Height,ElementName=btn_tab1}"
@@ -169,14 +169,14 @@
                             BorderBrush="{Binding Path=BorderBrush,ElementName=btn_tab1}"
                             Cursor="{Binding Path=Cursor,ElementName=btn_tab1}"
                             FontWeight="{Binding Path=FontWeight,ElementName=btn_tab1}"
-                            Click="btn_tab_Click" Uid="t5">
+                            Click="btn_tab_Click" Uid="t5" Background="{Binding Path=Background,ElementName=btn_tab1}">
                                 NHẬP HÀNG
                             </Button>
                             <Rectangle x:Name="rec5" Visibility="Hidden" Uid="t5"
                                        Style="{DynamicResource Underline_But}"/>
                         </StackPanel>
                     </Grid>
-                    
+
                     <Grid Grid.Row="2" Margin="5">
                         <ScrollViewer Style="{DynamicResource ScrollViewerBinStyle}">
                             <Frame x:Name="Main" NavigationUIVisibility="Hidden"/>

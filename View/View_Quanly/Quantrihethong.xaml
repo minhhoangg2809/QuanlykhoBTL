@@ -111,6 +111,34 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
+                            <StackPanel Orientation="Vertical" Height="auto" Width="auto">
+                                <TextBlock Height="10"/>
+                                <Button
+                                    HorizontalAlignment="Right"
+                                    Background="WhiteSmoke" 
+                                    BorderBrush="{x:Null}" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="Tạo mới"
+                                    Command="{Binding Reset_Command}">
+                                    <MaterialDesign:PackIcon
+                                            Kind="Plus"
+                                            Height="24"
+                                            Width="24" />
+                                </Button>
+                                <TextBlock Height="10"/>
+                                <Button
+                                    HorizontalAlignment="Right"
+                                    Background="WhiteSmoke" 
+                                    BorderBrush="{x:Null}" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="Tình trạng người dùng"
+                                    Command="{Binding Status_Command}">
+                                    <MaterialDesign:PackIcon
+                                            Kind="Face"
+                                            Height="24"
+                                            Width="24" />
+                                </Button>
+                            </StackPanel>
                             <Grid Grid.Row="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>
@@ -118,18 +146,7 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Button
-                                   HorizontalAlignment="Right"
-                                   Background="WhiteSmoke" 
-                                   BorderBrush="{x:Null}" 
-                                   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                   ToolTip="Tạo mới"
-                                   Command="{Binding Reset_Command}">
-                                    <MaterialDesign:PackIcon
-                                         Kind="Plus"
-                                         Height="24"
-                                         Width="24" />
-                                </Button>
+
                                 <Grid Grid.Row="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
@@ -293,7 +310,7 @@
                                     </MaterialDesign:DialogHost.DialogContent>
                                 </MaterialDesign:DialogHost>
                                 <!--end-->
-                                
+
                                 <Border
                                     x:Name="bd_table" 
                                     Style="{DynamicResource ListviewBorder}">
@@ -393,7 +410,7 @@
                                                     <GridViewColumn Width="auto">
                                                         <GridViewColumn.HeaderTemplate>
                                                             <DataTemplate>
-                                                                <Grid>
+                                                                <Grid ToolTip="{Binding ElementName=lv_hienthi,Path=Items.Count}">
                                                                     <Grid.ColumnDefinitions>
                                                                         <ColumnDefinition Width="auto"/>
                                                                         <ColumnDefinition/>

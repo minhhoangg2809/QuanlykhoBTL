@@ -277,7 +277,7 @@
                                          DisplayMemberPath="ma_ctphieunhap">
                                             <MaterialDesign:HintAssist.Hint>
                                                 <StackPanel Orientation="Horizontal">
-                                                    <TextBlock Text="Phiếu nhập ("/>
+                                                    <TextBlock Text="Mã phiếu nhập ("/>
                                                     <TextBlock Text="{Binding Items.Count,ElementName=cb_pnhap}"/>
                                                     <TextBlock Text=")"/>
                                                 </StackPanel>
@@ -662,7 +662,7 @@
                                                         <GridViewColumn Width="auto">
                                                             <GridViewColumn.HeaderTemplate>
                                                                 <DataTemplate>
-                                                                    <Grid>
+                                                                    <Grid ToolTip="{Binding ElementName=lv_hienthi,Path=Items.Count}">
                                                                         <Grid.ColumnDefinitions>
                                                                             <ColumnDefinition Width="auto"/>
                                                                             <ColumnDefinition/>

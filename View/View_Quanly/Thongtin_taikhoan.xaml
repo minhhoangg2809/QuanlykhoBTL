@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-        Title="Tài khoản" Height="530" Width="350"
+        Title="Tài khoản" Height="600" Width="400"
         DataContext="{StaticResource vm_Taikhoan}"
         ResizeMode="NoResize"
         WindowStyle="None"
@@ -18,12 +18,12 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0" VerticalAlignment="Top" 
           Margin="35,80" Height="auto">
-            <StackPanel VerticalAlignment="Top"  Height="350">
+            <StackPanel VerticalAlignment="Top"  Height="400">
                 <Label Foreground="Gray" Content="THÔNG TIN TÀI KHOẢN" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5"  FontSize="18" Height="40"/>
                 <TextBox x:Name="tb_tendn" Margin="0,10" MaterialDesign:HintAssist.Hint="TÊN ĐĂNG NHẬP" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"
                              Text="{Binding Tentkmoi,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                 <TextBox x:Name="tb_hoten" IsReadOnly="True" Margin="0,10" MaterialDesign:HintAssist.Hint="HỌ TÊN" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"
-                             Text="{Binding CurrentUser.NHANVIEN.ten_nhanvien,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                             Text="{Binding CurrentUser.NHANVIEN.ten_nhanvien,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" ToolTip="Không được sửa"/>
                 <TextBox x:Name="tb_mail" Margin="0,10" MaterialDesign:HintAssist.Hint="E-MAIL KHÔI PHỤC" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"
                              Text="{Binding CurrentUser.email,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                 <PasswordBox x:Name="pb_matkhau" Margin="0,10" MaterialDesign:HintAssist.Hint="MẬT KHẨU MỚI" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18">
@@ -34,11 +34,19 @@
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
                 </PasswordBox>
+                <PasswordBox x:Name="pb_matkhaunl" Margin="0,10" MaterialDesign:HintAssist.Hint="XÁC NHẬN MẬT KHẨU" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" FontFamily="Champagne &amp; Limousines" FontSize="18">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding getNewCurrentRePass_Command}"
+                                                    CommandParameter="{Binding ElementName=pb_matkhaunl}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
             </StackPanel>
         </Grid>
         <Grid Grid.Row="1">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btn_update" Uid="{Binding CurrentUser.ma_taikhoan}" Width="150" Height="40" Content="THAY ĐỔI" Style="{StaticResource MaterialDesignFlatButton}">
+                <Button x:Name="btn_update" Uid="{Binding CurrentUser.ma_taikhoan}" Width="150" Height="40" Content="THAY ĐỔI" FontSize="15" Style="{StaticResource MaterialDesignFlatButton}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding Update_Command}"
@@ -47,7 +55,7 @@
                     </i:Interaction.Triggers>
                 </Button>
                 <TextBlock Width="30"/>
-                <Button x:Name="btn_close" Width="150" Height="40" Content="ĐÓNG" Style="{StaticResource MaterialDesignFlatButton}" >
+                <Button x:Name="btn_close" Width="150" Height="40" Content="ĐÓNG" FontSize="15" Style="{StaticResource MaterialDesignFlatButton}" >
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="Click">
                             <i:InvokeCommandAction Command="{Binding Back_Command}"

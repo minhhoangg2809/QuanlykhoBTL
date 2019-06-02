@@ -156,12 +156,23 @@
                                 </MaterialDesign:DialogHost.DialogContent>
                             </MaterialDesign:DialogHost>
                             <!--end-->
-                            <Border
-                                x:Name="bd_table"
-                                BorderBrush="Gray"
-                                BorderThickness="2"
-                                Height="500"
-                                VerticalAlignment="Top">
+                            <Border 
+                                x:Name="bd_table">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="IsEnabled" Value="True"></Setter>
+                                        <Setter Property="Opacity" Value="1"></Setter>
+                                        <Setter Property="BorderBrush" Value="Gray"></Setter>
+                                        <Setter Property="BorderThickness" Value="2"></Setter>
+                                        <Setter Property="Height" Value="500"></Setter>
+                                        <Setter Property="VerticalAlignment" Value="Top"></Setter>
+                                        <Style.Triggers>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Opacity" Value="0.5"></Setter>
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
                                 <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
                                     <ListView x:Name="lv_hienthi"
                                               ItemsSource="{Binding List}">
@@ -388,6 +399,13 @@
                                     <StackPanel
                                       Orientation="Vertical" 
                                       TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                        <CheckBox Margin="150 0 0 0"
+                                                  Cursor="Pen"
+                                                  FontSize="15"
+                                                  Opacity="0.7"
+                                                  Content="Tất cả mặt hàng"
+                                                  IsChecked="{Binding IscheckAll,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                        <TextBlock Width="30"/>
                                         <DatePicker ToolTip="Không được để trống" Margin="5"
                                                         FontSize="15" Width="250" MaterialDesign:HintAssist.Hint="Chọn ngày bắt đầu"
                                                         Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
@@ -569,7 +587,7 @@
                                         </ListView>
                                     </StackPanel>
                                 </Expander>
-                                
+
                                 <TextBlock Height="100"/>
                                 <Separator Background="Black" Height="1.5"/>
                             </StackPanel>
