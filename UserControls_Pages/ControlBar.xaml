@@ -8,7 +8,7 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:fw="clr-namespace:SourceChord.FluentWPF;assembly=FluentWPF"
-             x:Name="ucControlbar"
+             x:Name="ucControlbar" 
              DataContext="{StaticResource vm_controlbar}">
     <Grid>
         <Rectangle VerticalAlignment="Top" 
@@ -22,7 +22,7 @@
                 </i:EventTrigger>
             </i:Interaction.Triggers>
         </Rectangle>
-        
+
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Background="{x:Null}"
                     BorderBrush="{x:Null}"
