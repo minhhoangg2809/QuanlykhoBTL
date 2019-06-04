@@ -552,6 +552,17 @@
                                     <StackPanel
                                       Orientation="Vertical"
                                       TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
+                                        <TextBox x:Name="tb_tkmathang" 
+                                            Margin="5" ToolTip="Nhập mã mặt hàng"
+                                            FontSize="15" Width="250">
+                                            <MaterialDesign:HintAssist.Hint>
+                                                <StackPanel Orientation="Horizontal" Opacity="0.8">
+                                                    <MaterialDesign:PackIcon Height="21" Kind="Search"/>
+                                                    <TextBlock Width="5"/>
+                                                    <TextBlock Text="Tìm kiếm mặt hàng"/>
+                                                </StackPanel>
+                                            </MaterialDesign:HintAssist.Hint>
+                                        </TextBox>
                                         <ListView x:Name="cb_supp" Margin="5"
                                               FontSize="15" Width="300"
                                               MaterialDesign:HintAssist.Hint="Chọn mặt hàng"

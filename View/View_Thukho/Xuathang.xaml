@@ -425,11 +425,11 @@
                                                     <TextBlock FontSize="15" Text="  Xác nhận" VerticalAlignment="Center" Foreground="White"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Tên mặt hàng : " FontSize="15"/>
+                                                    <TextBlock Text="Mã mặt hàng : " FontSize="15"/>
                                                     <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SPhieunhap.ma_mathang,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Mã mặt hàng : " FontSize="15"/>
+                                                    <TextBlock Text="Tên mặt hàng : " FontSize="15"/>
                                                     <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SPhieunhap.MATHANG.ten_mathang,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
                                                 </StackPanel>
                                                 <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">

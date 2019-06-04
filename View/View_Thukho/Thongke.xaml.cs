@@ -27,7 +27,9 @@ namespace QLK_Dn.View.View_Thukho
             ButtonClose.Click += ButtonClose_Click;
 
             this.DataContext = new ViewModel.Thongke_ViewModel();
+
             tb_Search.TextChanged += tb_Search_TextChanged;
+            tb_tkmathang.TextChanged += tb_tkmathang_TextChanged;
         }
 
         #region Phan tim kiem
@@ -55,13 +57,42 @@ namespace QLK_Dn.View.View_Thukho
 
             }
         }
+
+        private bool Search_Mathang (object item)
+        {
+            if (String.IsNullOrEmpty(tb_tkmathang.Text))
+            {
+                return true;
+            }
+            else
+            {
+                try
+                {
+                    return ((Model.MATHANG)item).ma_mathang.IndexOf(tb_tkmathang.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+                }
+                catch (Exception)
+                {
+                    return true;
+                }
+
+            }
+        }
         void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionView viewfilter = (CollectionView)CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource);
             viewfilter.Filter = Search;
             CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource).Refresh();
         }
+
+        void tb_tkmathang_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionView viewfilter = (CollectionView)CollectionViewSource.GetDefaultView(cb_supp.ItemsSource);
+            viewfilter.Filter = Search_Mathang;
+            CollectionViewSource.GetDefaultView(cb_supp.ItemsSource).Refresh();
+        }
         #endregion
+
+
         void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             ButtonClose.Visibility = Visibility.Hidden;
