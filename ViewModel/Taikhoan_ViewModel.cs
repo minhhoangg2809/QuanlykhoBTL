@@ -280,7 +280,7 @@ namespace QLK_Dn.ViewModel
 
         public Taikhoan_ViewModel()
         {
-            List = new ObservableCollection<Model.TAIKHOAN>(Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.IsDeleted == false));
+            List = new ObservableCollection<Model.TAIKHOAN>(Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.IsDeleted == false).ToList().OrderBy(x => x.NHANVIEN.ma_quyen));
 
             TaoDSNhanvien();
             DeleteList = new ObservableCollection<Model.TAIKHOAN>();
@@ -762,7 +762,7 @@ namespace QLK_Dn.ViewModel
         public void Capnhattrangthai()
         {
             Model.QuanlyKhoDoanhNghiepEntities UpdateStatus = new Model.QuanlyKhoDoanhNghiepEntities();
-            List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(UpdateStatus.TAIKHOANs.Where(x => x.IsDeleted == false));
+            List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(UpdateStatus.TAIKHOANs.Where(x => x.IsDeleted == false).ToList().OrderBy(x => x.NHANVIEN.ma_quyen));
         }
 
         public static void Chuyentrangthai_Mo(Model.TAIKHOAN taikhoan)
