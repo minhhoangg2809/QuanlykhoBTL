@@ -25,8 +25,7 @@ namespace QLK_Dn.View.View_Quanly
             ButtonClose.Click += ButtonClose_Click;
             ButtonOpen.Click += ButtonOpen_Click;
 
-            this.DataContext = new ViewModel.Khachhang_ViewModel();
-            tb_Search.TextChanged+=tb_Search_TextChanged;
+            tb_Search.TextChanged += tb_Search_TextChanged;
         }
 
         #region Phan tim kiem

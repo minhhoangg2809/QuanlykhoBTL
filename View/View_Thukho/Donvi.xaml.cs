@@ -25,7 +25,7 @@ namespace QLK_Dn.View.View_Thukho
             ButtonClose.Click += ButtonClose_Click;
             ButtonOpen.Click += ButtonOpen_Click;
 
-            this.DataContext = new ViewModel.Donvi_ViewModel();
+          
             //tb_Search.TextChanged += tb_Search_TextChanged;
         }
 

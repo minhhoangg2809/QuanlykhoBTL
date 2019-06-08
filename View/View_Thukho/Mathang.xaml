@@ -35,6 +35,13 @@
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
         </EventTrigger>
     </Window.Triggers>
+    
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Load_Command}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
 
     <Grid>

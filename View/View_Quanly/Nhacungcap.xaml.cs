@@ -25,7 +25,6 @@ namespace QLK_Dn.View.View_Quanly
             ButtonClose.Click += ButtonClose_Click;
             ButtonOpen.Click += ButtonOpen_Click;
 
-            this.DataContext = new ViewModel.Nhacungcap_ViewModel();
             tb_Search.TextChanged+=tb_Search_TextChanged;
         }
 
