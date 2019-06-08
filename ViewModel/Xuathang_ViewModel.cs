@@ -215,6 +215,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Commands
+        public ICommand Load_Command { get; set; }
         public ICommand Select_mathang_Command { get; set; }
         public ICommand Select_phieunhap_Command { get; set; }
         public ICommand Insert_Command { get; set; }
@@ -312,6 +313,29 @@ namespace QLK_Dn.ViewModel
             }, p =>
             {
                 p.IsOpen = false;
+            });
+
+            Load_Command = new RelayCommand<object>(p => 
+            {
+                return true;
+            }, p => 
+            {
+                List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).ToList().OrderByDescending(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat)));
+                DeleteList = new ObservableCollection<Model.CHITIETPHIEUXUAT>();
+
+                ListMathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+                ListKhachhang = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
+                ListPhieunhap = new ObservableCollection<Model.CHITIETPHIEUNHAP>();
+
+                ListSoluong = new ObservableCollection<string>();
+
+                Active = false;
+                IsOpen = false;
+                IsOpen_insert = false;
+
+                ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
+                ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+                ListKhachhang_Filter = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
             });
 
             #region Lua chon mat hang va phieu nhap

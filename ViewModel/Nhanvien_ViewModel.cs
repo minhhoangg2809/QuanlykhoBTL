@@ -109,6 +109,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Command
+        public ICommand Load_Commad { get; set; }
         public ICommand AddDeleteList_Command { get; set; }
         public ICommand RemoveDeleteList_Command { get; set; }
         public ICommand Insert_Command { get; set; }
@@ -189,6 +190,20 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
+                IsOpen = false;
+            });
+
+            Load_Commad = new RelayCommand<object>(p => 
+            {
+                return true;
+            }, p => 
+            {
+                List = new ObservableCollection<Model.NHANVIEN>(Model.DataProvider.Ins.DB.NHANVIENs.Where(x => x.IsDeleted == false));
+                DeleteList = new ObservableCollection<Model.NHANVIEN>();
+
+                List_Quyen = new ObservableCollection<Model.QUYEN>(Model.DataProvider.Ins.DB.QUYENs);
+
+                Active = false;
                 IsOpen = false;
             });
 

@@ -84,6 +84,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Command
+        public ICommand Load_Command { get; set; }
         public ICommand AddDeleteList_Command { get; set; }
         public ICommand RemoveDeleteList_Command { get; set; }
         public ICommand Insert_Command { get; set; }
@@ -163,6 +164,19 @@ namespace QLK_Dn.ViewModel
             }, p =>
             {
                 IsOpen = false;
+            });
+
+            Load_Command = new RelayCommand<object>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                List = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
+                DeleteList = new ObservableCollection<Model.KHACHHANG>();
+
+                Active = false;
+                IsOpen = false;
+
             });
 
             #region Phan them
@@ -291,7 +305,7 @@ namespace QLK_Dn.ViewModel
             Delete_Command = new RelayCommand<object>(p =>
             {
                 if (DeleteList.Count() == 0)
-                    return false;                
+                    return false;
 
                 return true;
             }, p =>
@@ -332,7 +346,7 @@ namespace QLK_Dn.ViewModel
 
                 if (!string.IsNullOrEmpty(str))
                 {
-                    var filterlist = List.Where(x => x.ten_khachhang.Contains(str)||x.diachi.Contains(str)||x.sodienthoai.Contains(str));
+                    var filterlist = List.Where(x => x.ten_khachhang.Contains(str) || x.diachi.Contains(str) || x.sodienthoai.Contains(str));
 
                     for (int i = 0; i < List.Count(); i++)
                     {
@@ -359,6 +373,7 @@ namespace QLK_Dn.ViewModel
             #endregion
         }
 
+        #region Methods
         private void RemoveIteminList()
         {
             for (int i = 0; i < List.Count(); i++)
@@ -394,6 +409,8 @@ namespace QLK_Dn.ViewModel
             }
 
         }
+
+        #endregion
     }
 }
 

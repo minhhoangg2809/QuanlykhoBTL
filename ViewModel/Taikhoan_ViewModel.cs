@@ -198,6 +198,7 @@ namespace QLK_Dn.ViewModel
         #region Command
 
         #region Command Phan quan tri he thong
+        public ICommand Load_Command { get; set; }
         public ICommand GetPassword_Command { get; set; }
         public ICommand GetRePassword_Command { get; set; }
         public ICommand Insert_Command { get; set; }
@@ -360,6 +361,23 @@ namespace QLK_Dn.ViewModel
 
             IsToggleChecked = false;
 
+            #region Trang quan tri he thong
+
+            #region Load trang quan tri
+
+            Load_Command = new RelayCommand<object>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                List = new ObservableCollection<Model.TAIKHOAN>(Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.IsDeleted == false).ToList().OrderBy(x => x.NHANVIEN.ma_quyen));
+
+                TaoDSNhanvien();
+                DeleteList = new ObservableCollection<Model.TAIKHOAN>();
+            });
+
+            #endregion
+
             #region Them tai khoan
 
             Insert_Command = new RelayCommand<object>(p =>
@@ -487,6 +505,10 @@ namespace QLK_Dn.ViewModel
 
             });
             #endregion
+
+            #endregion
+
+            #region Trang dang nhap
 
             #region Dang nhap
 
@@ -641,6 +663,8 @@ namespace QLK_Dn.ViewModel
                     Message = "Mã xác thực sai";
                 }
             });
+            #endregion
+
             #endregion
 
             #region Thay doi thong tin

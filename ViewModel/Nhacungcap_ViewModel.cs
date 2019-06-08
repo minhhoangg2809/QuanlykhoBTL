@@ -84,6 +84,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Command
+        public ICommand Load_Command { get; set; }
         public ICommand AddDeleteList_Command { get; set; }
         public ICommand RemoveDeleteList_Command { get; set; }
         public ICommand Insert_Command { get; set; }
@@ -163,6 +164,19 @@ namespace QLK_Dn.ViewModel
             }, p =>
             {
                 IsOpen = false;
+            });
+
+            Load_Command = new RelayCommand<object>(p => 
+            {
+                return true;
+            }, p => 
+            {
+                List = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
+                DeleteList = new ObservableCollection<Model.NHACUNGCAP>();
+
+                Active = false;
+                IsOpen = false;
+
             });
 
             #region Phan them

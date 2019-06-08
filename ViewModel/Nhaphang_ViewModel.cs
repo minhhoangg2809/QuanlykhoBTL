@@ -189,6 +189,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Command
+        public ICommand Load_Command { get; set; }
         public ICommand Insert_Command { get; set; }
         public ICommand InsertShow_Command { get; set; }
         public ICommand Reset_Command { get; set; }
@@ -279,6 +280,24 @@ namespace QLK_Dn.ViewModel
             }, p =>
             {
                 p.IsOpen = false;
+            });
+
+            Load_Command = new RelayCommand<object>(p => 
+            {
+                return true;
+            }, p => 
+            {
+                TaoDS_nhap();
+                DeleteList = new ObservableCollection<Model.CHITIETPHIEUNHAP>();
+                ListMathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+
+                ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
+                ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+                ListNhacungcap_Filter = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
+
+                Active = false;
+                IsOpen = false;
+                IsOpen_insert = false;
             });
 
             #region Tao moi
