@@ -79,6 +79,7 @@ namespace QLK_Dn.ViewModel
                 }
             });
 
+
             Close_Command = new RelayCommand<UserControl>(p =>
              {
                  if (IsOpen == false)
@@ -91,7 +92,9 @@ namespace QLK_Dn.ViewModel
                  {
                      ViewModel.Taikhoan_ViewModel.Chuyentrangthai_Dong(ViewModel.Taikhoan_ViewModel.Glo_CurrentUser);
                  }
+
                  Application.Current.Shutdown();
+
              });
 
             Drag_Command = new RelayCommand<UserControl>(p =>
