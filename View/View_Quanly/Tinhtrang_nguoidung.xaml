@@ -30,21 +30,7 @@
                     <TextBlock Padding="5" FontSize="20" Text="TÌNH TRẠNG NGƯỜI DÙNG"/>
                     <TextBlock Width="350"/>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Width="auto">
-                        <ToggleButton x:Name="tg_btn_update" Visibility="Hidden"
-                            IsChecked="{Binding IsToggleChecked,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                            Cursor="Hand"
-                            Style="{StaticResource MaterialDesignSwitchToggleButton}"
-                            ToolTip="Tự động cập nhật">
-                            <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Checked">
-                                    <i:InvokeCommandAction Command="{Binding Update_Auto_Command}"/>
-                                </i:EventTrigger>
-                                <i:EventTrigger EventName="Unchecked">
-                                    <i:InvokeCommandAction Command="{Binding Update_Auto_Command}"/>
-                                </i:EventTrigger>
-                            </i:Interaction.Triggers>
-                        </ToggleButton>
-                        <TextBlock Width="10"/>
+                        <TextBlock Width="50"/>
                         <Button x:Name="btn_refresh"
                                 HorizontalAlignment="Right"
                                 Height="auto" Width="auto"
