@@ -155,7 +155,8 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
-        #region Commands Thong ke + Excel
+        #region Commands Load + Thong ke + Excel
+        public ICommand Load_Command { get; set; }
         public ICommand Statistic_Command { get; set; }
         public ICommand Excel_Command { get; set; }
         #endregion
@@ -217,6 +218,29 @@ namespace QLK_Dn.ViewModel
             }, p =>
             {
                 p.IsOpen = false;
+            });
+
+            Load_Command = new RelayCommand<object>(p => 
+            {
+                return true;
+            }, p => 
+            {
+                List = new ObservableCollection<Model.Thongke>();
+                DeleteList = new ObservableCollection<Model.Thongke>();
+
+                List_nhacungcap = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
+                FilterList_nhacungcap = new ObservableCollection<Model.NHACUNGCAP>();
+
+                List_loaihang = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
+                FilterList_loaihang = new ObservableCollection<Model.LOAIHANG>();
+
+                List_donvi = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
+                FilterList_donvi = new ObservableCollection<Model.DONVITINH>();
+
+                List_mathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+                FilterList_mathang = new ObservableCollection<Model.MATHANG>();
+
+                IsOpen = false;
             });
 
             #region Them / xoa khoi FilterList_nhacungcap

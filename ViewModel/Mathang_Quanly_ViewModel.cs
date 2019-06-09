@@ -74,9 +74,10 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
-        #region Filter Commands
+        #region Commands
         public ICommand Filter_Command { get; set; }
         public ICommand ResetFilter_Command { get; set; }
+        public ICommand Load_Command { get; set; }
 
         #endregion
 
@@ -90,7 +91,22 @@ namespace QLK_Dn.ViewModel
             ListNhacungcap_Filter = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
             ListDonvi_Filter = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
 
+            Load_Command = new RelayCommand<object>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                List = new ObservableCollection<Model.Thongke>();
+                getThongke_list();
+
+                ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
+                ListNhacungcap_Filter = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
+                ListDonvi_Filter = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
+
+            });
+
             #region Phan loc
+
             ResetFilter_Command = new RelayCommand<Button>(p =>
             {
                 return true;
@@ -126,6 +142,7 @@ namespace QLK_Dn.ViewModel
                     FilterbyDonvi(SDonvi_Filter.ma_donvi);
                 }
             });
+
             #endregion
 
         }
