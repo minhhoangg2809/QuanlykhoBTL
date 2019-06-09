@@ -204,7 +204,7 @@
                                 </Grid>
                                 <StackPanel Grid.Row="2" Orientation="Horizontal">
                                     <Grid>
-                                        <PasswordBox x:Name="pb_pass"
+                                        <PasswordBox x:Name="pb_pass"         
                                          Width="950" Margin="5"
                                          VerticalAlignment="Bottom"
                                          HorizontalAlignment="Left"
