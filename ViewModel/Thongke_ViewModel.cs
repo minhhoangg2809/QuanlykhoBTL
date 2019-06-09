@@ -156,12 +156,15 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Commands Load + Thong ke + Excel
+
         public ICommand Load_Command { get; set; }
         public ICommand Statistic_Command { get; set; }
         public ICommand Excel_Command { get; set; }
+
         #endregion
 
         #region Commands Xoa
+
         public ICommand AddDeleteList_Command { get; set; }
         public ICommand RemoveDeleteList_Command { get; set; }
         public ICommand Delete_Command { get; set; }
