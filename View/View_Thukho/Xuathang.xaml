@@ -114,7 +114,7 @@
                             <RowDefinition Height="10"/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        
+
                         <Grid Grid.Row="0">
                             <Expander  HorizontalAlignment="Stretch"
                                        IsExpanded="False">
@@ -149,7 +149,7 @@
                                                       DisplayMemberPath="ten_khachhang">
                                             </ComboBox>
                                             <TextBlock Width="30"/>
-                                            
+
                                             <ComboBox x:Name="cb_Loai"
                                                       IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Loại hàng"
                                                       ItemsSource="{Binding ListLoai_Filter}"
@@ -163,7 +163,7 @@
                                                 </i:Interaction.Triggers>
                                             </ComboBox>
                                             <TextBlock Width="30"/>
-                                            
+
                                             <ComboBox x:Name="cb_Mathang"
                                                       ToolTip="{Binding SMathang_Filter.ten_mathang}"
                                                       IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Mã mặt hàng"
@@ -172,14 +172,16 @@
                                                       DisplayMemberPath="ma_mathang">
                                             </ComboBox>
                                             <TextBlock Width="30"/>
-                                           
+
                                             <DatePicker ToolTip="Không được để trống"
                                                         FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Ngày bắt đầu"
-                                                        Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                                        Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                        MouseDoubleClick="DatePicker_MouseDoubleClick"/>
                                             <TextBlock Width="30"/>
                                             <DatePicker ToolTip="Không được để trống"
                                                         FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Ngày kết thúc"
-                                                        Text="{Binding Date_End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                                        Text="{Binding Date_End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                        MouseDoubleClick="DatePicker_MouseDoubleClick"/>
                                             <TextBlock Width="30"/>
                                             <Button x:Name="btn_filter"
                                               ToolTip="Lọc"
@@ -365,7 +367,7 @@
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Ghichu,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 </Grid>
-                                
+
                                 <Grid Grid.Row="2">
 
                                     <!--Dialog-->
@@ -690,7 +692,7 @@
                                         </ScrollViewer>
                                     </Border>
                                 </Grid>
-                               
+
                                 <Grid Grid.Row="3">
                                     <StackPanel
                                     Margin="5 5"

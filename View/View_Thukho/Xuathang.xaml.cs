@@ -77,5 +77,12 @@ namespace QLK_Dn.View.View_Thukho
 
             GridMain.IsEnabled = false;
         }
+
+        private void DatePicker_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            DatePicker dp = sender as DatePicker;
+
+            dp.Text = DateTime.Today.ToShortDateString();
+        }
     }
 }

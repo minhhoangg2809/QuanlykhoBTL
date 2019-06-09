@@ -407,12 +407,14 @@
                                                   IsChecked="{Binding IscheckAll,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                         <TextBlock Width="30"/>
                                         <DatePicker ToolTip="Không được để trống" Margin="5"
-                                                        FontSize="15" Width="250" MaterialDesign:HintAssist.Hint="Chọn ngày bắt đầu"
-                                                        Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                                    FontSize="15" Width="250" MaterialDesign:HintAssist.Hint="Chọn ngày bắt đầu"
+                                                    Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                    MouseDoubleClick="DatePicker_MouseDoubleClick"/>
                                         <TextBlock Width="30"/>
                                         <DatePicker ToolTip="Không được để trống"  Margin="5"
-                                                        FontSize="15" Width="250" MaterialDesign:HintAssist.Hint="Chọn ngày kết thúc"
-                                                        Text="{Binding Date_End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                                                    FontSize="15" Width="250" MaterialDesign:HintAssist.Hint="Chọn ngày kết thúc"
+                                                    Text="{Binding Date_End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                    MouseDoubleClick="DatePicker_MouseDoubleClick"/>
                                     </StackPanel>
                                 </Expander>
 
