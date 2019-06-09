@@ -60,7 +60,7 @@ namespace QLK_Dn.ViewModel
         }
 
 
-        #region Thay doi thong tin
+        #region Thay doi thong tin (Thongtin_taikhoan.xaml)
 
         private string _Tentkmoi;
 
@@ -183,17 +183,6 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
-        #region Tinh trang prop
-
-        private bool _IsToggleChecked;
-
-        public bool IsToggleChecked
-        {
-            get { return _IsToggleChecked; }
-            set { _IsToggleChecked = value; OnPropertyChanged(); }
-        }
-
-        #endregion
 
         #region Command
 
@@ -229,7 +218,6 @@ namespace QLK_Dn.ViewModel
         #region Command Tinh trang ng dung
         public ICommand Status_Command { get; set; }
         public ICommand Refesh_State_Command { get; set; }
-        public ICommand Update_Auto_Command { get; set; }
 
         #endregion
 
@@ -358,8 +346,6 @@ namespace QLK_Dn.ViewModel
             {
                 IsOpen = false;
             });
-
-            IsToggleChecked = false;
 
             #region Trang quan tri he thong
 
@@ -747,34 +733,7 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
-                if (p != null)
-                {
-                    if (p.GetType() == typeof(Button))
-                    {
-                        IsToggleChecked = false;
-                    }
-                }
-
                 Capnhattrangthai();
-            });
-
-            Update_Auto_Command = new RelayCommand<object>(p =>
-            {
-                return true;
-            }, p =>
-            {
-                Thread thr = new Thread(t => Capnhattrangthai());
-
-                if (IsToggleChecked == true)
-                {
-                    thr.Start();
-                    Thread.Sleep(1000);
-                }
-                else
-                {
-                    thr.Abort();
-                }
-
             });
 
             #endregion
