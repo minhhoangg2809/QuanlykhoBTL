@@ -42,25 +42,6 @@ namespace QLK_Dn.ViewModel
             set { _IscheckAll = value; OnPropertyChanged(); }
         }
 
-        #region MATHANG
-
-        private ObservableCollection<Model.MATHANG> _List_mathang;
-
-        public ObservableCollection<Model.MATHANG> List_mathang
-        {
-            get { return _List_mathang; }
-            set { _List_mathang = value; OnPropertyChanged(); }
-        }
-
-        private ObservableCollection<Model.MATHANG> _FilterList_mathang;
-
-        public ObservableCollection<Model.MATHANG> FilterList_mathang
-        {
-            get { return _FilterList_mathang; }
-            set { _FilterList_mathang = value; OnPropertyChanged(); }
-        }
-
-        #endregion
 
         #region NHA CUNG CAP
 
@@ -150,8 +131,6 @@ namespace QLK_Dn.ViewModel
         public ICommand DeletefromFilterLH_Command { get; set; }
         public ICommand AddtoFilterDV_Command { get; set; }
         public ICommand DeletefromFilterDV_Command { get; set; }
-        public ICommand AddtoFilterMH_Command { get; set; }
-        public ICommand DeletefromFilterMH_Command { get; set; }
 
         #endregion
 
@@ -169,6 +148,13 @@ namespace QLK_Dn.ViewModel
         public ICommand RemoveDeleteList_Command { get; set; }
         public ICommand Delete_Command { get; set; }
         public ICommand DeleteShow_Command { get; set; }
+
+        #endregion
+
+        #region Commands Sap xep
+        public ICommand OrderbyNhap_Command { get; set; }
+        public ICommand OrderbyXuat_Command { get; set; }
+        public ICommand OrderbyTon_Command { get; set; }
 
         #endregion
 
@@ -208,9 +194,6 @@ namespace QLK_Dn.ViewModel
             List_donvi = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
             FilterList_donvi = new ObservableCollection<Model.DONVITINH>();
 
-            List_mathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
-            FilterList_mathang = new ObservableCollection<Model.MATHANG>();
-
             IscheckAll = true;
             IsOpen = false;
 
@@ -223,10 +206,10 @@ namespace QLK_Dn.ViewModel
                 p.IsOpen = false;
             });
 
-            Load_Command = new RelayCommand<object>(p => 
+            Load_Command = new RelayCommand<object>(p =>
             {
                 return true;
-            }, p => 
+            }, p =>
             {
                 List = new ObservableCollection<Model.Thongke>();
                 DeleteList = new ObservableCollection<Model.Thongke>();
@@ -239,9 +222,6 @@ namespace QLK_Dn.ViewModel
 
                 List_donvi = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
                 FilterList_donvi = new ObservableCollection<Model.DONVITINH>();
-
-                List_mathang = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
-                FilterList_mathang = new ObservableCollection<Model.MATHANG>();
 
                 IsOpen = false;
             });
@@ -320,32 +300,6 @@ namespace QLK_Dn.ViewModel
                 var item = List_donvi.Where(x => x.ma_donvi == id).SingleOrDefault();
 
                 FilterList_donvi.Remove(item);
-            });
-
-            #endregion
-
-            #region Them / xoa khoi FilterList_mathang
-
-            AddtoFilterMH_Command = new RelayCommand<CheckBox>(p =>
-            {
-                return true;
-            }, p =>
-            {
-                string id = p.Uid.ToString();
-                var item = List_mathang.Where(x => x.ma_mathang == id).SingleOrDefault();
-
-                FilterList_mathang.Add(item);
-            });
-
-            DeletefromFilterMH_Command = new RelayCommand<CheckBox>(p =>
-            {
-                return true;
-            }, p =>
-            {
-                string id = p.Uid.ToString();
-                var item = List_mathang.Where(x => x.ma_mathang == id).SingleOrDefault();
-
-                FilterList_mathang.Remove(item);
             });
 
             #endregion
@@ -430,7 +384,7 @@ namespace QLK_Dn.ViewModel
                 List = new ObservableCollection<Model.Thongke>();
                 Filter_ngaythang(MyStaticMethods.FormatDateString(Date_Start), MyStaticMethods.FormatDateString(Date_End));
 
-                if (IscheckAll == false) 
+                if (IscheckAll == false)
                 {
                     UncheckAll_Filter();
                 }
@@ -450,10 +404,6 @@ namespace QLK_Dn.ViewModel
                     Filter_donvi();
                 }
 
-                if (FilterList_mathang.Count != 0)
-                {
-                    Filter_mathang();
-                }
             });
             #endregion
 
@@ -607,6 +557,74 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Sap xep
+
+            OrderbyNhap_Command = new RelayCommand<object>(p => 
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p => 
+            {
+               ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.soluongnhap));
+
+               if (List[0] == chkList[0]) 
+               {
+                   List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.soluongnhap));
+               }
+               else
+               {
+                   List = new ObservableCollection<Model.Thongke>(chkList);
+               }
+
+            });
+
+            OrderbyXuat_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.soluongxuat));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.soluongxuat));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.Thongke>(chkList);
+                }
+            });
+
+            OrderbyTon_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.tonkho));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.tonkho));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.Thongke>(chkList);
+                }
+            });
+
+            #endregion
         }
 
         #region Methods
@@ -640,28 +658,6 @@ namespace QLK_Dn.ViewModel
                 for (int i = 0; i < List.Count(); i++)
                 {
                     while (FilterList_nhacungcap.Where(x => x == List[i].mathang.NHACUNGCAP).Count() == 0)
-                    {
-                        if (List[i] == List[List.Count() - 1])
-                        {
-                            List.Remove(List[i]);
-                            break;
-                        }
-                        else
-                        {
-                            List.Remove(List[i]);
-                        }
-                    }
-                }
-            }
-        }
-
-        private void Filter_mathang()
-        {
-            if (List.Count() != 0)
-            {
-                for (int i = 0; i < List.Count(); i++)
-                {
-                    while (FilterList_mathang.Where(x => x == List[i].mathang).Count() == 0)
                     {
                         if (List[i] == List[List.Count() - 1])
                         {
@@ -772,6 +768,7 @@ namespace QLK_Dn.ViewModel
         }
 
         #endregion
+
     }
 
 

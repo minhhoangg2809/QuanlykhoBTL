@@ -282,10 +282,10 @@ namespace QLK_Dn.ViewModel
                 p.IsOpen = false;
             });
 
-            Load_Command = new RelayCommand<object>(p => 
+            Load_Command = new RelayCommand<object>(p =>
             {
                 return true;
-            }, p => 
+            }, p =>
             {
                 TaoDS_nhap();
                 DeleteList = new ObservableCollection<Model.CHITIETPHIEUNHAP>();
@@ -355,6 +355,7 @@ namespace QLK_Dn.ViewModel
                 double dongiaxuat = ((phantram * dongianhap) + dongianhap);
 
                 Dongiaxuat = dongiaxuat.ToString();
+
             });
 
             InsertShow_Command = new RelayCommand<object>(p =>
@@ -377,6 +378,20 @@ namespace QLK_Dn.ViewModel
                 int soluongthucnhap = 0;
                 if (!int.TryParse(Soluongthucnhap.Replace(" ", String.Empty), out soluongthucnhap))
                     return false;
+
+                try
+                {
+                    if (Convert.ToInt32(Soluongnhap) <= 0 || Convert.ToInt32(Soluongthucnhap) <= 0)
+                        return false;
+
+                    if (Convert.ToInt32(Dongianhap) <= 0 || Convert.ToDouble(Phantram) < 0)
+                        return false;
+
+                    if (Convert.ToInt32(Dongiaxuat) <= 0)
+                        return false;
+                }
+                catch (Exception) {/*Try catch de sua loi FormatException*/}
+                
 
                 if (IsOpen_insert == true || IsOpen == true)
                     return false;
@@ -443,6 +458,8 @@ namespace QLK_Dn.ViewModel
                 Active = true;
                 Message = "Thêm mới thành công !!!";
                 IsOpen_insert = false;
+
+
             });
 
             #endregion

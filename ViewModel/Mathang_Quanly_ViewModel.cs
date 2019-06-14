@@ -78,6 +78,7 @@ namespace QLK_Dn.ViewModel
         public ICommand Filter_Command { get; set; }
         public ICommand ResetFilter_Command { get; set; }
         public ICommand Load_Command { get; set; }
+        public ICommand OrderbyTon_Command { get; set; }
 
         #endregion
 
@@ -140,6 +141,31 @@ namespace QLK_Dn.ViewModel
                 if (SDonvi_Filter != null)
                 {
                     FilterbyDonvi(SDonvi_Filter.ma_donvi);
+                }
+            });
+
+            #endregion
+
+            #region Sap xep
+
+            OrderbyTon_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.tonkho));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.tonkho));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.Thongke>(chkList);
                 }
             });
 

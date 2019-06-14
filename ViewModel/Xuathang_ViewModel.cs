@@ -315,10 +315,10 @@ namespace QLK_Dn.ViewModel
                 p.IsOpen = false;
             });
 
-            Load_Command = new RelayCommand<object>(p => 
+            Load_Command = new RelayCommand<object>(p =>
             {
                 return true;
-            }, p => 
+            }, p =>
             {
                 List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).ToList().OrderByDescending(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat)));
                 DeleteList = new ObservableCollection<Model.CHITIETPHIEUXUAT>();
@@ -397,6 +397,9 @@ namespace QLK_Dn.ViewModel
                     return false;
 
                 if (IsOpen_insert == true || IsOpen == true)
+                    return false;
+
+                if (Convert.ToInt32(Dongiaxuat) <= 0 || Convert.ToInt32(Soluongxuat) <= 0 || Convert.ToInt32(Soluongthucxuat) <= 0)
                     return false;
 
                 return true;

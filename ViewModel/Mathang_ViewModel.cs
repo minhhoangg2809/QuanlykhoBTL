@@ -77,6 +77,59 @@ namespace QLK_Dn.ViewModel
             }
         }
 
+        #region Filter data
+
+        private ObservableCollection<Model.LOAIHANG> _ListLoai_Filter;
+
+        public ObservableCollection<Model.LOAIHANG> ListLoai_Filter
+        {
+            get { return _ListLoai_Filter; }
+            set { _ListLoai_Filter = value; OnPropertyChanged(); }
+        }
+
+
+        private ObservableCollection<Model.DONVITINH> _ListDonvi_Filter;
+
+        public ObservableCollection<Model.DONVITINH> ListDonvi_Filter
+        {
+            get { return _ListDonvi_Filter; }
+            set { _ListDonvi_Filter = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<Model.NHACUNGCAP> _ListNhacungcap_Filter;
+
+        public ObservableCollection<Model.NHACUNGCAP> ListNhacungcap_Filter
+        {
+            get { return _ListNhacungcap_Filter; }
+            set { _ListNhacungcap_Filter = value; OnPropertyChanged(); }
+        }
+
+        private Model.NHACUNGCAP _SNhacungcap_Filter;
+
+        public Model.NHACUNGCAP SNhacungcap_Filter
+        {
+            get { return _SNhacungcap_Filter; }
+            set { _SNhacungcap_Filter = value; OnPropertyChanged(); }
+        }
+
+        Model.LOAIHANG _SLoai_Filter;
+
+        public Model.LOAIHANG SLoai_Filter
+        {
+            get { return _SLoai_Filter; }
+            set { _SLoai_Filter = value; OnPropertyChanged(); }
+        }
+
+        private Model.DONVITINH _SDonvi_Filter;
+
+        public Model.DONVITINH SDonvi_Filter
+        {
+            get { return _SDonvi_Filter; }
+            set { _SDonvi_Filter = value; OnPropertyChanged(); }
+        }
+
+
+        #endregion
 
         #region SelectedItem.prop
 
@@ -156,6 +209,8 @@ namespace QLK_Dn.ViewModel
         public ICommand DeleteShow_Command { get; set; }
         public ICommand Reset_Command { get; set; }
         public ICommand Search_Command { get; set; }
+        public ICommand Filter_Command { get; set; }
+        public ICommand ResetFilter_Command { get; set; }
 
         #endregion
 
@@ -234,10 +289,10 @@ namespace QLK_Dn.ViewModel
                 IsOpen = false;
             });
 
-            Load_Command = new RelayCommand<object>(p => 
+            Load_Command = new RelayCommand<object>(p =>
             {
                 return true;
-            }, p => 
+            }, p =>
             {
                 List = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
                 DeleteList = new ObservableCollection<Model.MATHANG>();
@@ -248,6 +303,11 @@ namespace QLK_Dn.ViewModel
 
                 Active = false;
                 IsOpen = false;
+
+                ListDonvi_Filter = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
+                ListNhacungcap_Filter = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
+                ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
+
             });
 
             #region Tao moi
@@ -412,7 +472,7 @@ namespace QLK_Dn.ViewModel
                 SelectedItem = null;
             });
             #endregion
-            
+
             #region Phan tim kiem
 
             Search_Command = new RelayCommand<TextBox>(p =>
@@ -451,6 +511,106 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Phan loc
+
+            ListDonvi_Filter = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
+            ListNhacungcap_Filter = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
+            ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
+
+            ResetFilter_Command = new RelayCommand<Button>(p => 
+            {
+                return true;
+            }, p => 
+            {
+                List = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+
+                SLoai_Filter = null;
+                SNhacungcap_Filter = null;
+                SDonvi_Filter = null;
+            });
+
+            Filter_Command = new RelayCommand<Button>(p => 
+            {
+                return true;
+            }, p => 
+            {
+                List = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
+
+                if (SLoai_Filter != null)
+                {
+                    FilterbyLoaihang(SLoai_Filter.ma_loaihang);
+                }
+                if (SNhacungcap_Filter != null)
+                {
+                    FilterbyNhacungcap(SNhacungcap_Filter.ma_nhacungcap);
+                }
+                if (SDonvi_Filter != null)
+                {
+                    FilterbyDonvi(SDonvi_Filter.ma_donvi);
+                }
+            });
+            #endregion
+        }
+
+        #region Methods
+
+        private void FilterbyNhacungcap(string ma_nhacungcap)
+        {
+            for (int i = 0; i < List.Count(); i++)
+            {
+                while (List[i].NHACUNGCAP.ma_nhacungcap != ma_nhacungcap)
+                {
+                    if (List[i] == List[List.Count() - 1])
+                    {
+                        List.Remove(List[i]);
+                        break;
+                    }
+                    else
+                    {
+                        List.Remove(List[i]);
+                    }
+                };
+            }
+        }
+
+        private void FilterbyLoaihang(string ma_loai)
+        {
+            for (int i = 0; i < List.Count(); i++)
+            {
+                while (List[i].LOAIHANG.ma_loaihang != ma_loai)
+                {
+                    if (List[i] == List[List.Count() - 1])
+                    {
+                        List.Remove(List[i]);
+                        break;
+                    }
+                    else
+                    {
+                        List.Remove(List[i]);
+                    }
+                };
+            }
+        }
+
+        private void FilterbyDonvi(string ma_donvi)
+        {
+
+            for (int i = 0; i < List.Count(); i++)
+            {
+                while (List[i].DONVITINH.ma_donvi != ma_donvi)
+                {
+                    if (List[i] == List[List.Count() - 1])
+                    {
+                        List.Remove(List[i]);
+                        break;
+                    }
+                    else
+                    {
+                        List.Remove(List[i]);
+                    }
+                };
+            }
         }
 
         private void RemoveIteminList()
@@ -488,6 +648,8 @@ namespace QLK_Dn.ViewModel
             }
 
         }
+        #endregion
+
 
     }
 }
