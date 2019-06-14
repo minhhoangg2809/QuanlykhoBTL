@@ -152,6 +152,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Commands Sap xep
+		
         public ICommand OrderbyNhap_Command { get; set; }
         public ICommand OrderbyXuat_Command { get; set; }
         public ICommand OrderbyTon_Command { get; set; }
