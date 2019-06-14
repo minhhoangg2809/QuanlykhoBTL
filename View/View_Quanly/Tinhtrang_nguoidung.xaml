@@ -106,7 +106,7 @@
                                                     <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
-                                                <MaterialDesign:PackIcon Kind="Face"/>
+                                                <MaterialDesign:PackIcon Kind="GithubFace"/>
                                                 <TextBlock Grid.Column="1" Text=" Tình trạng"/>
                                             </Grid>
                                         </DataTemplate>

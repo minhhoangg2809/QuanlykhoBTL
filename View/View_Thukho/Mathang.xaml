@@ -109,7 +109,98 @@
 
             <Grid Grid.Row="1">
                 <Grid x:Name="GridMain">
-                    <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerStyle}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Row="0">
+                        <Expander  HorizontalAlignment="Stretch"
+                                       IsExpanded="False">
+                            <Expander.Header>
+                                <StackPanel Orientation="Horizontal">
+                                    <MaterialDesign:PackIcon Opacity="0.8" Kind="Filter"/>
+                                    <TextBlock Width="5"/>
+                                    <TextBlock
+                                            Opacity="0.8"
+                                            VerticalAlignment="Stretch"
+                                            HorizontalAlignment="Stretch"
+                                            FontSize="15"
+                                            Foreground="Black"     
+                                            Text="Bộ lọc :"/>
+                                </StackPanel>
+                            </Expander.Header>
+                            <MaterialDesign:ColorZone
+                                  Background="White"
+                                  Padding="16">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="auto"/>
+                                    </Grid.ColumnDefinitions>
+                                    <StackPanel Grid.Column="1"
+                                                    Orientation="Horizontal"
+                                                    HorizontalAlignment="Right">
+                                        <ComboBox x:Name="cb_Nhacungcap"
+                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Nhà cung cấp"
+                                                      ItemsSource="{Binding ListNhacungcap_Filter}"
+                                                      SelectedItem="{Binding SNhacungcap_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                      DisplayMemberPath="ten_nhacungcap">
+                                        </ComboBox>
+                                        <TextBlock Width="30"/>
+
+                                        <ComboBox x:Name="cb_Loai"
+                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Loại hàng"
+                                                      ItemsSource="{Binding ListLoai_Filter}"
+                                                      SelectedItem="{Binding SLoai_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                      DisplayMemberPath="ten_loaihang"/>
+                                        <TextBlock Width="30"/>
+
+                                        <ComboBox x:Name="cb_Donvi"
+                                                  IsEditable="True" FontSize="15" Width="200"
+                                                  MaterialDesign:HintAssist.Hint="Đơn vị tính"
+                                                  ItemsSource="{Binding ListDonvi_Filter}"
+                                                  SelectedItem="{Binding SDonvi_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                                  DisplayMemberPath="ten_donvi">
+                                        </ComboBox>
+                                        <TextBlock Width="30"/>
+                                       
+                                        <Button x:Name="btn_filter"
+                                              ToolTip="Lọc"
+                                              Width="30" Height="30" 
+                                              Style="{DynamicResource OutlineButton_Primary}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:InvokeCommandAction Command="{Binding Filter_Command}"
+                                                                               CommandParameter="{Binding ElementName=btn_filter}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                            <MaterialDesign:PackIcon Kind="FilterVariant" Width="18" Height="18"/>
+                                        </Button>
+                                        <TextBlock Width="10"/>
+                                        <Button x:Name="btn_resetfilter"
+                                                BorderThickness="3"
+                                                ToolTip="Hủy bộ lọc"
+                                                Width="30" Height="30" 
+                                                Style="{DynamicResource OutlineButton_Danger}">
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="Click">
+                                                    <i:InvokeCommandAction Command="{Binding ResetFilter_Command}"
+                                                                               CommandParameter="{Binding ElementName=btn_resetfilter}"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                            <MaterialDesign:PackIcon Kind="Close" Width="18" Height="18"/>
+                                        </Button>
+                                    </StackPanel>
+                                </Grid>
+                            </MaterialDesign:ColorZone>
+                        </Expander>
+                        <Separator Background="Black" Height="1" VerticalAlignment="Bottom"/>
+                    </Grid>
+                    
+                    
+                    <ScrollViewer Grid.Row="2" Style="{DynamicResource ResourceKey=ScrollViewerStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -118,6 +209,9 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
+                            
+                          
+                            
                             <Grid Grid.Row="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition/>

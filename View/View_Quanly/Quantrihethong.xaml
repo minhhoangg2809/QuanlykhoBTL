@@ -140,7 +140,7 @@
                                     ToolTip="Tình trạng người dùng"
                                     Command="{Binding Status_Command}">
                                     <MaterialDesign:PackIcon
-                                            Kind="Face"
+                                            Kind="GithubFace"
                                             Height="24"
                                             Width="24" />
                                 </Button>

@@ -35,6 +35,12 @@
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
         </EventTrigger>
     </Window.Triggers>
+    
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Load_Command}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
 
 
     <Grid>
@@ -279,6 +285,13 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <MaterialDesign:PackIcon Kind="ArrowDownBoldCircleOutline"/>
                                                                 <TextBlock Grid.Column="1" Text=" Số lượng nhập"/>
+                                                                
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyNhap_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
@@ -294,12 +307,19 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <MaterialDesign:PackIcon Kind="ArrowUpBoldCircleOutline"/>
                                                                 <TextBlock Grid.Column="1" Text=" Số lượng xuất"/>
+
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyXuat_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
                                                 </GridViewColumn>
 
-                                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding tonkho}">
+                                                <GridViewColumn x:Name="ton" Width="200" DisplayMemberBinding="{Binding tonkho}">
                                                     <GridViewColumn.HeaderTemplate>
                                                         <DataTemplate>
                                                             <Grid>
@@ -309,9 +329,17 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <MaterialDesign:PackIcon Kind="MinusCircleOutline"/>
                                                                 <TextBlock Grid.Column="1" Text=" Tồn kho"/>
+                                                                
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTon_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
+                                                    
                                                 </GridViewColumn>
 
                                                 <GridViewColumn Width="150" DisplayMemberBinding="{Binding mathang.DONVITINH.ten_donvi}">
@@ -538,60 +566,6 @@
                                                             </CheckBox>
                                                             <StackPanel Grid.Column="2">
                                                                 <TextBlock  Text="{Binding ten_donvi}" />
-                                                            </StackPanel>
-                                                        </Grid>
-                                                    </Border>
-                                                </DataTemplate>
-                                            </ListView.ItemTemplate>
-                                        </ListView>
-                                    </StackPanel>
-                                </Expander>
-
-                                <Expander x:Name="ex_supp"
-                                          HorizontalAlignment="Stretch"
-                                          Header="Lọc theo mặt hàng"
-                                          Background="WhiteSmoke">
-                                    <StackPanel
-                                      Orientation="Vertical"
-                                      TextBlock.Foreground="{DynamicResource MaterialDesignBody}">
-                                        <TextBox x:Name="tb_tkmathang" 
-                                            Margin="5" ToolTip="Nhập mã mặt hàng"
-                                            FontSize="15" Width="250">
-                                            <MaterialDesign:HintAssist.Hint>
-                                                <StackPanel Orientation="Horizontal" Opacity="0.8">
-                                                    <MaterialDesign:PackIcon Height="21" Kind="Search"/>
-                                                    <TextBlock Width="5"/>
-                                                    <TextBlock Text="Tìm kiếm mặt hàng"/>
-                                                </StackPanel>
-                                            </MaterialDesign:HintAssist.Hint>
-                                        </TextBox>
-                                        <ListView x:Name="cb_supp" Margin="5"
-                                              FontSize="15" Width="300"
-                                              MaterialDesign:HintAssist.Hint="Chọn mặt hàng"
-                                              ItemsSource="{Binding List_mathang}">
-                                            <ListView.ItemTemplate>
-                                                <DataTemplate>
-                                                    <Border x:Name="Border" Padding="8">
-                                                        <Grid>
-                                                            <Grid.ColumnDefinitions>
-                                                                <ColumnDefinition Width="auto"/>
-                                                                <ColumnDefinition Width="5"/>
-                                                                <ColumnDefinition />
-                                                            </Grid.ColumnDefinitions>
-                                                            <CheckBox Grid.Column="0" Cursor="Pen" x:Name="cb_mh" Uid="{Binding ma_mathang}">
-                                                                <i:Interaction.Triggers>
-                                                                    <i:EventTrigger EventName="Checked">
-                                                                        <i:InvokeCommandAction Command="{Binding DataContext.AddtoFilterMH_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                                                               CommandParameter="{Binding ElementName=cb_mh}"/>
-                                                                    </i:EventTrigger>
-                                                                    <i:EventTrigger EventName="Unchecked">
-                                                                        <i:InvokeCommandAction Command="{Binding DataContext.DeletefromFilterMH_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
-                                                                                               CommandParameter="{Binding ElementName=cb_mh}"/>
-                                                                    </i:EventTrigger>
-                                                                </i:Interaction.Triggers>
-                                                            </CheckBox>
-                                                            <StackPanel Grid.Column="2">
-                                                                <TextBlock  Text="{Binding ma_mathang}" />
                                                             </StackPanel>
                                                         </Grid>
                                                     </Border>

@@ -46,19 +46,38 @@
                 <Label Content="XÁC THỰC TÀI KHOẢN" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="5" Foreground="Gray" FontSize="18"/>
                 <StackPanel VerticalAlignment="Top" Margin="15">
                     <TextBox x:Name="tb_chk" Margin="0,30"
-                             materialDesign:HintAssist.Hint="MÃ XÁC THỰC" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              FontFamily="Champagne &amp; Limousines" FontSize="18"
-                             Text="{Binding Maxacthuc,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                             Text="{Binding Maxacthuc,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                             KeyboardNavigation.TabIndex="0" KeyboardNavigation.IsTabStop="True">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Margin="-2 0 0 0">
+                                <TextBlock VerticalAlignment="Bottom">
+                                     MÃ XÁC THỰC
+                                </TextBlock>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
                     <TextBox x:Name="tb_dn" Margin="0,10"
                              IsReadOnly="True"
-                             materialDesign:HintAssist.Hint="TÊN ĐĂNG NHẬP" 
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                              FontFamily="Champagne &amp; Limousines" FontSize="18"
-                             Text="{Binding Tendangnhap,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+                             Text="{Binding Tendangnhap,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        <materialDesign:HintAssist.Hint>
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Margin="-2 0 0 0">
+                                <TextBlock VerticalAlignment="Bottom">
+                                     TÊN ĐĂNG NHẬP
+                                </TextBlock>
+                            </StackPanel>
+                        </materialDesign:HintAssist.Hint>
+                    </TextBox>
                 </StackPanel>
             </Grid>
-            <Button  x:Name="btn_chk"
+            <Button  x:Name="btn_chk" IsDefault="True"
                      Height="40" Width="150"
                      HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,65" Content="XÁC THỰC" Background="#FF1CBAC0">
                 <i:Interaction.Triggers>
@@ -82,7 +101,7 @@
                          ActionContent="OK" 
                          ActionCommand="{Binding Active_Command}"/>
             </materialDesign:Snackbar>
-            <Image Source="Images/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
+            <Image Source="/Images/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="30"/>
         </Grid>
 
     </Grid>

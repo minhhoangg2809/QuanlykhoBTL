@@ -50,7 +50,6 @@
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <UC:ControlBar Height="30"/>
-
         </Grid>
 
 

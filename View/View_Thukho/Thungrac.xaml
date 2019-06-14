@@ -107,7 +107,7 @@
                             Cursor="Hand" Click="btn_tab_Click" Uid="t1" Background="White">
                                 MẶT HÀNG
                             </Button>
-                            <Rectangle x:Name="rec1" Height="3.5" 
+                            <Rectangle x:Name="rec1" 
                                        Visibility="Visible" Uid="t1"
                                        Style="{DynamicResource Underline_But}"/>
                         </StackPanel>
