@@ -220,6 +220,7 @@ namespace QLK_Dn.ViewModel
             #endregion
 
             #region Phan sua
+
             Update_Command = new RelayCommand<object>(p =>
             {
                 if (SelectedItem == null)

@@ -48,6 +48,7 @@ namespace QLK_Dn.ViewModel
         public ICommand DelShow_Command { get; set; }
         public ICommand ResShow_Command { get; set; }
         public ICommand Search_Command { get; set; }
+        public ICommand Sort_Command { get; set; }
         #endregion
 
         #region Dialog
@@ -288,6 +289,31 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Phan sap xep
+
+            Sort_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.DONVITINH> chkList = new ObservableCollection<Model.DONVITINH>(List.OrderByDescending(x => x.ten_donvi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.DONVITINH>(List.OrderBy(x => x.ten_donvi));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.DONVITINH>(chkList);
+                }
+            });
+
+            #endregion
+
         }
 
         #region Methods

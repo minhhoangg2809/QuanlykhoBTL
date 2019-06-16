@@ -51,6 +51,15 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
+        #region Commands Sap xep
+
+        public ICommand OrderbyTenMathang_Command { get; set; }
+        public ICommand OrderbyTennhacungcap_Command { get; set; }
+        public ICommand OrderbyTenloai_Command { get; set; }
+        public ICommand OrderbyTendonvi_Command { get; set; }
+
+        #endregion
+
         #region Dialog
         private bool _Openres;
 
@@ -290,6 +299,95 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Phan sap xep
+
+            OrderbyTenMathang_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.MATHANG> chkList = new ObservableCollection<Model.MATHANG>(List.OrderByDescending(x => x.ten_mathang));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.MATHANG>(List.OrderBy(x => x.ten_mathang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.MATHANG>(chkList);
+                }
+            });
+
+            OrderbyTennhacungcap_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.MATHANG> chkList = new ObservableCollection<Model.MATHANG>(List.OrderByDescending(x => x.NHACUNGCAP.ten_nhacungcap));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.MATHANG>(List.OrderBy(x => x.NHACUNGCAP.ten_nhacungcap));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.MATHANG>(chkList);
+                }
+            });
+
+            OrderbyTenloai_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.MATHANG> chkList = new ObservableCollection<Model.MATHANG>(List.OrderByDescending(x => x.LOAIHANG.ten_loaihang));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.MATHANG>(List.OrderBy(x => x.LOAIHANG.ten_loaihang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.MATHANG>(chkList);
+                }
+            });
+
+            OrderbyTendonvi_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.MATHANG> chkList = new ObservableCollection<Model.MATHANG>(List.OrderByDescending(x => x.DONVITINH.ten_donvi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.MATHANG>(List.OrderBy(x => x.DONVITINH.ten_donvi));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.MATHANG>(chkList);
+                }
+            });
+
+            #endregion
+
         }
 
         #region Methods

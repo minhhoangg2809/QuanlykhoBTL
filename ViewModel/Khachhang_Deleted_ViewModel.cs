@@ -48,6 +48,8 @@ namespace QLK_Dn.ViewModel
         public ICommand DelShow_Command { get; set; }
         public ICommand ResShow_Command { get; set; }
         public ICommand Search_Command { get; set; }
+        public ICommand Sort_Command { get; set; }
+        public ICommand SortbyDiachi_Command { get; set; }
 
         #endregion
 
@@ -286,6 +288,52 @@ namespace QLK_Dn.ViewModel
                 {
                     List = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == true));
                 }
+            });
+
+            #endregion
+
+            #region Sap xep
+
+            Sort_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.KHACHHANG> chkList = new ObservableCollection<Model.KHACHHANG>(List.OrderByDescending(x => x.ten_khachhang));
+
+                if (List[0]==chkList[0])
+                {
+                    List = new ObservableCollection<Model.KHACHHANG>(List.OrderBy(x => x.ten_khachhang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.KHACHHANG>(chkList);
+                }
+
+            });
+
+            SortbyDiachi_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.KHACHHANG> chkList = new ObservableCollection<Model.KHACHHANG>(List.OrderByDescending(x => x.diachi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.KHACHHANG>(List.OrderBy(x => x.diachi));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.KHACHHANG>(chkList);
+                }
+
             });
 
             #endregion

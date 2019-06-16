@@ -48,6 +48,8 @@ namespace QLK_Dn.ViewModel
         public ICommand DelShow_Command { get; set; }
         public ICommand ResShow_Command { get; set; }
         public ICommand Search_Command { get; set; }
+        public ICommand Sort_Command { get; set; }
+        public ICommand SortbyDiachi_Command { get; set; }
 
         #endregion
 
@@ -288,6 +290,51 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Phan sap xep
+
+            Sort_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.NHACUNGCAP> chkList = new ObservableCollection<Model.NHACUNGCAP>(List.OrderByDescending(x => x.ten_nhacungcap));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.NHACUNGCAP>(List.OrderBy(x => x.ten_nhacungcap));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.NHACUNGCAP>(chkList);
+                }
+            });
+
+            SortbyDiachi_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.NHACUNGCAP> chkList = new ObservableCollection<Model.NHACUNGCAP>(List.OrderByDescending(x => x.diachi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.NHACUNGCAP>(List.OrderBy(x => x.diachi));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.NHACUNGCAP>(chkList);
+                }
+            });
+
+            #endregion
+
         }
 
         #region Methods
