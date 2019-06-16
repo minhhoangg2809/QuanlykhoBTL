@@ -240,6 +240,13 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <MaterialDesign:PackIcon Kind="BoxVariant"/>
                                                                 <TextBlock Grid.Column="1" Text=" Tên mặt hàng"/>
+
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTenMathang_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
@@ -255,6 +262,13 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <MaterialDesign:PackIcon Kind="Buffer"/>
                                                                 <TextBlock Grid.Column="1" Text=" Loại mặt hàng"/>
+
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTenloai_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
@@ -270,6 +284,14 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <MaterialDesign:PackIcon Kind="Contacts"/>
                                                                 <TextBlock Grid.Column="1" Text=" Nhà cung cấp"/>
+
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTennhacungcap_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
@@ -352,6 +374,13 @@
                                                                 </Grid.ColumnDefinitions>
                                                                 <MaterialDesign:PackIcon Kind="Animation"/>
                                                                 <TextBlock Grid.Column="1" Text=" Đơn vị tính"/>
+                                                                
+                                                                <i:Interaction.Triggers>
+                                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTendonvi_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                    </i:EventTrigger>
+                                                                </i:Interaction.Triggers>
+                                                                
                                                             </Grid>
                                                         </DataTemplate>
                                                     </GridViewColumn.HeaderTemplate>
