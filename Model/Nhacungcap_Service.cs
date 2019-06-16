@@ -23,7 +23,9 @@ namespace QLK_Dn.Model
         public static void Update(Model.NHACUNGCAP item, string id)
         {
             Model.NHACUNGCAP getdt = Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.ma_nhacungcap == id).SingleOrDefault();
-            getdt = item;
+            getdt.ten_nhacungcap = item.ten_nhacungcap;
+            getdt.sodienthoai = item.sodienthoai;
+            getdt.diachi = item.diachi;
 
             Model.DataProvider.Ins.DB.SaveChanges();
         }
