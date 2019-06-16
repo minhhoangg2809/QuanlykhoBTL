@@ -289,6 +289,13 @@
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="Account"/>
                                                 <TextBlock Grid.Column="1" Text=" Tên nhân viên"/>
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTen_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
@@ -331,6 +338,13 @@
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="MapMarkerRadius"/>
                                                 <TextBlock Grid.Column="1" Text=" Địa chỉ"/>
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyDiachi_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
@@ -345,6 +359,14 @@
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="AccountLocation"/>
                                                 <TextBlock Grid.Column="1" Text=" Vị trí"/>
+
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyVitri_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>

@@ -274,6 +274,13 @@
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="HumanHandsdown"/>
                                                 <TextBlock Grid.Column="1" Text=" Tên khách hàng"/>
+                                                
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.Sort_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
@@ -302,6 +309,13 @@
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="MapMarkerRadius"/>
                                                 <TextBlock Grid.Column="1" Text=" Địa chỉ"/>
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.SortbyDiachi_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
