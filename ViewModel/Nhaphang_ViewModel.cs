@@ -658,7 +658,7 @@ namespace QLK_Dn.ViewModel
 
                 if (List[0] == chkList[0])
                 {
-                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderByDescending(x => x.MATHANG.ten_mathang));
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderBy(x => x.MATHANG.ten_mathang));
                 }
                 else
                 {

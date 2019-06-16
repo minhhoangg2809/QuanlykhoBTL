@@ -109,7 +109,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Command
-        public ICommand Load_Commad { get; set; }
+        public ICommand Load_Command { get; set; }
         public ICommand AddDeleteList_Command { get; set; }
         public ICommand RemoveDeleteList_Command { get; set; }
         public ICommand Insert_Command { get; set; }
@@ -201,7 +201,7 @@ namespace QLK_Dn.ViewModel
                 IsOpen = false;
             });
 
-            Load_Commad = new RelayCommand<object>(p =>
+            Load_Command = new RelayCommand<object>(p =>
             {
                 return true;
             }, p =>

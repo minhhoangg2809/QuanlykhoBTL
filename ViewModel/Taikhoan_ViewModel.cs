@@ -756,16 +756,33 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
-                ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List.OrderByDescending(x => x.NHANVIEN.ten_nhanvien));
+                if (p == null)
+                {
+                    ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List.OrderByDescending(x => x.NHANVIEN.ten_nhanvien));
 
-                if (List[0] == chkList[0])
-                {
-                    List = new ObservableCollection<Model.TAIKHOAN>(List.OrderBy(x => x.NHANVIEN.ten_nhanvien));
+                    if (List[0] == chkList[0])
+                    {
+                        List = new ObservableCollection<Model.TAIKHOAN>(List.OrderBy(x => x.NHANVIEN.ten_nhanvien));
+                    }
+                    else
+                    {
+                        List = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                    }
                 }
-                else
+                else if (p != null)
                 {
-                    List = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                    ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List_Tinhtrang.OrderByDescending(x => x.NHANVIEN.ten_nhanvien));
+
+                    if (List_Tinhtrang[0] == chkList[0])
+                    {
+                        List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(List_Tinhtrang.OrderBy(x => x.NHANVIEN.ten_nhanvien));
+                    }
+                    else
+                    {
+                        List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                    }
                 }
+
             });
 
             OrderbyTentaikhoan_Command = new RelayCommand<object>(p =>
@@ -776,16 +793,33 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
-                ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List.OrderByDescending(x => x.ten_taikhoan));
+                if (p == null)
+                {
+                    ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List.OrderByDescending(x => x.ten_taikhoan));
 
-                if (List[0] == chkList[0])
-                {
-                    List = new ObservableCollection<Model.TAIKHOAN>(List.OrderBy(x => x.ten_taikhoan));
+                    if (List[0] == chkList[0])
+                    {
+                        List = new ObservableCollection<Model.TAIKHOAN>(List.OrderBy(x => x.ten_taikhoan));
+                    }
+                    else
+                    {
+                        List = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                    }
                 }
-                else
+                else if (p != null)
                 {
-                    List = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                    ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List_Tinhtrang.OrderByDescending(x => x.ten_taikhoan));
+
+                    if (List_Tinhtrang[0] == chkList[0])
+                    {
+                        List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(List_Tinhtrang.OrderBy(x => x.ten_taikhoan));
+                    }
+                    else
+                    {
+                        List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                    }
                 }
+
             });
 
             OrderbyTinhtrang_Command = new RelayCommand<object>(p =>
