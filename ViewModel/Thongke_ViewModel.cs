@@ -152,12 +152,18 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Commands Sap xep
-		
+
         public ICommand OrderbyNhap_Command { get; set; }
         public ICommand OrderbyXuat_Command { get; set; }
         public ICommand OrderbyTon_Command { get; set; }
+        public ICommand OrderbyTenMathang_Command { get; set; }
+        public ICommand OrderbyTennhacungcap_Command { get; set; }
+        public ICommand OrderbyTenloai_Command { get; set; }
+        public ICommand OrderbyTendonvi_Command { get; set; }
 
         #endregion
+
+       
 
         #region Dialog
 
@@ -618,6 +624,91 @@ namespace QLK_Dn.ViewModel
                 if (List[0] == chkList[0])
                 {
                     List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.tonkho));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.Thongke>(chkList);
+                }
+            });
+
+
+            OrderbyTenMathang_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.mathang.ten_mathang));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.mathang.ten_mathang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.Thongke>(chkList);
+                }
+            });
+
+            OrderbyTennhacungcap_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.mathang.NHACUNGCAP.ten_nhacungcap));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.mathang.NHACUNGCAP.ten_nhacungcap));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.Thongke>(chkList);
+                }
+            });
+
+            OrderbyTenloai_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.mathang.LOAIHANG.ten_loaihang));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.mathang.LOAIHANG.ten_loaihang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.Thongke>(chkList);
+                }
+            });
+
+            OrderbyTendonvi_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.Thongke> chkList = new ObservableCollection<Model.Thongke>(List.OrderByDescending(x => x.mathang.DONVITINH.ten_donvi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.Thongke>(List.OrderBy(x => x.mathang.DONVITINH.ten_donvi));
                 }
                 else
                 {

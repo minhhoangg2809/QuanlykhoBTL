@@ -223,6 +223,14 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
+        #region Commands Sap xep
+
+        public ICommand OrderbyTentaikhoan_Command { get; set; }
+        public ICommand OrderbyTennhanvien_Command { get; set; }
+        public ICommand OrderbyTinhtrang_Command { get; set; }
+
+        #endregion
+
         #region Message
 
         private string _Message;
@@ -734,6 +742,70 @@ namespace QLK_Dn.ViewModel
             }, p =>
             {
                 Capnhattrangthai();
+            });
+
+            #endregion
+
+            #region Phan sap xep
+
+            OrderbyTennhanvien_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List.OrderByDescending(x => x.NHANVIEN.ten_nhanvien));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.TAIKHOAN>(List.OrderBy(x => x.NHANVIEN.ten_nhanvien));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                }
+            });
+
+            OrderbyTentaikhoan_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List.OrderByDescending(x => x.ten_taikhoan));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.TAIKHOAN>(List.OrderBy(x => x.ten_taikhoan));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                }
+            });
+
+            OrderbyTinhtrang_Command = new RelayCommand<object>(p =>
+            {
+                if (List_Tinhtrang.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.TAIKHOAN> chkList = new ObservableCollection<Model.TAIKHOAN>(List_Tinhtrang.OrderByDescending(x => x.IsLogin));
+
+                if (List_Tinhtrang[0] == chkList[0])
+                {
+                    List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(List.OrderBy(x => x.IsLogin));
+                }
+                else
+                {
+                    List_Tinhtrang = new ObservableCollection<Model.TAIKHOAN>(chkList);
+                }
             });
 
             #endregion

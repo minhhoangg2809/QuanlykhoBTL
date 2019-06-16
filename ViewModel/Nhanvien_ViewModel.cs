@@ -120,6 +120,14 @@ namespace QLK_Dn.ViewModel
         public ICommand Search_Command { get; set; }
         #endregion
 
+        #region Commands Sap xep
+
+        public ICommand OrderbyTen_Command { get; set; }
+        public ICommand OrderbyDiachi_Command { get; set; }
+        public ICommand OrderbyVitri_Command { get; set; }
+
+        #endregion
+
         #region Message
 
         private string _Message;
@@ -193,10 +201,10 @@ namespace QLK_Dn.ViewModel
                 IsOpen = false;
             });
 
-            Load_Commad = new RelayCommand<object>(p => 
+            Load_Commad = new RelayCommand<object>(p =>
             {
                 return true;
-            }, p => 
+            }, p =>
             {
                 List = new ObservableCollection<Model.NHANVIEN>(Model.DataProvider.Ins.DB.NHANVIENs.Where(x => x.IsDeleted == false));
                 DeleteList = new ObservableCollection<Model.NHANVIEN>();
@@ -406,7 +414,73 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Sap xep
+
+            OrderbyTen_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.NHANVIEN> chkList = new ObservableCollection<Model.NHANVIEN>(List.OrderByDescending(x => x.ten_nhanvien));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.NHANVIEN>(List.OrderBy(x => x.ten_nhanvien));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.NHANVIEN>(chkList);
+                }
+            });
+
+            OrderbyDiachi_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.NHANVIEN> chkList = new ObservableCollection<Model.NHANVIEN>(List.OrderByDescending(x => x.diachi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.NHANVIEN>(List.OrderBy(x => x.diachi));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.NHANVIEN>(chkList);
+                }
+            });
+
+            OrderbyVitri_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.NHANVIEN> chkList = new ObservableCollection<Model.NHANVIEN>(List.OrderByDescending(x => x.QUYEN.ma_quyen));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.NHANVIEN>(List.OrderBy(x => x.QUYEN.ma_quyen));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.NHANVIEN>(chkList);
+                }
+            });
+
+            #endregion
         }
+
+        #region Methods
         private void RemoveIteminList()
         {
             for (int i = 0; i < List.Count(); i++)
@@ -458,5 +532,6 @@ namespace QLK_Dn.ViewModel
                 }
             }
         }
+        #endregion
     }
 }

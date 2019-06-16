@@ -229,6 +229,15 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
+        #region Commands Sap xep
+
+        public ICommand OrderbyTenMathang_Command { get; set; }
+        public ICommand OrderbyTennhacungcap_Command { get; set; }
+        public ICommand OrderbyNgay_Command { get; set; }
+        public ICommand OrderbyTendonvi_Command { get; set; }
+
+        #endregion
+
         #region Message
 
         private string _Message;
@@ -647,6 +656,94 @@ namespace QLK_Dn.ViewModel
                 else
                 {
                     List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false));
+                }
+            });
+
+            #endregion
+
+            #region Phan sap xep
+
+            OrderbyTenMathang_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUXUAT> chkList = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderByDescending(x => x.CHITIETPHIEUNHAP.MATHANG.ten_mathang));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderBy(x => x.CHITIETPHIEUNHAP.MATHANG.ten_mathang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(chkList);
+                }
+            });
+
+            OrderbyTennhacungcap_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUXUAT> chkList = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderByDescending(x => x.CHITIETPHIEUNHAP.MATHANG.NHACUNGCAP.ten_nhacungcap));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderBy(x => x.CHITIETPHIEUNHAP.MATHANG.NHACUNGCAP.ten_nhacungcap));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(chkList);
+                }
+            });
+
+            OrderbyNgay_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUXUAT> chkList = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderByDescending(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat)));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderBy(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUXUAT.ngayxuat)));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(chkList);
+                }
+            });
+
+            OrderbyTendonvi_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUXUAT> chkList = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderByDescending(x => x.CHITIETPHIEUNHAP.MATHANG.DONVITINH.ten_donvi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.OrderBy(x => x.CHITIETPHIEUNHAP.MATHANG.DONVITINH.ten_donvi));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(chkList);
                 }
             });
 

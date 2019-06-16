@@ -86,6 +86,7 @@ namespace QLK_Dn.ViewModel
         public ICommand Delete_Command { get; set; }
         public ICommand Reset_Command { get; set; }
         public ICommand Search_Command { get; set; }
+        public ICommand Sort_Command { get; set; }
         #endregion
 
         #region Message
@@ -343,7 +344,34 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Phan sap xep
+
+            Sort_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count == 0)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                ObservableCollection<Model.LOAIHANG> chkList = new ObservableCollection<Model.LOAIHANG>(List.OrderByDescending(x => x.ten_loaihang));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.LOAIHANG>(List.OrderBy(x => x.ten_loaihang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.LOAIHANG>(chkList);
+                }
+
+            });
+
+            #endregion
         }
+
+        #region Methods
         private void RemoveIteminList()
         {
             for (int i = 0; i < List.Count(); i++)
@@ -379,5 +407,7 @@ namespace QLK_Dn.ViewModel
             }
 
         }
+        #endregion
+
     }
 }

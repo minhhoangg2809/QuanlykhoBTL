@@ -201,6 +201,15 @@ namespace QLK_Dn.ViewModel
         public ICommand Search_Command { get; set; }
         #endregion
 
+        #region Commands Sap xep
+
+        public ICommand OrderbyTenMathang_Command { get; set; }
+        public ICommand OrderbyTennhacungcap_Command { get; set; }
+        public ICommand OrderbyNgay_Command { get; set; }
+        public ICommand OrderbyTendonvi_Command { get; set; }
+
+        #endregion
+
         #region Message
 
         private string _Message;
@@ -391,7 +400,7 @@ namespace QLK_Dn.ViewModel
                         return false;
                 }
                 catch (Exception) {/*Try catch de sua loi FormatException*/}
-                
+
 
                 if (IsOpen_insert == true || IsOpen == true)
                     return false;
@@ -633,6 +642,95 @@ namespace QLK_Dn.ViewModel
             });
 
             #endregion
+
+            #region Phan sap xep
+
+            OrderbyTenMathang_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUNHAP> chkList = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderByDescending(x => x.MATHANG.ten_mathang));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderByDescending(x => x.MATHANG.ten_mathang));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(chkList);
+                }
+            });
+
+            OrderbyTennhacungcap_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUNHAP> chkList = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderByDescending(x => x.MATHANG.NHACUNGCAP.ten_nhacungcap));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderBy(x => x.MATHANG.NHACUNGCAP.ten_nhacungcap));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(chkList);
+                }
+            });
+
+            OrderbyNgay_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUNHAP> chkList = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderByDescending(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUNHAP.ngaynhap)));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderBy(x => MyStaticMethods.ConvertStringtoDate(x.PHIEUNHAP.ngaynhap)));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(chkList);
+                }
+            });
+
+            OrderbyTendonvi_Command = new RelayCommand<object>(p =>
+            {
+                if (List.Count() == 0)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                ObservableCollection<Model.CHITIETPHIEUNHAP> chkList = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderByDescending(x => x.MATHANG.DONVITINH.ten_donvi));
+
+                if (List[0] == chkList[0])
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(List.OrderBy(x => x.MATHANG.DONVITINH.ten_donvi));
+                }
+                else
+                {
+                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(chkList);
+                }
+            });
+
+            #endregion
+
         }
 
         #region Filter Methods
