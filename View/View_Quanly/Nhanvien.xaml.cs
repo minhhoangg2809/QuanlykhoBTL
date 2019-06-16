@@ -24,8 +24,7 @@ namespace QLK_Dn.View.View_Quanly
             InitializeComponent();
             ButtonOpen.Click += ButtonOpen_Click;
             ButtonClose.Click += ButtonClose_Click;
-
-            this.DataContext = new ViewModel.Nhanvien_ViewModel();
+           
             tb_Search.TextChanged += tb_Search_TextChanged;
         }
 

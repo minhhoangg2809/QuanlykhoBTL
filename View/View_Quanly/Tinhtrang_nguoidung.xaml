@@ -73,13 +73,21 @@
                                 <GridViewColumn Width="200" DisplayMemberBinding="{Binding ten_taikhoan}">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
-                                            <Grid>
+                                            <Grid x:Name="gr_taikhoan">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="AccountBox"/>
                                                 <TextBlock Grid.Column="1" Text=" Tên tài khoản"/>
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTentaikhoan_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                               CommandParameter="{Binding ElementName=gr_taikhoan}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
@@ -87,13 +95,21 @@
                                 <GridViewColumn Width="200" DisplayMemberBinding="{Binding NHANVIEN.ten_nhanvien}">
                                     <GridViewColumn.HeaderTemplate>
                                         <DataTemplate>
-                                            <Grid>
+                                            <Grid x:Name="gr_tennhanvien">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="auto"/>
                                                     <ColumnDefinition/>
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="Account"/>
                                                 <TextBlock Grid.Column="1" Text=" Tên nhân viên"/>
+
+                                                <i:Interaction.Triggers>
+                                                    <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                        <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTennhanvien_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                               CommandParameter="{Binding ElementName=gr_tennhanvien}"/>
+                                                    </i:EventTrigger>
+                                                </i:Interaction.Triggers>
+                                                
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
