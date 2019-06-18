@@ -240,6 +240,10 @@ namespace QLK_Dn.ViewModel
                 if (!long.TryParse(Sodienthoai, out i))
                     return false;
 
+                int count = Model.DataProvider.Ins.DB.NHANVIENs.Where(x => x.sodienthoai == Sodienthoai).Count();
+                if (count != 0)
+                    return false;
+
                 if (SQuyen == null)
                     return false;
 
