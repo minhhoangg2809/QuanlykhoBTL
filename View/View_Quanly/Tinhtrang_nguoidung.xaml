@@ -4,19 +4,45 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         Title="Tình trạng người dùng" Height="500" Width="800"
-        MaxHeight="500" MaxWidth="1000"
+        MaxHeight="500" MaxWidth="1000" 
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         BorderBrush="Gray"
         BorderThickness="2"
-        DataContext="{StaticResource vm_Taikhoan}">
+        DataContext="{StaticResource vm_Taikhoan}"
+        x:Name="wd_tinhtrang">
+
+    <Window.Resources>
+        <Storyboard x:Key="Open">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="gr_main">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-500"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+    
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded" SourceName="wd_tinhtrang">
+            <BeginStoryboard  Storyboard="{StaticResource Open}"/>
+        </EventTrigger>
+    </Window.Triggers> 
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Refesh_State_Command}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    <Grid>
+    
+    <Grid x:Name="gr_main" Margin="0 0 0 0" RenderTransformOrigin="0.5,0.5" Height="500">
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition/>

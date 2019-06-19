@@ -9,8 +9,36 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         BorderBrush="Gray"
-        BorderThickness="2">
-    <Grid Background="White">
+        BorderThickness="2"
+        x:Name="wd_thongtin">
+
+    <Window.Resources>
+        <Storyboard x:Key="Open">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="gr_main">
+                <EasingDoubleKeyFrame KeyTime="0" Value="-300"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+    </Window.Resources>
+
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Loaded" SourceName="wd_thongtin">
+            <BeginStoryboard  Storyboard="{StaticResource Open}"/>
+        </EventTrigger>
+    </Window.Triggers>
+
+
+    <Grid Background="White" x:Name="gr_main" Margin="0 0 0 0" RenderTransformOrigin="0.5,0.5" Height="600">
+
+        <Grid.RenderTransform>
+            <TransformGroup>
+                <ScaleTransform/>
+                <SkewTransform/>
+                <RotateTransform/>
+                <TranslateTransform/>
+            </TransformGroup>
+        </Grid.RenderTransform>
+
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
