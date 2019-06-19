@@ -47,7 +47,6 @@ namespace QLK_Dn.ViewModel
         public ICommand RestoreShow_Command { get; set; }
         public ICommand DelShow_Command { get; set; }
         public ICommand ResShow_Command { get; set; }
-        public ICommand Search_Command { get; set; }
         public ICommand Sort_Command { get; set; }
         public ICommand SortbyDiachi_Command { get; set; }
 
@@ -251,44 +250,6 @@ namespace QLK_Dn.ViewModel
                 RDList = new ObservableCollection<Model.NHACUNGCAP>();
                 Opendel = false;
             });
-            #endregion
-
-            #region Phan tim kiem
-
-            Search_Command = new RelayCommand<TextBox>(p =>
-            {
-                return true;
-            }, p =>
-            {
-                string str = p.Text;
-                List = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == true));
-
-                if (!string.IsNullOrEmpty(str))
-                {
-                    var filterlist = List.Where(x => x.ten_nhacungcap.Contains(str) || x.diachi.Contains(str) || x.sodienthoai.Contains(str));
-
-                    for (int i = 0; i < List.Count(); i++)
-                    {
-                        while (!filterlist.Contains(List[i]))
-                        {
-                            if (List[i] == List[List.Count() - 1])
-                            {
-                                List.Remove(List[i]);
-                                break;
-                            }
-                            else
-                            {
-                                List.Remove(List[i]);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    List = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == true));
-                }
-            });
-
             #endregion
 
             #region Phan sap xep

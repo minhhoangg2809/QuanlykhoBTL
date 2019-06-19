@@ -47,14 +47,6 @@ namespace QLK_Dn.ViewModel
             }
         }
 
-        private string _SearchText;
-
-        public string SearchText
-        {
-            get { return _SearchText; }
-            set { _SearchText = value; OnPropertyChanged(); }
-        }
-
         #region SelectedItem.prop
 
         private string _Madonvi;
@@ -93,7 +85,6 @@ namespace QLK_Dn.ViewModel
         public ICommand DeleteShow_Command { get; set; }
         public ICommand Delete_Command { get; set; }
         public ICommand Reset_Command { get; set; }
-        public ICommand Search_Command { get; set; }
         public ICommand Sort_Command { get; set; }
 
         #endregion
@@ -314,44 +305,6 @@ namespace QLK_Dn.ViewModel
                 Tendonvi = "";
                 Mota = "";
             });
-            #endregion
-
-            #region Phan tim kiem
-
-            Search_Command = new RelayCommand<TextBox>(p =>
-            {
-                return true;
-            }, p =>
-            {
-                string str = p.Text;
-                List = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
-
-                if (!string.IsNullOrEmpty(str))
-                {
-                    var filterlist = List.Where(x => x.ten_donvi.Contains(str));
-
-                    for (int i = 0; i < List.Count(); i++)
-                    {
-                        while (!filterlist.Contains(List[i]))
-                        {
-                            if (List[i] == List[List.Count() - 1])
-                            {
-                                List.Remove(List[i]);
-                                break;
-                            }
-                            else
-                            {
-                                List.Remove(List[i]);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    List = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
-                }
-            });
-
             #endregion
 
             #region Phan sap xep

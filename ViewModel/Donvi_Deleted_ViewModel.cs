@@ -47,7 +47,6 @@ namespace QLK_Dn.ViewModel
         public ICommand RestoreShow_Command { get; set; }
         public ICommand DelShow_Command { get; set; }
         public ICommand ResShow_Command { get; set; }
-        public ICommand Search_Command { get; set; }
         public ICommand Sort_Command { get; set; }
         #endregion
 
@@ -250,44 +249,6 @@ namespace QLK_Dn.ViewModel
                     RDList = new ObservableCollection<Model.DONVITINH>();
                     Opendel = false;
             });
-            #endregion
-
-            #region Phan tim kiem
-
-            Search_Command = new RelayCommand<TextBox>(p =>
-            {
-                return true;
-            }, p =>
-            {
-                string str = p.Text;
-                List = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == true));
-
-                if (!string.IsNullOrEmpty(str))
-                {
-                    var filterlist = List.Where(x => x.ten_donvi.Contains(str));
-
-                    for (int i = 0; i < List.Count(); i++)
-                    {
-                        while (!filterlist.Contains(List[i]))
-                        {
-                            if (List[i] == List[List.Count() - 1])
-                            {
-                                List.Remove(List[i]);
-                                break;
-                            }
-                            else
-                            {
-                                List.Remove(List[i]);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    List = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == true));
-                }
-            });
-
             #endregion
 
             #region Phan sap xep

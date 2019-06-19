@@ -282,57 +282,6 @@ namespace QLK_Dn.ViewModel
             TaoDSNhanvien();
             DeleteList = new ObservableCollection<Model.TAIKHOAN>();
 
-            GetPassword_Command = new RelayCommand<PasswordBox>(p =>
-            {
-                if (p.Password.Length < 5)
-                    return false;
-
-                return true;
-            }, p =>
-            {
-                Matkhautaikhoan = p.Password;
-            });
-
-
-            GetRePassword_Command = new RelayCommand<PasswordBox>(p =>
-            {
-                if (p.Password.Length < 5)
-                    return false;
-
-                return true;
-            }, p =>
-            {
-                Matkhauxacnhan = p.Password;
-            });
-
-            getNewCurrentPass_Command = new RelayCommand<PasswordBox>(p =>
-            {
-                if (p.Password.Length < 5)
-                    return false;
-
-                if (string.IsNullOrEmpty(p.Password))
-                    return false;
-
-                return true;
-            }, p =>
-            {
-                Matkhaumoi = p.Password;
-            });
-
-            getNewCurrentRePass_Command = new RelayCommand<PasswordBox>(p =>
-            {
-                if (p.Password.Length < 5)
-                    return false;
-
-                if (string.IsNullOrEmpty(p.Password))
-                    return false;
-
-                return true;
-            }, p =>
-            {
-                XacnhanMatkhaumoi = p.Password;
-            });
-
             Active = false;
             IsOpen = false;
 
@@ -373,6 +322,31 @@ namespace QLK_Dn.ViewModel
             #endregion
 
             #region Them tai khoan
+
+            GetPassword_Command = new RelayCommand<PasswordBox>(p =>
+            {
+                if (p.Password.Length < 5)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                Matkhautaikhoan = p.Password;
+            });
+
+
+            GetRePassword_Command = new RelayCommand<PasswordBox>(p =>
+            {
+                if (p.Password.Length < 5)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                Matkhauxacnhan = p.Password;
+            });
+
+           
 
             Insert_Command = new RelayCommand<object>(p =>
             {
@@ -662,6 +636,34 @@ namespace QLK_Dn.ViewModel
             #endregion
 
             #region Thay doi thong tin
+
+            getNewCurrentPass_Command = new RelayCommand<PasswordBox>(p =>
+            {
+                if (p.Password.Length < 5)
+                    return false;
+
+                if (string.IsNullOrEmpty(p.Password))
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                Matkhaumoi = p.Password;
+            });
+
+            getNewCurrentRePass_Command = new RelayCommand<PasswordBox>(p =>
+            {
+                if (p.Password.Length < 5)
+                    return false;
+
+                if (string.IsNullOrEmpty(p.Password))
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                XacnhanMatkhaumoi = p.Password;
+            });
 
             Update_Command = new RelayCommand<Button>(p =>
             {

@@ -189,6 +189,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Command
+
         public ICommand Load_Command { get; set; }
         public ICommand Insert_Command { get; set; }
         public ICommand InsertShow_Command { get; set; }
@@ -198,7 +199,7 @@ namespace QLK_Dn.ViewModel
         public ICommand RemoveDeleteList_Command { get; set; }
         public ICommand Delete_Command { get; set; }
         public ICommand DeleteShow_Command { get; set; }
-        public ICommand Search_Command { get; set; }
+
         #endregion
 
         #region Commands Sap xep
@@ -602,45 +603,6 @@ namespace QLK_Dn.ViewModel
                     FindByLOAI(SLoai_Filter.ma_loaihang);
                 }
             });
-            #endregion
-
-            #region Phan tim kiem
-
-            Search_Command = new RelayCommand<TextBox>(p =>
-            {
-                return true;
-            }, p =>
-            {
-                string str = p.Text;
-                List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(Model.DataProvider.Ins.DB.CHITIETPHIEUNHAPs.Where(x => x.IsDeleted == false));
-
-                if (!string.IsNullOrEmpty(str))
-                {
-                    var filterlist = List.Where(x => x.MATHANG.ten_mathang.Contains(str) || x.MATHANG.NHACUNGCAP.ten_nhacungcap.Contains(str)
-                                     || x.MATHANG.DONVITINH.ten_donvi.Contains(str) || x.MATHANG.LOAIHANG.ten_loaihang.Contains(str) || x.PHIEUNHAP.ngaynhap.Contains(str));
-
-                    for (int i = 0; i < List.Count(); i++)
-                    {
-                        while (!filterlist.Contains(List[i]))
-                        {
-                            if (List[i] == List[List.Count() - 1])
-                            {
-                                List.Remove(List[i]);
-                                break;
-                            }
-                            else
-                            {
-                                List.Remove(List[i]);
-                            }
-                        }
-                    }
-                }
-                else
-                {
-                    List = new ObservableCollection<Model.CHITIETPHIEUNHAP>(Model.DataProvider.Ins.DB.CHITIETPHIEUNHAPs.Where(x => x.IsDeleted == false));
-                }
-            });
-
             #endregion
 
             #region Phan sap xep
