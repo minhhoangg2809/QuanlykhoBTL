@@ -62,7 +62,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-
+    
     <Style x:Key="RoundButton" TargetType="{x:Type Button}">
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
