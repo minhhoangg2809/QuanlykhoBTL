@@ -24,6 +24,7 @@ namespace QLK_Dn.Pages_Thungrac
         {
             InitializeComponent();
             this.DataContext = new ViewModel.Loaimathang_Deleted_ViewModel();
+
             tb_Search.TextChanged += tb_Search_TextChanged;
         }
 
