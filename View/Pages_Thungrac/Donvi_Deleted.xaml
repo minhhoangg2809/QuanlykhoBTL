@@ -30,6 +30,7 @@
             <BeginStoryboard x:Name="End" Storyboard="{StaticResource End}"/>
         </EventTrigger>
     </Page.Triggers>
+
     <Grid x:Name="pagecontent" Opacity="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -59,12 +60,6 @@
                                 <TextBlock Text="Tìm kiếm" Foreground="Black" VerticalAlignment="Center"/>
                             </StackPanel>
                         </MaterialDesign:HintAssist.Hint>
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="TextChanged">
-                                <i:InvokeCommandAction Command="{Binding Search_Command}"
-                                                       CommandParameter="{Binding ElementName=tb_Search}"/>
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
                     </TextBox>
                 </StackPanel>
             </MaterialDesign:Card>
@@ -286,7 +281,7 @@
                                                         <i:InvokeCommandAction Command="{Binding DataContext.Sort_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
-                                                
+
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
