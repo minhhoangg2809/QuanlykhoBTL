@@ -11,40 +11,43 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <Button
-                        ToolTip="Màn hình chính"
-                        Background="{x:Null}" BorderBrush="{x:Null}" Width="auto" Height="auto"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                        Command="{Binding ToMain_Command}"
-                        CommandParameter="{Binding ElementName=ucLowcontrolbar}">
+                ToolTip="Màn hình chính"
+                Foreground="Black"
+                Background="{x:Null}" BorderBrush="{x:Null}" Width="auto" Height="auto"
+                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                Command="{Binding ToMain_Command}"
+                CommandParameter="{Binding ElementName=ucLowcontrolbar}">
                 <MaterialDesign:PackIcon 
-                                         Height="30"
-                                         Width="30"
-                                         Margin="10"
-                                         Kind="Computer"/>
+                    Height="30"
+                    Width="30"
+                    Margin="10"
+                    Kind="Computer"/>
             </Button>
             <Button
-                        ToolTip="Thông tin tài khoản"
-                        Background="{x:Null}" BorderBrush="{x:Null}" Width="auto" Height="auto"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                        Command="{Binding Account_Command}"
-                        CommandParameter="{Binding ElementName=ucLowcontrolbar}">
+                ToolTip="Thông tin tài khoản"
+                Foreground="Black"
+                Background="{x:Null}" BorderBrush="{x:Null}" Width="auto" Height="auto"
+                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                Command="{Binding Account_Command}"
+                CommandParameter="{Binding ElementName=ucLowcontrolbar}">
                 <MaterialDesign:PackIcon 
-                                         Height="30"
-                                         Width="30"
-                                         Margin="10"
-                                         Kind="AccountCircleOutline"/>
+                    Height="30"
+                    Width="30"
+                    Margin="10"
+                    Kind="AccountCircleOutline"/>
             </Button>
             <Button
-                        ToolTip="Đăng xuất"
-                        Background="{x:Null}" BorderBrush="{x:Null}" Width="auto" Height="auto"
-                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                        Command="{Binding LogoutShow_Command}"
-                        CommandParameter="{Binding ElementName=ucLowcontrolbar}">
+                ToolTip="Đăng xuất"
+                Foreground="Black"
+                Background="{x:Null}" BorderBrush="{x:Null}" Width="auto" Height="auto"
+                Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                Command="{Binding LogoutShow_Command}"
+                CommandParameter="{Binding ElementName=ucLowcontrolbar}">
                 <MaterialDesign:PackIcon 
-                                         Height="30"
-                                         Width="30"
-                                         Margin="10"
-                                         Kind="Logout"/>
+                    Height="30"
+                    Width="30"
+                    Margin="10"
+                    Kind="Logout"/>
             </Button>
         </StackPanel>
         <!--Dialog-->
