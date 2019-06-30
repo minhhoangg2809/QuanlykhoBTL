@@ -861,9 +861,9 @@ namespace QLK_Dn.ViewModel
                         printDialog.PrintVisual(p, "invoice");
                     }
 
-                    MessageBox.Show("Thành công !!!");
+                    MessageBox.Show("Thành công !!!","THÔNG BÁO");
                 }
-                catch (Exception) { MessageBox.Show("Có lỗi xảy ra !!!"); };
+                catch (Exception) { MessageBox.Show("Có lỗi xảy ra !!!","THÔNG BÁO"); };
             });
 
             PrinterFormClose_Command = new RelayCommand<Window>(p =>
