@@ -82,7 +82,7 @@ namespace QLK_Dn.View.View_Thukho
         {
             DatePicker dp = sender as DatePicker;
 
-            if (dp.Text != string.Empty)
+            if (dp.Text == string.Empty)
             {
                 dp.Text = DateTime.Today.ToShortDateString();
             }
