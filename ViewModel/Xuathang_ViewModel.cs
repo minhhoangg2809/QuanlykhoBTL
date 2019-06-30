@@ -62,6 +62,87 @@ namespace QLK_Dn.ViewModel
             set { _ListKhachhang = value; OnPropertyChanged(); }
         }
 
+        #region Print
+
+        private bool _IsOpen_prt;
+
+        public bool IsOpen_prt
+        {
+            get { return _IsOpen_prt; }
+            set { _IsOpen_prt = value; OnPropertyChanged(); }
+        }
+
+        private int _ItemsCount;
+
+        public int ItemsCount
+        {
+            get { return _ItemsCount; }
+            set { _ItemsCount = value; OnPropertyChanged(); }
+        }
+
+        private double _Tongtien;
+
+        public double Tongtien
+        {
+            get { return _Tongtien; }
+            set { _Tongtien = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<Model.CHITIETPHIEUXUAT> _List_Print;
+
+        public ObservableCollection<Model.CHITIETPHIEUXUAT> List_Print
+        {
+            get { return _List_Print; }
+            set { _List_Print = value; OnPropertyChanged(); }
+        }
+
+        private ObservableCollection<Model.KHACHHANG> _ListKH_Print;
+
+        public ObservableCollection<Model.KHACHHANG> ListKH_Print
+        {
+            get { return _ListKH_Print; }
+            set { _ListKH_Print = value; OnPropertyChanged(); }
+        }
+
+        private Model.KHACHHANG _SKhachhangPrint;
+
+        public Model.KHACHHANG SKhachhangPrint
+        {
+            get { return _SKhachhangPrint; }
+            set { _SKhachhangPrint = value; OnPropertyChanged(); }
+        }
+
+        private string _DayPrintVN;
+
+        public string DayPrintVN
+        {
+            get { return _DayPrintVN; }
+            set
+            {
+                _DayPrintVN = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _DayPrint;
+
+        public string DayPrint
+        {
+            get { return _DayPrint; }
+            set { _DayPrint = value; OnPropertyChanged(); }
+        }
+
+        #endregion
+
+        #region Commands Print
+
+        public ICommand PrinterOpen_Command { get; set; }
+        public ICommand PrinterFormClose_Command { get; set; }
+        public ICommand OpenPrintDialog_Command { get; set; }
+        public ICommand Print_Command { get; set; }
+
+        #endregion
+
         #region prop
 
         private ObservableCollection<string> _ListSoluong;
@@ -297,6 +378,8 @@ namespace QLK_Dn.ViewModel
             ListKhachhang = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
             ListPhieunhap = new ObservableCollection<Model.CHITIETPHIEUNHAP>();
 
+            ListKH_Print = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
+        
             ListSoluong = new ObservableCollection<string>();
 
             Active = false;
@@ -343,6 +426,8 @@ namespace QLK_Dn.ViewModel
                 ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
                 ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
                 ListKhachhang_Filter = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
+
+                ListKH_Print = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
             });
 
             #region Lua chon mat hang va phieu nhap
@@ -703,6 +788,93 @@ namespace QLK_Dn.ViewModel
                 else
                 {
                     List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(chkList);
+                }
+            });
+
+            #endregion
+
+            #region Printer
+
+            PrinterOpen_Command = new RelayCommand<object>(p =>
+            {
+                if (SKhachhangPrint == null)
+                    return false;
+
+                if (string.IsNullOrEmpty(DayPrint))
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                List_Print = new ObservableCollection<Model.CHITIETPHIEUXUAT>(List.Where(x => x.KHACHHANG == SKhachhangPrint
+                                                                 && x.PHIEUXUAT.ngayxuat == MyStaticMethods.FormatDateString(DayPrint)));
+
+                var list_chk = new ObservableCollection<Model.CHITIETPHIEUXUAT>();
+
+                ItemsCount = 0;
+                Tongtien = 0;
+
+                foreach (var item in List_Print)
+                {
+                    Tongtien += (double)(item.CHITIETPHIEUNHAP.giaxuat * item.soluongthucxuat);
+
+                    if (list_chk.Where(x => x.CHITIETPHIEUNHAP.MATHANG == item.CHITIETPHIEUNHAP.MATHANG).Count() == 0)
+                    {
+                        list_chk.Add(item);
+                    }
+                }
+
+                ItemsCount = list_chk.Count();
+
+
+                DayPrintVN = MyStaticMethods.FormatDateString(DayPrint);
+
+                View.View_Thukho.In_Xuat w = new View.View_Thukho.In_Xuat();
+                w.ShowDialog();
+            });
+
+            OpenPrintDialog_Command = new RelayCommand<object>(p =>
+            {
+                if (IsOpen == true)
+                    return false;
+
+                if (IsOpen_insert == true)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                IsOpen_prt = true;
+            });
+
+            Print_Command = new RelayCommand<Grid>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                try
+                {
+                    PrintDialog printDialog = new PrintDialog();
+                    if (printDialog.ShowDialog() == true)
+                    {
+                        printDialog.PrintVisual(p, "invoice");
+                    }
+
+                    MessageBox.Show("Thành công !!!");
+                }
+                catch (Exception) { MessageBox.Show("Có lỗi xảy ra !!!"); };
+            });
+
+            PrinterFormClose_Command = new RelayCommand<Window>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                if (p != null)
+                {
+                    p.Close();
+                    IsOpen_prt = false;
                 }
             });
 
