@@ -56,7 +56,7 @@ namespace QLK_Dn.View.View_Thukho
             }
         }
 
-        
+
         void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
         {
             CollectionView viewfilter = (CollectionView)CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource);
@@ -64,7 +64,7 @@ namespace QLK_Dn.View.View_Thukho
             CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource).Refresh();
         }
 
-       
+
         #endregion
 
         void ButtonClose_Click(object sender, RoutedEventArgs e)
@@ -87,7 +87,10 @@ namespace QLK_Dn.View.View_Thukho
         {
             DatePicker dp = sender as DatePicker;
 
-            dp.Text = DateTime.Today.ToShortDateString();
+            if (dp.Text == string.Empty)
+            {
+                dp.Text = DateTime.Today.ToShortDateString();
+            }
         }
     }
 }

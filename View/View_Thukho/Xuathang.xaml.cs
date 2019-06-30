@@ -24,8 +24,8 @@ namespace QLK_Dn.View.View_Thukho
             InitializeComponent();
             ButtonOpen.Click += ButtonOpen_Click;
             ButtonClose.Click += ButtonClose_Click;
-           
-            tb_Search.TextChanged+=tb_Search_TextChanged;
+
+            tb_Search.TextChanged += tb_Search_TextChanged;
         }
 
         #region Phan tim kiem
@@ -82,7 +82,10 @@ namespace QLK_Dn.View.View_Thukho
         {
             DatePicker dp = sender as DatePicker;
 
-            dp.Text = DateTime.Today.ToShortDateString();
+            if (dp.Text != string.Empty)
+            {
+                dp.Text = DateTime.Today.ToShortDateString();
+            }
         }
     }
 }

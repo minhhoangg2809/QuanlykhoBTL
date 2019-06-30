@@ -120,12 +120,14 @@
                             <StackPanel Orientation="Vertical" Height="auto" Width="auto">
                                 <TextBlock Height="10"/>
                                 <Button
+                                    x:Name="btn_Reset"
                                     HorizontalAlignment="Right"
                                     Background="WhiteSmoke" 
                                     BorderBrush="{x:Null}" 
                                     Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
                                     ToolTip="Tạo mới"
-                                    Command="{Binding Reset_Command}">
+                                    Command="{Binding Reset_Command}"
+                                    Click="btn_Reset_Click">
                                     <MaterialDesign:PackIcon
                                             Kind="Plus"
                                             Height="24"

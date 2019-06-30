@@ -106,5 +106,14 @@ namespace QLK_Dn.View.View_Quanly
                 pb_pass.Password = tb_pass.Text;
             }
         }
+
+        private void btn_Reset_Click(object sender, RoutedEventArgs e)
+        {
+            tb_pass.Clear();
+            tb_repass.Clear();
+
+            pb_pass.Clear();
+            pb_repass.Clear();
+        }
     }
 }
