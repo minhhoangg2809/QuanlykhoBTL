@@ -70,23 +70,9 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <MaterialDesign:Chip Grid.Column="1" 
-                                         Style="{DynamicResource ResourceKey=SearchboxBorder}">
-                        <TextBox x:Name="tb_Search"
-                                 Width="800" 
-                                 BorderBrush="{x:Null}"
-                                 BorderThickness="0"
-                                 FontSize="15"
-                                 MaterialDesign:TextFieldAssist.DecorationVisibility="Hidden">
-                            <MaterialDesign:HintAssist.Hint>
-                                <StackPanel Orientation="Horizontal" Opacity="0.8">
-                                    <MaterialDesign:PackIcon Height="21" Kind="Search"/>
-                                    <TextBlock Width="5"/>
-                                    <TextBlock Text="Tìm kiếm"/>
-                                </StackPanel>
-                            </MaterialDesign:HintAssist.Hint>
-                        </TextBox>
-                    </MaterialDesign:Chip>
+                    <Grid Grid.Column="1">
+                        <UC:SearchBar/>
+                    </Grid>
                     <Button x:Name="ButtonOpen" Visibility="Visible"
                         Content="{MaterialDesign:PackIcon Kind=Menu, Size=30}"
                         Background="{x:Null}"

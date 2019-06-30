@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="QLK_Dn.UserControls_Pages.SearchBar"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="820"
+             x:Name="uc_search">
+    <MaterialDesign:Chip
+        Style="{DynamicResource ResourceKey=SearchboxBorder}">
+        <TextBox x:Name="tb_Search"
+                 Width="800" 
+                 BorderBrush="{x:Null}"
+                 BorderThickness="0"
+                 FontSize="15"
+                 MaterialDesign:TextFieldAssist.DecorationVisibility="Hidden">
+            <MaterialDesign:HintAssist.Hint>
+                <StackPanel Orientation="Horizontal" Opacity="0.8">
+                    <MaterialDesign:PackIcon Height="21" Kind="Search"/>
+                    <TextBlock Width="5"/>
+                    <TextBlock Text="Tìm kiếm"/>
+                </StackPanel>
+            </MaterialDesign:HintAssist.Hint>
+        </TextBox>
+    </MaterialDesign:Chip>
+
+</UserControl>

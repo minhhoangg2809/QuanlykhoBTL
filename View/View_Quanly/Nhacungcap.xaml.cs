@@ -25,13 +25,13 @@ namespace QLK_Dn.View.View_Quanly
             ButtonClose.Click += ButtonClose_Click;
             ButtonOpen.Click += ButtonOpen_Click;
 
-            tb_Search.TextChanged+=tb_Search_TextChanged;
+            UserControls_Pages.SearchBar.Gl_search.TextChanged+=tb_Search_TextChanged;
         }
 
         #region Phan tim kiem
         private bool Search(object item)
         {
-            if (String.IsNullOrEmpty(tb_Search.Text))
+            if (String.IsNullOrEmpty(UserControls_Pages.SearchBar.Gl_search.Text))
             {
                 return true;
             }
@@ -39,9 +39,9 @@ namespace QLK_Dn.View.View_Quanly
             {
                 try
                 {
-                    return ((Model.NHACUNGCAP)item).ten_nhacungcap.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHACUNGCAP)item).diachi.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHACUNGCAP)item).sodienthoai.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+                    return ((Model.NHACUNGCAP)item).ten_nhacungcap.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.NHACUNGCAP)item).diachi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.NHACUNGCAP)item).sodienthoai.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
                 }
                 catch (Exception)
                 {

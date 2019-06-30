@@ -25,13 +25,13 @@ namespace QLK_Dn.View.View_Quanly
             ButtonOpen.Click += ButtonOpen_Click;
             ButtonClose.Click += ButtonClose_Click;
            
-            tb_Search.TextChanged += tb_Search_TextChanged;
+            UserControls_Pages.SearchBar.Gl_search.TextChanged += tb_Search_TextChanged;
         }
 
         #region Phan tim kiem
         private bool Search(object item)
         {
-            if (String.IsNullOrEmpty(tb_Search.Text))
+            if (String.IsNullOrEmpty(UserControls_Pages.SearchBar.Gl_search.Text))
             {
                 return true;
             }
@@ -39,12 +39,12 @@ namespace QLK_Dn.View.View_Quanly
             {
                 try
                 {
-                    return ((Model.NHANVIEN)item).ma_nhanvien.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).ten_nhanvien.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).diachi.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).sodienthoai.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).QUYEN.ten_quyen.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).ngaysinh.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+                    return ((Model.NHANVIEN)item).ma_nhanvien.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.NHANVIEN)item).ten_nhanvien.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.NHANVIEN)item).diachi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.NHANVIEN)item).sodienthoai.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.NHANVIEN)item).QUYEN.ten_quyen.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.NHANVIEN)item).ngaysinh.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
 
                 }
                 catch (Exception)

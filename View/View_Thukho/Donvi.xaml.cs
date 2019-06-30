@@ -26,13 +26,13 @@ namespace QLK_Dn.View.View_Thukho
             ButtonOpen.Click += ButtonOpen_Click;
 
           
-            tb_Search.TextChanged += tb_Search_TextChanged;
+            UserControls_Pages.SearchBar.Gl_search.TextChanged += tb_Search_TextChanged;
         }
 
         #region Phan tim kiem
         private bool Search(object item)
         {
-            if (String.IsNullOrEmpty(tb_Search.Text))
+            if (String.IsNullOrEmpty(UserControls_Pages.SearchBar.Gl_search.Text))
             {
                 return true;
             }
@@ -40,8 +40,8 @@ namespace QLK_Dn.View.View_Thukho
             {
                 try
                 {
-                    return ((Model.DONVITINH)item).ma_donvi.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.DONVITINH)item).ten_donvi.IndexOf(tb_Search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
+                    return ((Model.DONVITINH)item).ma_donvi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
+                    ((Model.DONVITINH)item).ten_donvi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
                 }
                 catch (Exception)
                 {
