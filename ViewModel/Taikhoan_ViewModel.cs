@@ -35,6 +35,7 @@ namespace QLK_Dn.ViewModel
             set { _List_Tinhtrang = value; OnPropertyChanged(); }
         }
 
+
         private ObservableCollection<Model.NHANVIEN> _List_Nhanvien;
 
         public ObservableCollection<Model.NHANVIEN> List_Nhanvien
@@ -42,6 +43,7 @@ namespace QLK_Dn.ViewModel
             get { return _List_Nhanvien; }
             set { _List_Nhanvien = value; OnPropertyChanged(); }
         }
+
 
         private ObservableCollection<Model.TAIKHOAN> _DeleteList;
 
@@ -140,6 +142,7 @@ namespace QLK_Dn.ViewModel
             set { _Maxacthuc = value; OnPropertyChanged(); }
         }
         #endregion
+
 
         #region Binding Data (Quantrihethong.xaml)
         private string _Tentaikhoan;
@@ -274,6 +277,7 @@ namespace QLK_Dn.ViewModel
         public ICommand CloseDialog_Command { get; set; }
 
         #endregion
+
 
         public Taikhoan_ViewModel()
         {
@@ -847,6 +851,7 @@ namespace QLK_Dn.ViewModel
             #endregion
 
         }
+
 
         #region Methods
 
