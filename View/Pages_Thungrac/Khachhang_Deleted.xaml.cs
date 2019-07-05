@@ -26,6 +26,7 @@ namespace QLK_Dn.Pages_Thungrac
             this.DataContext = new ViewModel.Khachhang_Deleted_ViewModel();
             tb_Search.TextChanged+=tb_Search_TextChanged;
         }
+
         #region Phan tim kiem
         private bool Search(object item)
         {

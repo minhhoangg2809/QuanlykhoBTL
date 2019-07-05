@@ -24,40 +24,8 @@ namespace QLK_Dn.View.View_Quanly
             InitializeComponent();
             ButtonClose.Click += ButtonClose_Click;
             ButtonOpen.Click += ButtonOpen_Click;
-
-            UserControls_Pages.SearchBar.Gl_search.TextChanged+=tb_Search_TextChanged;
         }
 
-        #region Phan tim kiem
-        private bool Search(object item)
-        {
-            if (String.IsNullOrEmpty(UserControls_Pages.SearchBar.Gl_search.Text))
-            {
-                return true;
-            }
-            else
-            {
-                try
-                {
-                    return ((Model.NHACUNGCAP)item).ten_nhacungcap.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHACUNGCAP)item).diachi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHACUNGCAP)item).sodienthoai.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
-                }
-                catch (Exception)
-                {
-                    return true;
-                }
-
-            }
-        }
-        void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionView viewfilter = (CollectionView)CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource);
-            viewfilter.Filter = Search;
-            CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource).Refresh();
-        }
-
-        #endregion
         void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             ButtonClose.Visibility = Visibility.Hidden;

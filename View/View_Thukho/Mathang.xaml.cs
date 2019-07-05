@@ -24,47 +24,8 @@ namespace QLK_Dn.View.View_Thukho
             InitializeComponent();
             ButtonOpen.Click += ButtonOpen_Click;
             ButtonClose.Click += ButtonClose_Click;
-
-            UserControls_Pages.SearchBar.Gl_search.TextChanged += tb_Search_TextChanged;
         }
 
-        #region Phan tim kiem
-
-        private bool Search(object item)
-        {
-            if (String.IsNullOrEmpty(UserControls_Pages.SearchBar.Gl_search.Text))
-            {
-                return true;
-            }
-            else
-            {
-                try
-                {
-                    return ((Model.MATHANG)item).ma_mathang.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).ten_mathang.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).hang.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).dong.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).NHACUNGCAP.ten_nhacungcap.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).DONVITINH.ten_donvi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.MATHANG)item).LOAIHANG.ten_loaihang.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
-
-                }
-                catch (Exception)
-                {
-                    return true;
-                }
-
-            }
-        }
-
-        void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionView viewfilter = (CollectionView)CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource);
-            viewfilter.Filter = Search;
-            CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource).Refresh();
-        }
-
-        #endregion
 
         void ButtonClose_Click(object sender, RoutedEventArgs e)
         {

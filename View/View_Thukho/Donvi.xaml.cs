@@ -24,39 +24,7 @@ namespace QLK_Dn.View.View_Thukho
             InitializeComponent();
             ButtonClose.Click += ButtonClose_Click;
             ButtonOpen.Click += ButtonOpen_Click;
-
-          
-            UserControls_Pages.SearchBar.Gl_search.TextChanged += tb_Search_TextChanged;
         }
-
-        #region Phan tim kiem
-        private bool Search(object item)
-        {
-            if (String.IsNullOrEmpty(UserControls_Pages.SearchBar.Gl_search.Text))
-            {
-                return true;
-            }
-            else
-            {
-                try
-                {
-                    return ((Model.DONVITINH)item).ma_donvi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.DONVITINH)item).ten_donvi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
-                }
-                catch (Exception)
-                {
-                    return true;
-                }
-
-            }
-        }
-        void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionView viewfilter = (CollectionView)CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource);
-            viewfilter.Filter = Search;
-            CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource).Refresh();
-        }
-        #endregion
 
         void ButtonClose_Click(object sender, RoutedEventArgs e)
         {

@@ -20,19 +20,9 @@ namespace QLK_Dn.UserControls_Pages
     /// </summary>
     public partial class SearchBar : UserControl
     {
-        private static TextBox gl_search;
-
-        public static TextBox Gl_search
-        {
-            get { return SearchBar.gl_search; }
-            set { SearchBar.gl_search = value;}
-        }
-
         public SearchBar()
         {
             InitializeComponent();
-
-            Gl_search = tb_Search;
         }
        
     }

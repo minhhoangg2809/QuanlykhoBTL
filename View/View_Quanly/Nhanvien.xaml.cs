@@ -24,43 +24,8 @@ namespace QLK_Dn.View.View_Quanly
             InitializeComponent();
             ButtonOpen.Click += ButtonOpen_Click;
             ButtonClose.Click += ButtonClose_Click;
-           
-            UserControls_Pages.SearchBar.Gl_search.TextChanged += tb_Search_TextChanged;
         }
 
-        #region Phan tim kiem
-        private bool Search(object item)
-        {
-            if (String.IsNullOrEmpty(UserControls_Pages.SearchBar.Gl_search.Text))
-            {
-                return true;
-            }
-            else
-            {
-                try
-                {
-                    return ((Model.NHANVIEN)item).ma_nhanvien.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).ten_nhanvien.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).diachi.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).sodienthoai.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).QUYEN.ten_quyen.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0 ||
-                    ((Model.NHANVIEN)item).ngaysinh.IndexOf(UserControls_Pages.SearchBar.Gl_search.Text, StringComparison.OrdinalIgnoreCase) >= 0;
-
-                }
-                catch (Exception)
-                {
-                    return true;
-                }
-
-            }
-        }
-        void tb_Search_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            CollectionView viewfilter = (CollectionView)CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource);
-            viewfilter.Filter = Search;
-            CollectionViewSource.GetDefaultView(lv_hienthi.ItemsSource).Refresh();
-        }
-        #endregion
         void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             ButtonClose.Visibility = Visibility.Hidden;

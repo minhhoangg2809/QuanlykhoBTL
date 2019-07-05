@@ -7,15 +7,24 @@
              xmlns:MaterialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="50" d:DesignWidth="820"
-             x:Name="uc_search">
+             x:Name="uc_search"
+             DataContext="{StaticResource vm_searchbar}">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding Load_Command}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <MaterialDesign:Chip
         Style="{DynamicResource ResourceKey=SearchboxBorder}">
-        <TextBox x:Name="tb_Search"
+        <TextBox x:Name="tb_Search" 
                  Width="800" 
                  BorderBrush="{x:Null}"
                  BorderThickness="0"
                  FontSize="15"
-                 MaterialDesign:TextFieldAssist.DecorationVisibility="Hidden">
+                 MaterialDesign:TextFieldAssist.DecorationVisibility="Hidden"
+                 Text="{Binding Texts,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
             <MaterialDesign:HintAssist.Hint>
                 <StackPanel Orientation="Horizontal" Opacity="0.8">
                     <MaterialDesign:PackIcon Height="21" Kind="Search"/>
@@ -23,6 +32,14 @@
                     <TextBlock Text="Tìm kiếm"/>
                 </StackPanel>
             </MaterialDesign:HintAssist.Hint>
+            
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="TextChanged">
+                    <i:InvokeCommandAction Command="{Binding Search_Command}"
+                                           CommandParameter="{Binding ElementName=tb_Search}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+            
         </TextBox>
     </MaterialDesign:Chip>
 
