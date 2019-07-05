@@ -5,6 +5,7 @@
     <viewmodel:LowControlBar_ViewModel x:Key="vm_lowcontrolbar"></viewmodel:LowControlBar_ViewModel>
     <viewmodel:Menu_Tk_ViewModel x:Key="vm_menutk"></viewmodel:Menu_Tk_ViewModel>
     <viewmodel:Menu_ViewModel x:Key="vm_menu"></viewmodel:Menu_ViewModel>
+    <viewmodel:SearchBar_ViewModel x:Key="vm_searchbar"></viewmodel:SearchBar_ViewModel>
     <viewmodel:MainPage_ViewModel x:Key="vm_mainpage"></viewmodel:MainPage_ViewModel>
     <viewmodel:Main2Page_ViewModel x:Key="vm_main2page"></viewmodel:Main2Page_ViewModel>
     <viewmodel:Loaimathang_ViewModel x:Key="vm_loaimathang"></viewmodel:Loaimathang_ViewModel>
