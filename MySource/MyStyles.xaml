@@ -124,7 +124,7 @@
         <Setter Property="Background" Value="WhiteSmoke"></Setter>
         <Setter Property="HorizontalAlignment" Value="Left"></Setter>
         <Setter Property="VerticalContentAlignment" Value="Stretch"></Setter>
-        <Setter Property="MaterialDesign:ShadowAssist.ShadowDepth" Value="Depth1"></Setter>
+        <Setter Property="MaterialDesign:ShadowAssist.ShadowDepth" Value="Depth2"></Setter>
         <Style.Triggers>
             <Trigger Property="IsEnabled" Value="False">
                 <Setter Property="MaterialDesign:ShadowAssist.ShadowDepth" Value="Depth0"></Setter>
