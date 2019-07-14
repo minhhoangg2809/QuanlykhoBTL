@@ -35,8 +35,8 @@
             <BeginStoryboard Storyboard="{StaticResource OpenMenu}"/>
         </EventTrigger>
     </Window.Triggers>
-    
-    
+
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Load_Command}"/>
@@ -49,6 +49,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+
         <Grid Grid.Row="0">
             <UC:ControlBar Height="30"/>
         </Grid>
@@ -74,7 +75,7 @@
                     <Grid Grid.Column="1">
                         <UC:SearchBar/>
                     </Grid>
-                    
+
                     <Button x:Name="ButtonOpen" Visibility="Visible"
                         Content="{MaterialDesign:PackIcon Kind=Menu, Size=30}"
                         Background="{x:Null}"
@@ -96,98 +97,7 @@
 
             <Grid Grid.Row="1">
                 <Grid x:Name="GridMain">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="10"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="0">
-                        <Expander  HorizontalAlignment="Stretch"
-                                       IsExpanded="False">
-                            <Expander.Header>
-                                <StackPanel Orientation="Horizontal">
-                                    <MaterialDesign:PackIcon Opacity="0.8" Kind="Filter"/>
-                                    <TextBlock Width="5"/>
-                                    <TextBlock
-                                            Opacity="0.8"
-                                            VerticalAlignment="Stretch"
-                                            HorizontalAlignment="Stretch"
-                                            FontSize="15"
-                                            Foreground="Black"     
-                                            Text="Bộ lọc :"/>
-                                </StackPanel>
-                            </Expander.Header>
-                            <MaterialDesign:ColorZone
-                                  Background="White"
-                                  Padding="16">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition/>
-                                        <ColumnDefinition Width="auto"/>
-                                    </Grid.ColumnDefinitions>
-                                    <StackPanel Grid.Column="1"
-                                                    Orientation="Horizontal"
-                                                    HorizontalAlignment="Right">
-                                        <ComboBox x:Name="cb_Nhacungcap"
-                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Nhà cung cấp"
-                                                      ItemsSource="{Binding ListNhacungcap_Filter}"
-                                                      SelectedItem="{Binding SNhacungcap_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                      DisplayMemberPath="ten_nhacungcap">
-                                        </ComboBox>
-                                        <TextBlock Width="30"/>
-
-                                        <ComboBox x:Name="cb_Loai"
-                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Loại hàng"
-                                                      ItemsSource="{Binding ListLoai_Filter}"
-                                                      SelectedItem="{Binding SLoai_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                      DisplayMemberPath="ten_loaihang"/>
-                                        <TextBlock Width="30"/>
-
-                                        <ComboBox x:Name="cb_Donvi"
-                                                  IsEditable="True" FontSize="15" Width="200"
-                                                  MaterialDesign:HintAssist.Hint="Đơn vị tính"
-                                                  ItemsSource="{Binding ListDonvi_Filter}"
-                                                  SelectedItem="{Binding SDonvi_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                  DisplayMemberPath="ten_donvi">
-                                        </ComboBox>
-                                        <TextBlock Width="30"/>
-                                       
-                                        <Button x:Name="btn_filter"
-                                              ToolTip="Lọc"
-                                              Width="30" Height="30" 
-                                              Style="{DynamicResource OutlineButton_Primary}">
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="Click">
-                                                    <i:InvokeCommandAction Command="{Binding Filter_Command}"
-                                                                               CommandParameter="{Binding ElementName=btn_filter}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                            <MaterialDesign:PackIcon Kind="FilterVariant" Width="18" Height="18"/>
-                                        </Button>
-                                        <TextBlock Width="10"/>
-                                        <Button x:Name="btn_resetfilter"
-                                                BorderThickness="3"
-                                                ToolTip="Hủy bộ lọc"
-                                                Width="30" Height="30" 
-                                                Style="{DynamicResource OutlineButton_Danger}">
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="Click">
-                                                    <i:InvokeCommandAction Command="{Binding ResetFilter_Command}"
-                                                                               CommandParameter="{Binding ElementName=btn_resetfilter}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                            <MaterialDesign:PackIcon Kind="Close" Width="18" Height="18"/>
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
-                            </MaterialDesign:ColorZone>
-                        </Expander>
-                        <Separator Background="Black" Height="1" VerticalAlignment="Bottom"/>
-                    </Grid>
-                    
-                    
-                    <ScrollViewer Grid.Row="2" Style="{DynamicResource ResourceKey=ScrollViewerStyle}">
+                    <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerStyle}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
@@ -196,8 +106,34 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="20"/>
                             </Grid.RowDefinitions>
-                            
-                          
+
+                            <StackPanel Orientation="Vertical" HorizontalAlignment="Right" Grid.Row="0">
+                                <Button 
+                                        HorizontalAlignment="Right"
+                                        Background="WhiteSmoke" 
+                                        BorderBrush="{x:Null}" 
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                        ToolTip="Tạo mới"
+                                        Command="{Binding Reset_Command}">
+                                    <MaterialDesign:PackIcon
+                                            Kind="Plus"
+                                            Height="24"
+                                            Width="24" />
+                                </Button>
+                                <TextBlock Height="10"/>
+                                <Button 
+                                        HorizontalAlignment="Right"
+                                        Background="WhiteSmoke" 
+                                        BorderBrush="{x:Null}" 
+                                        Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                        ToolTip="Bộ lọc"
+                                        Command="{Binding OpenFilter_Command}">
+                                    <MaterialDesign:PackIcon
+                                            Kind="FilterVariant"
+                                            Height="24"
+                                            Width="24" />
+                                </Button>
+                            </StackPanel>
                             
                             <Grid Grid.Row="0">
                                 <Grid.RowDefinitions>
@@ -205,25 +141,14 @@
                                     <RowDefinition/>
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
-                                <Button 
-                                   HorizontalAlignment="Right"
-                                   Background="WhiteSmoke" 
-                                   BorderBrush="{x:Null}" 
-                                   Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                   ToolTip="Tạo mới"
-                                   Command="{Binding Reset_Command}">
-                                    <MaterialDesign:PackIcon
-                                         Kind="Plus"
-                                         Height="24"
-                                         Width="24" />
-                                </Button>
-                                
+
                                 <Grid Grid.Row="0">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
                                         <ColumnDefinition Width="auto"/>
                                     </Grid.ColumnDefinitions>
+
                                     <ComboBox Grid.Column="0"
                                          IsEditable="True"     
                                          Width="300" Margin="5"
@@ -258,7 +183,7 @@
                                          SelectedItem="{Binding SDonvi,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                          DisplayMemberPath="ten_donvi"/>
                                 </Grid>
-                                
+
                                 <Grid Grid.Row="1">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="auto"/>
@@ -290,7 +215,7 @@
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Dong,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 </Grid>
-                                
+
                                 <Grid Grid.Row="2">
                                     <TextBox 
                                          Width="1230" Margin="5"
@@ -302,15 +227,14 @@
                                          Text="{Binding Mota,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
                                 </Grid>
                             </Grid>
-                            
-                            <Grid Grid.Row="2">
 
-                                <!--Dialog-->
+                            <Grid Grid.Row="2">
+                                <!--Dialog del-->
                                 <MaterialDesign:DialogHost
-                                        HorizontalAlignment="Center"
-                                        VerticalAlignment="Center"
-                                        Background="White"
-                                        IsOpen="{Binding IsOpen,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Background="White"
+                                    IsOpen="{Binding IsOpen,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                     <MaterialDesign:DialogHost.DialogContent>
                                         <Grid Width="auto" Height="200">
                                             <Grid.RowDefinitions>
@@ -342,7 +266,7 @@
                                         </Grid>
                                     </MaterialDesign:DialogHost.DialogContent>
                                 </MaterialDesign:DialogHost>
-                                <!--end-->
+                                <!--end dialog del-->
 
                                 <Border
                                        x:Name="bd_table"
@@ -414,7 +338,7 @@
                                                                             <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTenMathang_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                                         </i:EventTrigger>
                                                                     </i:Interaction.Triggers>
-                                                                    
+
                                                                 </Grid>
                                                             </DataTemplate>
                                                         </GridViewColumn.HeaderTemplate>
@@ -464,7 +388,7 @@
                                                                             <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTenloai_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                                         </i:EventTrigger>
                                                                     </i:Interaction.Triggers>
-                                                                    
+
                                                                 </Grid>
                                                             </DataTemplate>
                                                         </GridViewColumn.HeaderTemplate>
@@ -485,7 +409,7 @@
                                                                             <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTennhacungcap_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                                         </i:EventTrigger>
                                                                     </i:Interaction.Triggers>
-                                                                    
+
                                                                 </Grid>
                                                             </DataTemplate>
                                                         </GridViewColumn.HeaderTemplate>
@@ -506,7 +430,7 @@
                                                                             <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTendonvi_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                                         </i:EventTrigger>
                                                                     </i:Interaction.Triggers>
-                                                                    
+
                                                                 </Grid>
                                                             </DataTemplate>
                                                         </GridViewColumn.HeaderTemplate>
@@ -550,7 +474,7 @@
                                     </ScrollViewer>
                                 </Border>
                             </Grid>
-                           
+
                             <Grid Grid.Row="3">
                                 <StackPanel
                                     Margin="5 5"
@@ -625,6 +549,67 @@
                 </MaterialDesign:Snackbar>
             </Grid>
         </Grid>
+
+        <!--dialog filter-->
+        <MaterialDesign:DialogHost
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                IsOpen="{Binding IsOpen_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <MaterialDesign:DialogHost.DialogContent>
+                <Grid Width="300" Height="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
+                        <TextBlock Width="5"/>
+                        <MaterialDesign:PackIcon Kind="Filter" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="  Bộ lọc" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+                        <ComboBox
+                            IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Nhà cung cấp"
+                            ItemsSource="{Binding ListNhacungcap_Filter}"
+                            SelectedItem="{Binding SNhacungcap_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberPath="ten_nhacungcap">
+                        </ComboBox>
+                        <TextBlock Width="30"/>
+
+                        <ComboBox
+                            IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Loại hàng"
+                            ItemsSource="{Binding ListLoai_Filter}"
+                            SelectedItem="{Binding SLoai_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberPath="ten_loaihang"/>
+                        <TextBlock Width="30"/>
+
+                        <ComboBox
+                            IsEditable="True" FontSize="15" Width="200"
+                            MaterialDesign:HintAssist.Hint="Đơn vị tính"
+                            ItemsSource="{Binding ListDonvi_Filter}"
+                            SelectedItem="{Binding SDonvi_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberPath="ten_donvi">
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Margin="0 8 8 0"
+                                                    Command="{Binding Filter_Command}">
+                            LỌC
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Margin="0 8 8 0"
+                                                    Command="{Binding ResetFilter_Command}">
+                            XÓA BỘ LỌC
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </MaterialDesign:DialogHost.DialogContent>
+        </MaterialDesign:DialogHost>
+        <!--end dialog filter-->
+
     </Grid>
 </Window>
 

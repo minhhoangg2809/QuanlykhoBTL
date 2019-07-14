@@ -94,164 +94,74 @@
 
             <Grid Grid.Row="1">
                 <Grid x:Name="GridMain">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="auto"/>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition/>
-                        </Grid.RowDefinitions>
-                        <Grid Grid.Row="0">
-                            <Expander  HorizontalAlignment="Stretch"
-                                       IsExpanded="False">
-                                <Expander.Header>
-                                    <StackPanel Orientation="Horizontal">
-                                        <MaterialDesign:PackIcon Opacity="0.8" Kind="Filter"/>
-                                        <TextBlock Width="5"/>
-                                        <TextBlock
-                                            Opacity="0.8"
-                                            VerticalAlignment="Stretch"
-                                            HorizontalAlignment="Stretch"
-                                            FontSize="15"
-                                            Foreground="Black"     
-                                            Text="Bộ lọc :"/>
-                                    </StackPanel>
-                                </Expander.Header>
-                                <MaterialDesign:ColorZone
-                                  Background="White"
-                                  Padding="16">
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <StackPanel Grid.Column="1"
-                                                    Orientation="Horizontal"
-                                                    HorizontalAlignment="Right">
-                                            <ComboBox x:Name="cb_Nhacungcap"
-                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Nhà cung cấp"
-                                                      ItemsSource="{Binding ListNhacungcap_Filter}"
-                                                      SelectedItem="{Binding SNhacungcap_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                      DisplayMemberPath="ten_nhacungcap">
-                                            </ComboBox>
-                                            <TextBlock Width="30"/>
+                    <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerStyle}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
 
-                                            <ComboBox x:Name="cb_Loai"
-                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Loại hàng"
-                                                      ItemsSource="{Binding ListLoai_Filter}"
-                                                      SelectedItem="{Binding SLoai_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                      DisplayMemberPath="ten_loaihang">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="SelectionChanged">
-                                                        <i:InvokeCommandAction Command="{Binding FilterLoai_Command}"
-                                                                               CommandParameter="{Binding ElementName=cb_Loai}"/>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </ComboBox>
-                                            <TextBlock Width="30"/>
-                                            <ComboBox x:Name="cb_Mathang"
-                                                      ToolTip="{Binding SMathang_Filter.ten_mathang}"
-                                                      IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Mã mặt hàng"
-                                                      ItemsSource="{Binding ListMathang_Filter}"
-                                                      SelectedItem="{Binding SMathang_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                      DisplayMemberPath="ma_mathang">
-                                            </ComboBox>
-                                            <TextBlock Width="30"/>
-
-                                            <DatePicker ToolTip="Không được để trống"
-                                                        FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Ngày bắt đầu"
-                                                        Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                        MouseDoubleClick="DatePicker_MouseDoubleClick"/>
-                                            <TextBlock Width="30"/>
-                                            <DatePicker ToolTip="Không được để trống"
-                                                        FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Ngày kết thúc"
-                                                        Text="{Binding Date_End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                                                        MouseDoubleClick="DatePicker_MouseDoubleClick"/>
-                                            <TextBlock Width="30"/>
-                                            <Button x:Name="btn_filter"
-                                              ToolTip="Lọc"
-                                              Width="30" Height="30" 
-                                              Style="{DynamicResource OutlineButton_Primary}">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <i:InvokeCommandAction Command="{Binding Filter_Command}"
-                                                                               CommandParameter="{Binding ElementName=btn_filter}"/>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                                <MaterialDesign:PackIcon Kind="FilterVariant" Width="18" Height="18"/>
-                                            </Button>
-                                            <TextBlock Width="10"/>
-                                            <Button x:Name="btn_resetfilter"
-                                                BorderThickness="3"
-                                                ToolTip="Hủy bộ lọc"
-                                                Width="30" Height="30" 
-                                                Style="{DynamicResource OutlineButton_Danger}">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <i:InvokeCommandAction Command="{Binding ResetFilter_Command}"
-                                                                               CommandParameter="{Binding ElementName=btn_resetfilter}"/>
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                                <MaterialDesign:PackIcon Kind="Close" Width="18" Height="18"/>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
-                                </MaterialDesign:ColorZone>
-                            </Expander>
-                            <Separator Background="Black" Height="1" VerticalAlignment="Bottom"/>
-                        </Grid>
-
-                        <ScrollViewer Grid.Row="2" Style="{DynamicResource ResourceKey=ScrollViewerStyle}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="20"/>
-                                </Grid.RowDefinitions>
-                                <Grid Grid.Row="0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <StackPanel Orientation="Vertical">
-                                        <Button
-                                            HorizontalAlignment="Right"
-                                            Background="WhiteSmoke" 
-                                            BorderBrush="{x:Null}" 
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                            ToolTip="Tạo mới"
-                                            Command="{Binding Reset_Command}">
-                                            <MaterialDesign:PackIcon
+                            <StackPanel Orientation="Vertical">
+                                <Button
+                                    HorizontalAlignment="Right"
+                                    Background="WhiteSmoke" 
+                                    BorderBrush="{x:Null}" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="Tạo mới"
+                                    Command="{Binding Reset_Command}">
+                                    <MaterialDesign:PackIcon
                                                 Kind="Plus"
                                                 Height="24"
                                                 Width="24" />
-                                        </Button>
-                                        <TextBlock Height="10"/>
-                                        <Button
-                                            HorizontalAlignment="Right"
-                                            Background="WhiteSmoke" 
-                                            BorderBrush="{x:Null}" 
-                                            Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
-                                            ToolTip="In"
-                                            Command="{Binding OpenPrintDialog_Command}">
-                                            <MaterialDesign:PackIcon
+                                </Button>
+                                <TextBlock Height="10"/>
+                                <Button
+                                    HorizontalAlignment="Right"
+                                    Background="WhiteSmoke" 
+                                    BorderBrush="{x:Null}" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="In"
+                                    Command="{Binding OpenPrintDialog_Command}">
+                                    <MaterialDesign:PackIcon
                                                 Kind="Printer"
                                                 Height="24"
                                                 Width="24" />
-                                        </Button>
-                                    </StackPanel>
-                                    <Grid Grid.Row="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="10"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="10"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
+                                </Button>
+                                <TextBlock Height="10"/>
+                                <Button 
+                                    HorizontalAlignment="Right"
+                                    Background="WhiteSmoke" 
+                                    BorderBrush="{x:Null}" 
+                                    Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    ToolTip="Bộ lọc"
+                                    Command="{Binding OpenFilter_Command}">
+                                    <MaterialDesign:PackIcon
+                                            Kind="FilterVariant"
+                                            Height="24"
+                                            Width="24" />
+                                </Button>
+                            </StackPanel>
 
-                                        <ComboBox Grid.Column="0"
+                            <Grid Grid.Row="0">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                
+                                <Grid Grid.Row="0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <ComboBox Grid.Column="0"
                                          IsEditable="True"         
                                          Width="250" Margin="5"
                                          VerticalAlignment="Bottom"
@@ -264,7 +174,7 @@
                                          SelectedItem="{Binding SMathang,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                          DisplayMemberPath="ma_mathang"/>
 
-                                        <TextBox Grid.Column="2"
+                                    <TextBox Grid.Column="2"
                                          Width="250" Margin="5"
                                          VerticalAlignment="Bottom"
                                          HorizontalAlignment="Left"
@@ -273,7 +183,7 @@
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Soluongnhap,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
-                                        <TextBox Grid.Column="4"
+                                    <TextBox Grid.Column="4"
                                          Width="250" Margin="5"
                                          VerticalAlignment="Bottom"
                                          HorizontalAlignment="Left"
@@ -281,17 +191,17 @@
                                          MaterialDesign:HintAssist.Hint="Số lượng thực nhập"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Soluongthucnhap,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                                    </Grid>
-                                    <Grid Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="10"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="10"/>
-                                            <ColumnDefinition/>
-                                        </Grid.ColumnDefinitions>
+                                </Grid>
+                                <Grid Grid.Row="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition Width="auto"/>
+                                        <ColumnDefinition Width="10"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
 
-                                        <TextBox Grid.Column="0"         
+                                    <TextBox Grid.Column="0"         
                                          Width="250" Margin="5"
                                          VerticalAlignment="Bottom"
                                          HorizontalAlignment="Left"
@@ -300,7 +210,7 @@
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Dongianhap,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
 
-                                        <TextBox Grid.Column="2" x:Name="tb_phantram"
+                                    <TextBox Grid.Column="2" x:Name="tb_phantram"
                                          Width="250" Margin="5"
                                          VerticalAlignment="Bottom"
                                          HorizontalAlignment="Left"
@@ -308,15 +218,15 @@
                                          MaterialDesign:HintAssist.Hint="Phần trăm (%)"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Phantram,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                                            <i:Interaction.Triggers>
-                                                <i:EventTrigger EventName="TextChanged">
-                                                    <i:InvokeCommandAction Command="{Binding GetvalueTextbox_Command}"
+                                        <i:Interaction.Triggers>
+                                            <i:EventTrigger EventName="TextChanged">
+                                                <i:InvokeCommandAction Command="{Binding GetvalueTextbox_Command}"
                                                                            CommandParameter="{Binding ElementName=tb_phantram}"/>
-                                                </i:EventTrigger>
-                                            </i:Interaction.Triggers>
-                                        </TextBox>
+                                            </i:EventTrigger>
+                                        </i:Interaction.Triggers>
+                                    </TextBox>
 
-                                        <TextBox Grid.Column="4"
+                                    <TextBox Grid.Column="4"
                                          IsReadOnly="True"        
                                          Width="250" Margin="5"
                                          VerticalAlignment="Bottom"
@@ -325,41 +235,41 @@
                                          MaterialDesign:HintAssist.Hint="Đơn giá xuất"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Dongiaxuat,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                    </Grid>
+                                </Grid>
 
-                                    <TextBox Grid.Row="2"
-                                         Width="1230" Margin="5"
+                                <TextBox Grid.Row="2"
+                                         Width="1200" Margin="5"
                                          VerticalAlignment="Bottom"
                                          HorizontalAlignment="Left"
                                          FontSize="15"
                                          MaterialDesign:HintAssist.Hint="Ghi chú"
                                          Style="{StaticResource MaterialDesignFloatingHintTextBox}"
                                          Text="{Binding Ghichu,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
-                                </Grid>
+                            </Grid>
 
-                                <Grid Grid.Row="2">
+                            <Grid Grid.Row="2">
 
-                                    <!--Dialog-->
-                                    <MaterialDesign:DialogHost x:Name="dil_print"
+                                <!--Dialog-->
+                                <MaterialDesign:DialogHost x:Name="dil_print"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Top"
                                         Background="White"
                                         IsOpen="{Binding IsOpen_prt,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                                        <MaterialDesign:DialogHost.DialogContent>
-                                            <Grid Width="300" Height="260">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="45"/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition Height="20"/>
-                                                </Grid.RowDefinitions>
-                                                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
-                                                    <TextBlock Width="5"/>
-                                                    <MaterialDesign:PackIcon Kind="PrinterAlert" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
-                                                    <TextBlock FontSize="15" Text="  Chọn" VerticalAlignment="Center" Foreground="White"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5">
-                                                    <ComboBox x:Name="cb_NhacungcapPrt"
+                                    <MaterialDesign:DialogHost.DialogContent>
+                                        <Grid Width="300" Height="260">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="45"/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
+                                                <TextBlock Width="5"/>
+                                                <MaterialDesign:PackIcon Kind="PrinterAlert" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
+                                                <TextBlock FontSize="15" Text="  Chọn" VerticalAlignment="Center" Foreground="White"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Orientation="Vertical" Margin="5">
+                                                <ComboBox x:Name="cb_NhacungcapPrt"
                                                               IsEditable="True" 
                                                               FontSize="15" 
                                                               Width="200" 
@@ -367,419 +277,417 @@
                                                               ItemsSource="{Binding ListNCC_Print}"
                                                               SelectedItem="{Binding SNhacungcapPrint,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                               DisplayMemberPath="ten_nhacungcap">
-                                                    </ComboBox>
-                                                    <TextBlock Height="20"/>
-                                                    <DatePicker
+                                                </ComboBox>
+                                                <TextBlock Height="20"/>
+                                                <DatePicker
                                                         FontSize="15" 
                                                         Width="200" 
                                                         MaterialDesign:HintAssist.Hint="Ngày nhập"
                                                         Text="{Binding DayPrint,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                                                         MouseDoubleClick="DatePicker_MouseDoubleClick"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     Margin="0 8 8 0"
                                                     Command="{Binding PrinterOpen_Command}">
-                                                        XEM BẢN IN
-                                                    </Button>
-                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    XEM BẢN IN
+                                                </Button>
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     Margin="0 8 8 0"
                                                     Command="{Binding CloseDialog_Command}"
                                                     CommandParameter="{Binding ElementName=dil_print}">
-                                                        HỦY
-                                                    </Button>
-                                                </StackPanel>
-                                            </Grid>
-                                        </MaterialDesign:DialogHost.DialogContent>
-                                    </MaterialDesign:DialogHost>
+                                                    HỦY
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </MaterialDesign:DialogHost.DialogContent>
+                                </MaterialDesign:DialogHost>
 
-                                    <MaterialDesign:DialogHost x:Name="dil_delete"
+                                <MaterialDesign:DialogHost x:Name="dil_delete"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Background="White"
                                         IsOpen="{Binding IsOpen,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                                        <MaterialDesign:DialogHost.DialogContent>
-                                            <Grid Width="auto" Height="200">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="45"/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition Height="20"/>
-                                                </Grid.RowDefinitions>
-                                                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
-                                                    <TextBlock Width="5"/>
-                                                    <MaterialDesign:PackIcon Kind="Warning" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
-                                                    <TextBlock FontSize="15" Text="  Thông báo" VerticalAlignment="Center" Foreground="White"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Content,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    <MaterialDesign:DialogHost.DialogContent>
+                                        <Grid Width="auto" Height="200">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="45"/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
+                                                <TextBlock Width="5"/>
+                                                <MaterialDesign:PackIcon Kind="Warning" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
+                                                <TextBlock FontSize="15" Text="  Thông báo" VerticalAlignment="Center" Foreground="White"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                                <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Content,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     Margin="0 8 8 0"
                                                     Command="{Binding Delete_Command}">
-                                                        XÁC NHẬN
-                                                    </Button>
-                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    XÁC NHẬN
+                                                </Button>
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     Margin="0 8 8 0"
                                                     Command="{Binding CloseDialog_Command}"
                                                     CommandParameter="{Binding ElementName=dil_delete}">
-                                                        HỦY
-                                                    </Button>
-                                                </StackPanel>
-                                            </Grid>
-                                        </MaterialDesign:DialogHost.DialogContent>
-                                    </MaterialDesign:DialogHost>
+                                                    HỦY
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </MaterialDesign:DialogHost.DialogContent>
+                                </MaterialDesign:DialogHost>
 
-                                    <MaterialDesign:DialogHost x:Name="dil_insert"
+                                <MaterialDesign:DialogHost x:Name="dil_insert"
                                         HorizontalAlignment="Center"
                                         VerticalAlignment="Center"
                                         Background="White"
                                         IsOpen="{Binding IsOpen_insert,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                                        <MaterialDesign:DialogHost.DialogContent>
-                                            <Grid Width="auto" Height="auto">
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="45"/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition Height="20"/>
-                                                </Grid.RowDefinitions>
-                                                <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
-                                                    <TextBlock Width="5"/>
-                                                    <MaterialDesign:PackIcon Kind="Information" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
-                                                    <TextBlock FontSize="15" Text="  Xác nhận" VerticalAlignment="Center" Foreground="White"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Mã mặt hàng : " FontSize="15"/>
-                                                    <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SMathang.ma_mathang,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Tên mặt hàng : " FontSize="15"/>
-                                                    <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SMathang.ten_mathang,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Ngày nhập : " FontSize="15"/>
-                                                    <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Ngay,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Số lượng nhập : " FontSize="15"/>
-                                                    <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Soluongnhap,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Số lượng thực nhập : " FontSize="15"/>
-                                                    <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Soluongthucnhap,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5">
-                                                    <TextBlock Text="Nhà cung cấp : " FontSize="15"/>
-                                                    <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SMathang.NHACUNGCAP.ten_nhacungcap,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
-                                                </StackPanel>
-                                                <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    <MaterialDesign:DialogHost.DialogContent>
+                                        <Grid Width="auto" Height="auto">
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="45"/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition Height="20"/>
+                                            </Grid.RowDefinitions>
+                                            <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
+                                                <TextBlock Width="5"/>
+                                                <MaterialDesign:PackIcon Kind="Information" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
+                                                <TextBlock FontSize="15" Text="  Xác nhận" VerticalAlignment="Center" Foreground="White"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Mã mặt hàng : " FontSize="15"/>
+                                                <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SMathang.ma_mathang,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="2" Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Tên mặt hàng : " FontSize="15"/>
+                                                <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SMathang.ten_mathang,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Ngày nhập : " FontSize="15"/>
+                                                <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Ngay,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="4" Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Số lượng nhập : " FontSize="15"/>
+                                                <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Soluongnhap,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="5" Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Số lượng thực nhập : " FontSize="15"/>
+                                                <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding Soluongthucnhap,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="6" Orientation="Horizontal" Margin="5">
+                                                <TextBlock Text="Nhà cung cấp : " FontSize="15"/>
+                                                <TextBlock FontSize="15" TextWrapping="WrapWithOverflow" VerticalAlignment="Center" HorizontalAlignment="Center" Text="{Binding SMathang.NHACUNGCAP.ten_nhacungcap,UpdateSourceTrigger=PropertyChanged,Mode=OneWay}"/>
+                                            </StackPanel>
+                                            <StackPanel Grid.Row="7" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     Margin="0 8 8 0"
                                                     Command="{Binding Insert_Command}">
-                                                        XÁC NHẬN
-                                                    </Button>
-                                                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    XÁC NHẬN
+                                                </Button>
+                                                <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     Margin="0 8 8 0"
                                                     Command="{Binding CloseDialog_Command}"
                                                     CommandParameter="{Binding ElementName=dil_insert}">
-                                                        HỦY
-                                                    </Button>
-                                                </StackPanel>
-                                            </Grid>
-                                        </MaterialDesign:DialogHost.DialogContent>
-                                    </MaterialDesign:DialogHost>
-                                    <!--end-->
+                                                    HỦY
+                                                </Button>
+                                            </StackPanel>
+                                        </Grid>
+                                    </MaterialDesign:DialogHost.DialogContent>
+                                </MaterialDesign:DialogHost>
+                                <!--end-->
 
-                                    <Border
+                                <Border
                                             x:Name="bd_table" 
                                             Style="{DynamicResource ListviewBorder}">
-                                        <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
-                                            <ListView x:Name="lv_hienthi"
+                                    <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
+                                        <ListView x:Name="lv_hienthi"
                                               ItemsSource="{Binding List}"
                                               SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                                                <ListView.View>
-                                                    <GridView>
-                                                        <GridViewColumn Width="auto" >
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Grid.Column="0" Kind="CheckboxMarkedOutline" />
-                                                                        <TextBlock Grid.Column="1" Text=" Chọn"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <CheckBox x:Name="cb_select" Uid="{Binding ma_ctphieunhap}"
+                                            <ListView.View>
+                                                <GridView>
+                                                    <GridViewColumn Width="auto" >
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Grid.Column="0" Kind="CheckboxMarkedOutline" />
+                                                                    <TextBlock Grid.Column="1" Text=" Chọn"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <CheckBox x:Name="cb_select" Uid="{Binding ma_ctphieunhap}"
                                                                           Cursor="Pen">
-                                                                        <i:Interaction.Triggers>
-                                                                            <i:EventTrigger EventName="Checked">
-                                                                                <i:InvokeCommandAction Command="{Binding DataContext.AddDeleteList_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="Checked">
+                                                                            <i:InvokeCommandAction Command="{Binding DataContext.AddDeleteList_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
                                                                                CommandParameter="{Binding ElementName=cb_select}"/>
-                                                                            </i:EventTrigger>
-                                                                            <i:EventTrigger EventName="Unchecked">
-                                                                                <i:InvokeCommandAction Command="{Binding DataContext.RemoveDeleteList_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
+                                                                        </i:EventTrigger>
+                                                                        <i:EventTrigger EventName="Unchecked">
+                                                                            <i:InvokeCommandAction Command="{Binding DataContext.RemoveDeleteList_Command,RelativeSource={RelativeSource AncestorType=ListView}}"
                                                                                CommandParameter="{Binding ElementName=cb_select}"/>
-                                                                            </i:EventTrigger>
-                                                                        </i:Interaction.Triggers>
-                                                                    </CheckBox>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding ma_ctphieunhap}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="Qrcode"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Mã phiếu"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding PHIEUNHAP.ngaynhap}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="Calendar"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Ngày nhập"/>
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
+                                                                </CheckBox>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding ma_ctphieunhap}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="Qrcode"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Mã phiếu"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding PHIEUNHAP.ngaynhap}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="Calendar"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Ngày nhập"/>
 
-                                                                        <i:Interaction.Triggers>
-                                                                            <i:EventTrigger EventName="MouseLeftButtonDown">
-                                                                                <i:InvokeCommandAction Command="{Binding DataContext.OrderbyNgay_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
-                                                                            </i:EventTrigger>
-                                                                        </i:Interaction.Triggers>
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                            <i:InvokeCommandAction Command="{Binding DataContext.OrderbyNgay_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
 
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding MATHANG.ten_mathang}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="BoxVariant"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Tên mặt hàng"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding MATHANG.ten_mathang}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="BoxVariant"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Tên mặt hàng"/>
 
-                                                                        <i:Interaction.Triggers>
-                                                                            <i:EventTrigger EventName="MouseLeftButtonDown">
-                                                                                <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTenMathang_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
-                                                                            </i:EventTrigger>
-                                                                        </i:Interaction.Triggers>
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                            <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTenMathang_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
 
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding MATHANG.NHACUNGCAP.ten_nhacungcap}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="Contacts"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Nhà cung cấp"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding MATHANG.NHACUNGCAP.ten_nhacungcap}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="Contacts"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Nhà cung cấp"/>
 
-                                                                        <i:Interaction.Triggers>
-                                                                            <i:EventTrigger EventName="MouseLeftButtonDown">
-                                                                                <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTennhacungcap_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
-                                                                            </i:EventTrigger>
-                                                                        </i:Interaction.Triggers>
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                            <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTennhacungcap_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
 
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongnhap}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="CardsVariant"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Số lượng nhập"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongthuc}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="CardsVariant"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Số lượng thực nhập"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongton}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="Assistant"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Hiện tại"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding MATHANG.DONVITINH.ten_donvi}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="Animation"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Đơn vị"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongnhap}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="CardsVariant"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Số lượng nhập"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongthuc}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="CardsVariant"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Số lượng thực nhập"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding soluongton}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="Assistant"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Hiện tại"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding MATHANG.DONVITINH.ten_donvi}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="Animation"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Đơn vị"/>
 
-                                                                        <i:Interaction.Triggers>
-                                                                            <i:EventTrigger EventName="MouseLeftButtonDown">
-                                                                                <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTendonvi_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
-                                                                            </i:EventTrigger>
-                                                                        </i:Interaction.Triggers>
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="MouseLeftButtonDown">
+                                                                            <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTendonvi_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
+                                                                        </i:EventTrigger>
+                                                                    </i:Interaction.Triggers>
 
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding gianhap}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="CashUsd"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Giá nhập"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding ghichu}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="BorderColor"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Ghi chú"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="200" DisplayMemberBinding="{Binding nguoitao}">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid>
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <MaterialDesign:PackIcon Kind="UserAlert"/>
-                                                                        <TextBlock Grid.Column="1" Text=" Người tạo phiếu"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                        </GridViewColumn>
-                                                        <GridViewColumn Width="auto">
-                                                            <GridViewColumn.HeaderTemplate>
-                                                                <DataTemplate>
-                                                                    <Grid ToolTip="{Binding ElementName=lv_hienthi,Path=Items.Count}">
-                                                                        <Grid.ColumnDefinitions>
-                                                                            <ColumnDefinition Width="auto"/>
-                                                                            <ColumnDefinition/>
-                                                                        </Grid.ColumnDefinitions>
-                                                                        <TextBlock Grid.Column="0" Text=" Số Lượng : "/>
-                                                                        <TextBlock Grid.Column="1" Text="{Binding ElementName=lv_hienthi,Path=Items.Count}"/>
-                                                                    </Grid>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.HeaderTemplate>
-                                                            <GridViewColumn.CellTemplate>
-                                                                <DataTemplate>
-                                                                    <TextBlock Text="{Binding Path=ma_phieunhap}" Visibility="Hidden"/>
-                                                                </DataTemplate>
-                                                            </GridViewColumn.CellTemplate>
-                                                        </GridViewColumn>
-                                                    </GridView>
-                                                </ListView.View>
-                                            </ListView>
-                                        </ScrollViewer>
-                                    </Border>
-                                </Grid>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding gianhap}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="CashUsd"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Giá nhập"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding ghichu}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="BorderColor"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Ghi chú"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="200" DisplayMemberBinding="{Binding nguoitao}">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid>
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <MaterialDesign:PackIcon Kind="UserAlert"/>
+                                                                    <TextBlock Grid.Column="1" Text=" Người tạo phiếu"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                    </GridViewColumn>
+                                                    <GridViewColumn Width="auto">
+                                                        <GridViewColumn.HeaderTemplate>
+                                                            <DataTemplate>
+                                                                <Grid ToolTip="{Binding ElementName=lv_hienthi,Path=Items.Count}">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition Width="auto"/>
+                                                                        <ColumnDefinition/>
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <TextBlock Grid.Column="0" Text=" Số Lượng : "/>
+                                                                    <TextBlock Grid.Column="1" Text="{Binding ElementName=lv_hienthi,Path=Items.Count}"/>
+                                                                </Grid>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.HeaderTemplate>
+                                                        <GridViewColumn.CellTemplate>
+                                                            <DataTemplate>
+                                                                <TextBlock Text="{Binding Path=ma_phieunhap}" Visibility="Hidden"/>
+                                                            </DataTemplate>
+                                                        </GridViewColumn.CellTemplate>
+                                                    </GridViewColumn>
+                                                </GridView>
+                                            </ListView.View>
+                                        </ListView>
+                                    </ScrollViewer>
+                                </Border>
+                            </Grid>
 
-                                <Grid Grid.Row="3">
-                                    <StackPanel
+                            <Grid Grid.Row="3">
+                                <StackPanel
                                     Margin="5 5"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Center"
                                     Orientation="Horizontal">
-                                        <Button Uid="1"
+                                    <Button Uid="1"
                                          Margin="5"
                                          Style="{DynamicResource RoundButton}"
                                          Command="{Binding InsertShow_Command}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <MaterialDesign:PackIcon
+                                        <StackPanel Orientation="Horizontal">
+                                            <MaterialDesign:PackIcon
                                            Kind="PlusBoxOutline"
                                            Height="24"
                                            Width="24" />
-                                                <TextBlock VerticalAlignment="Center" FontSize="15" Text=" Thêm"></TextBlock>
-                                            </StackPanel>
-                                        </Button>
-                                        <Button Uid="2"
+                                            <TextBlock VerticalAlignment="Center" FontSize="15" Text=" Thêm"></TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                    <Button Uid="2"
                                          Margin="5"
                                          Style="{DynamicResource RoundButton}"
                                          Command="{Binding DeleteShow_Command}">
-                                            <StackPanel Orientation="Horizontal">
-                                                <MaterialDesign:PackIcon
+                                        <StackPanel Orientation="Horizontal">
+                                            <MaterialDesign:PackIcon
                                            Kind="CalendarRemove"
                                            Height="24"
                                            Width="24" />
-                                                <TextBlock VerticalAlignment="Center" FontSize="15" Text=" Xóa"></TextBlock>
-                                            </StackPanel>
-                                        </Button>
-                                    </StackPanel>
-                                </Grid>
+                                            <TextBlock VerticalAlignment="Center" FontSize="15" Text=" Xóa"></TextBlock>
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
                             </Grid>
-                        </ScrollViewer>
-                    </Grid>
-
+                        </Grid>
+                    </ScrollViewer>
                 </Grid>
 
 
@@ -808,5 +716,83 @@
                 </MaterialDesign:Snackbar>
             </Grid>
         </Grid>
+
+        <!--dialog filter-->
+        <MaterialDesign:DialogHost
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Background="White"
+                IsOpen="{Binding IsOpen_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+            <MaterialDesign:DialogHost.DialogContent>
+                <Grid Width="300" Height="auto">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="45"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0" Orientation="Horizontal" Background="Gray">
+                        <TextBlock Width="5"/>
+                        <MaterialDesign:PackIcon Kind="Filter" Width="30" Height="30" Foreground="White" VerticalAlignment="Center"/>
+                        <TextBlock FontSize="15" Text="  Bộ lọc" VerticalAlignment="Center" Foreground="White"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+                        <ComboBox 
+                            IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Nhà cung cấp"
+                            ItemsSource="{Binding ListNhacungcap_Filter}"
+                            SelectedItem="{Binding SNhacungcap_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberPath="ten_nhacungcap">
+                        </ComboBox>
+                        <TextBlock Width="30"/>
+
+                        <ComboBox x:Name="cb_Loai"
+                            IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Loại hàng"
+                            ItemsSource="{Binding ListLoai_Filter}"
+                            SelectedItem="{Binding SLoai_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberPath="ten_loaihang">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding FilterLoai_Command}"
+                                                           CommandParameter="{Binding ElementName=cb_Loai}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </ComboBox>
+                        <TextBlock Width="30"/>
+                        <ComboBox 
+                            ToolTip="{Binding SMathang_Filter.ten_mathang}"
+                            IsEditable="True" FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Mã mặt hàng"
+                            ItemsSource="{Binding ListMathang_Filter}"
+                            SelectedItem="{Binding SMathang_Filter,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            DisplayMemberPath="ma_mathang">
+                        </ComboBox>
+                        <TextBlock Width="30"/>
+
+                        <DatePicker ToolTip="Không được để trống"
+                                    FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Ngày bắt đầu"
+                                    Text="{Binding Date_Start,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    MouseDoubleClick="DatePicker_MouseDoubleClick"/>
+                        <TextBlock Width="30"/>
+                        <DatePicker ToolTip="Không được để trống"
+                                    FontSize="15" Width="200" MaterialDesign:HintAssist.Hint="Ngày kết thúc"
+                                    Text="{Binding Date_End,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                                    MouseDoubleClick="DatePicker_MouseDoubleClick"/>
+                        <TextBlock Width="30"/>
+                    </StackPanel>
+                    <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Margin="0 8 8 0"
+                                                    Command="{Binding Filter_Command}">
+                            LỌC
+                        </Button>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                                    Margin="0 8 8 0"
+                                                    Command="{Binding ResetFilter_Command}">
+                            XÓA BỘ LỌC
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </MaterialDesign:DialogHost.DialogContent>
+        </MaterialDesign:DialogHost>
+        <!--end dialog filter-->
     </Grid>
 </Window>
