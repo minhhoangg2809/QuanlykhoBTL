@@ -286,9 +286,20 @@ namespace QLK_Dn.ViewModel
             set { _Date_End = value; OnPropertyChanged(); }
         }
 
+        private bool _IsOpen_Filter;
+
+        public bool IsOpen_Filter
+        {
+            get { return _IsOpen_Filter; }
+            set { _IsOpen_Filter = value; OnPropertyChanged(); }
+        }
+
+
         #endregion
 
         #region Filter Commands
+
+        public ICommand OpenFilter_Command { get; set; }
         public ICommand Filter_Command { get; set; }
         public ICommand ResetFilter_Command { get; set; }
         public ICommand FilterLoai_Command { get; set; }
@@ -379,12 +390,13 @@ namespace QLK_Dn.ViewModel
             ListPhieunhap = new ObservableCollection<Model.CHITIETPHIEUNHAP>();
 
             ListKH_Print = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
-        
+
             ListSoluong = new ObservableCollection<string>();
 
             Active = false;
             IsOpen = false;
             IsOpen_insert = false;
+            IsOpen_Filter = false;
 
             Active_Command = new RelayCommand<object>(p =>
             {
@@ -422,6 +434,7 @@ namespace QLK_Dn.ViewModel
                 Active = false;
                 IsOpen = false;
                 IsOpen_insert = false;
+                IsOpen_Filter = false;
 
                 ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
                 ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
@@ -635,6 +648,17 @@ namespace QLK_Dn.ViewModel
             ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
             ListKhachhang_Filter = new ObservableCollection<Model.KHACHHANG>(Model.DataProvider.Ins.DB.KHACHHANGs.Where(x => x.IsDeleted == false));
 
+            OpenFilter_Command = new RelayCommand<object>(p =>
+            {
+                if (IsOpen_Filter == true || IsOpen_insert == true || IsOpen_prt == true || IsOpen == true)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                IsOpen_Filter = true;
+            });
+
             FilterLoai_Command = new RelayCommand<ComboBox>(p =>
             {
                 return true;
@@ -667,7 +691,10 @@ namespace QLK_Dn.ViewModel
                 Date_End = String.Empty;
 
                 List = new ObservableCollection<Model.CHITIETPHIEUXUAT>(Model.DataProvider.Ins.DB.CHITIETPHIEUXUATs.Where(x => x.IsDeleted == false).OrderByDescending(x => x.ma_phieuxuat));
+
+                IsOpen_Filter = false;
             });
+
             Filter_Command = new RelayCommand<Button>(p =>
             {
                 if (string.IsNullOrEmpty(Date_Start) || string.IsNullOrEmpty(Date_End))
@@ -702,7 +729,10 @@ namespace QLK_Dn.ViewModel
                 {
                     FindByLOAI(SLoai_Filter.ma_loaihang);
                 }
+
+                IsOpen_Filter = false;
             });
+
             #endregion
 
             #region Phan sap xep
@@ -842,6 +872,9 @@ namespace QLK_Dn.ViewModel
                 if (IsOpen_insert == true)
                     return false;
 
+                if (IsOpen_Filter == true)
+                    return false;
+
                 return true;
             }, p =>
             {
@@ -861,9 +894,9 @@ namespace QLK_Dn.ViewModel
                         printDialog.PrintVisual(p, "invoice");
                     }
 
-                    MessageBox.Show("Thành công !!!","THÔNG BÁO");
+                    MessageBox.Show("Thành công !!!", "THÔNG BÁO");
                 }
-                catch (Exception) { MessageBox.Show("Có lỗi xảy ra !!!","THÔNG BÁO"); };
+                catch (Exception) { MessageBox.Show("Có lỗi xảy ra !!!", "THÔNG BÁO"); };
             });
 
             PrinterFormClose_Command = new RelayCommand<Window>(p =>

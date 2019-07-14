@@ -128,6 +128,14 @@ namespace QLK_Dn.ViewModel
             set { _SDonvi_Filter = value; OnPropertyChanged(); }
         }
 
+        private bool _IsOpen_Filter;
+
+        public bool IsOpen_Filter
+        {
+            get { return _IsOpen_Filter; }
+            set { _IsOpen_Filter = value; OnPropertyChanged(); }
+        }
+
 
         #endregion
 
@@ -200,6 +208,7 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Command
+
         public ICommand Load_Command { get; set; }
         public ICommand AddDeleteList_Command { get; set; }
         public ICommand RemoveDeleteList_Command { get; set; }
@@ -208,6 +217,7 @@ namespace QLK_Dn.ViewModel
         public ICommand Delete_Command { get; set; }
         public ICommand DeleteShow_Command { get; set; }
         public ICommand Reset_Command { get; set; }
+        public ICommand OpenFilter_Command { get; set; }
         public ICommand Filter_Command { get; set; }
         public ICommand ResetFilter_Command { get; set; }
 
@@ -277,6 +287,7 @@ namespace QLK_Dn.ViewModel
 
             Active = false;
             IsOpen = false;
+            IsOpen_Filter = false;
 
             Active_Command = new RelayCommand<object>(p =>
             {
@@ -311,6 +322,7 @@ namespace QLK_Dn.ViewModel
 
                 Active = false;
                 IsOpen = false;
+                IsOpen_Filter = false;
 
                 ListDonvi_Filter = new ObservableCollection<Model.DONVITINH>(Model.DataProvider.Ins.DB.DONVITINHs.Where(x => x.IsDeleted == false));
                 ListNhacungcap_Filter = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
@@ -388,15 +400,15 @@ namespace QLK_Dn.ViewModel
             }, p =>
             {
                 Model.MATHANG UpdateItem = new Model.MATHANG()
-                 {
-                     ten_mathang = Tenmathang,
-                     dong = _Dong,
-                     hang = _Hang,
-                     LOAIHANG = SLoai,
-                     NHACUNGCAP = SNhacungcap,
-                     DONVITINH = SDonvi,
-                     mota = (string.IsNullOrEmpty(Mota)) ? null : Mota
-                 };
+                {
+                    ten_mathang = Tenmathang,
+                    dong = _Dong,
+                    hang = _Hang,
+                    LOAIHANG = SLoai,
+                    NHACUNGCAP = SNhacungcap,
+                    DONVITINH = SDonvi,
+                    mota = (string.IsNullOrEmpty(Mota)) ? null : Mota
+                };
                 Model.Mathang_Service.Update(UpdateItem, Mamathang);
 
                 for (int i = 0; i < List.Count(); i++)
@@ -487,6 +499,18 @@ namespace QLK_Dn.ViewModel
             ListNhacungcap_Filter = new ObservableCollection<Model.NHACUNGCAP>(Model.DataProvider.Ins.DB.NHACUNGCAPs.Where(x => x.IsDeleted == false));
             ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
 
+            OpenFilter_Command = new RelayCommand<object>(p =>
+            {
+                if (IsOpen == true || IsOpen_Filter == true)
+                    return false;
+
+                return true;
+
+            }, p =>
+            {
+                IsOpen_Filter = true;
+            });
+
             ResetFilter_Command = new RelayCommand<Button>(p =>
             {
                 return true;
@@ -497,6 +521,8 @@ namespace QLK_Dn.ViewModel
                 SLoai_Filter = null;
                 SNhacungcap_Filter = null;
                 SDonvi_Filter = null;
+
+                IsOpen_Filter = false;
             });
 
             Filter_Command = new RelayCommand<Button>(p =>
@@ -518,7 +544,10 @@ namespace QLK_Dn.ViewModel
                 {
                     FilterbyDonvi(SDonvi_Filter.ma_donvi);
                 }
+
+                IsOpen_Filter = false;
             });
+
             #endregion
 
             #region Phan sap xep

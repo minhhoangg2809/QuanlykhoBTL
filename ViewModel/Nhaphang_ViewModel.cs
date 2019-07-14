@@ -193,6 +193,15 @@ namespace QLK_Dn.ViewModel
             set { _Date_End = value; OnPropertyChanged(); }
         }
 
+        private bool _IsOpen_Filter;
+
+        public bool IsOpen_Filter
+        {
+            get { return _IsOpen_Filter; }
+            set { _IsOpen_Filter = value; OnPropertyChanged(); }
+        }
+
+
         #endregion
 
         #region prop
@@ -263,6 +272,8 @@ namespace QLK_Dn.ViewModel
         #endregion
 
         #region Filter Commands
+
+        public ICommand OpenFilter_Command { get; set; }
         public ICommand Filter_Command { get; set; }
         public ICommand ResetFilter_Command { get; set; }
         public ICommand FilterLoai_Command { get; set; }
@@ -355,6 +366,7 @@ namespace QLK_Dn.ViewModel
             Active = false;
             IsOpen = false;
             IsOpen_insert = false;
+            IsOpen_Filter = false;
 
             Active_Command = new RelayCommand<object>(p =>
             {
@@ -393,6 +405,7 @@ namespace QLK_Dn.ViewModel
                 Active = false;
                 IsOpen = false;
                 IsOpen_insert = false;
+                IsOpen_Filter = false;
             });
 
             #region Tao moi
@@ -635,6 +648,17 @@ namespace QLK_Dn.ViewModel
 
             });
 
+            OpenFilter_Command = new RelayCommand<object>(p => 
+            {
+                if (IsOpen_Filter == true || IsOpen == true || IsOpen_insert == true || IsOpen_prt == true)
+                    return false;
+
+                return true;
+            }, p =>
+            {
+                IsOpen_Filter = true;
+            });
+
             ResetFilter_Command = new RelayCommand<Button>(p =>
             {
                 return true;
@@ -651,6 +675,8 @@ namespace QLK_Dn.ViewModel
                 Date_End = String.Empty;
 
                 TaoDS_nhap();
+
+                IsOpen_Filter = false;
             });
 
             Filter_Command = new RelayCommand<Button>(p =>
@@ -687,6 +713,9 @@ namespace QLK_Dn.ViewModel
                 {
                     FindByLOAI(SLoai_Filter.ma_loaihang);
                 }
+
+                IsOpen_Filter = false;
+                
             });
             #endregion
 
@@ -825,6 +854,9 @@ namespace QLK_Dn.ViewModel
                     return false;
 
                 if (IsOpen_insert == true)
+                    return false;
+
+                if (IsOpen_Filter == true)
                     return false;
 
                 return true;
