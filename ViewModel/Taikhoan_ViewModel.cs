@@ -12,6 +12,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Threading;
 using System.Windows.Controls.Primitives;
+using System.IO;
 
 namespace QLK_Dn.ViewModel
 {
@@ -141,6 +142,16 @@ namespace QLK_Dn.ViewModel
             get { return _Maxacthuc; }
             set { _Maxacthuc = value; OnPropertyChanged(); }
         }
+
+        private bool _CheckedRemember;
+
+        public bool CheckedRemember
+        {
+            get { return _CheckedRemember; }
+            set { _CheckedRemember = value; OnPropertyChanged(); }
+        }
+
+
         #endregion
 
 
@@ -186,7 +197,6 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
-
         #region Command
 
         #region Command Phan quan tri he thong
@@ -203,6 +213,7 @@ namespace QLK_Dn.ViewModel
 
         #region Command Dang nhap va khoi phuc tai khoan
 
+        public ICommand LoadDangnhap_Command { get; set; }
         public ICommand getCurrentPass_Command { get; set; }
         public ICommand Login_Command { get; set; }
         public ICommand Send_Command { get; set; }
@@ -350,7 +361,7 @@ namespace QLK_Dn.ViewModel
                 Matkhauxacnhan = p.Password;
             });
 
-           
+
 
             Insert_Command = new RelayCommand<object>(p =>
             {
@@ -484,6 +495,15 @@ namespace QLK_Dn.ViewModel
 
             #region Dang nhap
 
+            LoadDangnhap_Command = new RelayCommand<Window>(p =>
+            {
+                return true;
+            }, p =>
+            {
+                Matkhau = string.Empty;
+                CheckRemember(p);
+            });
+
             getCurrentPass_Command = new RelayCommand<PasswordBox>(p =>
             {
                 return true;
@@ -520,7 +540,7 @@ namespace QLK_Dn.ViewModel
                     }
 
                     CurrentUser = current_user;
-                    Matkhau = "";
+                    IsRemember();
 
                     Window w = getWindowParent(p) as Window;
                     if (p != null)
@@ -908,6 +928,7 @@ namespace QLK_Dn.ViewModel
 
             return makhoiphuc;
         }
+
         private FrameworkElement getWindowParent(Button btn)
         {
             FrameworkElement p = btn;
@@ -918,6 +939,7 @@ namespace QLK_Dn.ViewModel
             }
             return p;
         }
+
         private bool Kiemtrataikhoan(string tendn, string matkhau)
         {
             string mk = MyStaticMethods.MD5Hash(MyStaticMethods.Base64Encode(matkhau));
@@ -949,6 +971,7 @@ namespace QLK_Dn.ViewModel
                 };
             }
         }
+
         private bool Kiemtratendangnhap(string tendangnhap)
         {
             var result = Model.DataProvider.Ins.DB.TAIKHOANs.Where(x => x.ten_taikhoan == tendangnhap).Count();
@@ -958,6 +981,7 @@ namespace QLK_Dn.ViewModel
             }
             return false;
         }
+
         private void RemoveIteminList()
         {
             for (int i = 0; i < List.Count(); i++)
@@ -991,6 +1015,53 @@ namespace QLK_Dn.ViewModel
                 }
             }
             Model.DataProvider.Ins.DB.SaveChanges();
+        }
+
+        private void CheckRemember(Window p)
+        {
+
+            if (!File.Exists("Pass.txt"))
+            {
+                FileStream fs;
+                fs = new FileStream("Pass.txt", FileMode.Create);
+                StreamWriter sWriter = new StreamWriter(fs, Encoding.UTF8);
+
+                sWriter.WriteLine("Hello World!");
+                sWriter.Flush();
+                fs.Close();
+            }
+
+            string[] lines = File.ReadAllLines("Pass.txt");
+            if (lines[lines.Length - 1] == "1")
+            {
+                Tendangnhap = MyStaticMethods.Base64Decode(lines[lines.Length - 3]);
+                Matkhau = MyStaticMethods.Base64Decode(lines[lines.Length - 2]);
+                CheckedRemember = true;
+            }
+
+            foreach (PasswordBox pb in MyStaticMethods.FindVisualChildren<PasswordBox>(p))
+            {
+                if (pb.Name == "pb_cr")
+                {
+                    pb.Password = Matkhau;
+                }
+            }
+        }
+
+        private void IsRemember()
+        {
+            FileStream fs = new FileStream("Pass.txt", FileMode.Append);
+
+            StreamWriter writeFile = new StreamWriter(fs, Encoding.UTF8);
+            if (CheckedRemember == true)
+            {
+                writeFile.WriteLine(MyStaticMethods.Base64Encode(Tendangnhap));
+                writeFile.WriteLine(MyStaticMethods.Base64Encode(Matkhau));
+                writeFile.WriteLine("1");
+                writeFile.Flush();
+            }
+            else writeFile.WriteLine("0");
+            writeFile.Close();
         }
 
         #endregion
