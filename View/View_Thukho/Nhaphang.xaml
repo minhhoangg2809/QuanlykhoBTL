@@ -780,13 +780,17 @@
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                    Margin="0 8 8 0"
-                                                    Command="{Binding Filter_Command}">
-                            LỌC
+                                Margin="0 8 8 0"
+                                Content="LỌC">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="Clicked">
+                                    <i:InvokeCommandAction  Command="{Binding Filter_Command}"/>
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
                         </Button>
                         <Button Style="{StaticResource MaterialDesignFlatButton}"
-                                                    Margin="0 8 8 0"
-                                                    Command="{Binding ResetFilter_Command}">
+                                Margin="0 8 8 0"
+                                Command="{Binding ResetFilter_Command}">
                             XÓA BỘ LỌC
                         </Button>
                     </StackPanel>
