@@ -17,7 +17,16 @@
         WindowStyle="None" 
         BorderBrush="Black" BorderThickness="1"
         FontFamily="Segoe UI Emoji"
-        DataContext="{StaticResource vm_Taikhoan}">
+        DataContext="{StaticResource vm_Taikhoan}"
+        x:Name="wd_dangnhap">
+
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <i:InvokeCommandAction Command="{Binding LoadDangnhap_Command}"
+                                   CommandParameter="{Binding ElementName=wd_dangnhap}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -88,8 +97,19 @@
                     </i:EventTrigger>
                 </i:Interaction.Triggers>
             </Button>
+
+            <CheckBox x:Name="cb_remember"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Bottom" 
+                      Margin="30" Cursor="Pen"
+                      Opacity="0.6"
+                      Content="Ghi nhớ"
+                      IsChecked="{Binding CheckedRemember,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"/>
+
             <Button  x:Name="btn_schk" 
-                     HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="30"  Cursor="Hand"
+                     HorizontalAlignment="Right"
+                     VerticalAlignment="Bottom" 
+                     Margin="30"  Cursor="Hand"
                      Style="{DynamicResource LinkButton}">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="Click">
