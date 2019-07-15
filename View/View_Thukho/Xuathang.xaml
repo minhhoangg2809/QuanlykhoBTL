@@ -809,12 +809,14 @@
                         <TextBlock Width="30"/>
                     </StackPanel>
                     <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                        <Button x:Name="btn_filter"
+                                Style="{StaticResource MaterialDesignFlatButton}"
                                 Margin="0 8 8 0"
                                 Content="LỌC">
                             <i:Interaction.Triggers>
-                                <i:EventTrigger EventName="Clicked">
-                                    <i:InvokeCommandAction Command="{Binding Filter_Command}"/>
+                                <i:EventTrigger EventName="Click">
+                                    <i:InvokeCommandAction Command="{Binding Filter_Command}"
+                                                           CommandParameter="{Binding ElementName=btn_filter}"/>
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                         </Button>
