@@ -37,6 +37,7 @@ namespace QLK_Dn.ViewModel
         }
 
         #region Commands
+        
         public ICommand Delete_Command { get; set; }
         public ICommand Restore_Command { get; set; }
         public ICommand Del_Command { get; set; }
