@@ -7,11 +7,15 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="MySource/MyStyles.xaml"></ResourceDictionary>
                 <ResourceDictionary Source="MySource/MyResourceXaml.xaml"></ResourceDictionary>
+                <!--FluentWPF-->
                 <ResourceDictionary Source="pack://application:,,,/FluentWPF;component/Styles/Controls.xaml"/>
+                <!--/-->
+                <!--MaterialDesignWPF-->
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.BlueGrey.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Lime.xaml"/>
+                <!--/-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
