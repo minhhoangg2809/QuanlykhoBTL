@@ -30,6 +30,8 @@ namespace QLK_Dn.ViewModel
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+                show_waitingwd();
+
                 view.Show();
 
                 win.Close();
@@ -46,6 +48,8 @@ namespace QLK_Dn.ViewModel
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+                show_waitingwd();
+
                 view.Show();
 
                 win.Close();
@@ -61,6 +65,8 @@ namespace QLK_Dn.ViewModel
                 View.View_Quanly.Nhacungcap view = new View.View_Quanly.Nhacungcap();
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                show_waitingwd();
 
                 view.Show();
 
@@ -79,6 +85,8 @@ namespace QLK_Dn.ViewModel
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+                show_waitingwd();
+
                 view.Show();
 
                 win.Close();
@@ -95,6 +103,8 @@ namespace QLK_Dn.ViewModel
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+                show_waitingwd();
+
                 view.Show();
 
                 win.Close();
@@ -108,6 +118,13 @@ namespace QLK_Dn.ViewModel
                 p = p.Parent as FrameworkElement;
             }
             return p;
+        }
+
+        private void show_waitingwd()
+        {
+            View.Waiting_window waiting = new View.Waiting_window();
+            waiting.ShowDialog();
+
         }
     }
 }

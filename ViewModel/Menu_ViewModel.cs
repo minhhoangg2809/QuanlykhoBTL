@@ -26,6 +26,8 @@ namespace QLK_Dn.ViewModel
                 Window win = getParent(p) as Window;
                 WindowState wds = win.WindowState;
 
+                show_waitingwd();
+
                 Select_Window(i, wds,WindowStartupLocation.CenterScreen);
 
                 win.Close();
@@ -97,5 +99,13 @@ namespace QLK_Dn.ViewModel
                     break;
             }
         }
+
+        private void show_waitingwd()
+        {
+            View.Waiting_window waiting = new View.Waiting_window();
+            waiting.ShowDialog();
+
+        }
+
     }
 }

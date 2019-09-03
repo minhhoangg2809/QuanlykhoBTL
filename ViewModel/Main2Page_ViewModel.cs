@@ -25,12 +25,13 @@ namespace QLK_Dn.ViewModel
                 return true;
             }, p =>
             {
-
                 Window win = getParent(p) as Window;
 
                 View.View_Thukho.Mathang view = new View.View_Thukho.Mathang();
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                show_waitingwd();
 
                 view.Show();
 
@@ -48,6 +49,8 @@ namespace QLK_Dn.ViewModel
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+                show_waitingwd();
+
                 view.Show();
 
                 win.Close();
@@ -63,6 +66,8 @@ namespace QLK_Dn.ViewModel
                 View.View_Thukho.Nhaphang view = new View.View_Thukho.Nhaphang();
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                show_waitingwd();
 
                 view.Show();
 
@@ -81,6 +86,8 @@ namespace QLK_Dn.ViewModel
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+                show_waitingwd();
+
                 view.Show();
 
                 win.Close();
@@ -96,6 +103,8 @@ namespace QLK_Dn.ViewModel
                 View.View_Thukho.Loaimathang view = new View.View_Thukho.Loaimathang();
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+
+                show_waitingwd();
 
                 view.Show();
 
@@ -114,11 +123,14 @@ namespace QLK_Dn.ViewModel
                 view.WindowState = win.WindowState;
                 view.WindowStartupLocation = WindowStartupLocation.CenterScreen;
 
+                show_waitingwd();
+
                 view.Show();
 
                 win.Close();
             });
         }
+
         private FrameworkElement getParent(Button lv)
         {
             FrameworkElement p = lv;
@@ -127,6 +139,13 @@ namespace QLK_Dn.ViewModel
                 p = p.Parent as FrameworkElement;
             }
             return p;
+        }
+
+        private void show_waitingwd()
+        {
+            View.Waiting_window waiting = new View.Waiting_window();
+            waiting.ShowDialog();
+
         }
     }
 }

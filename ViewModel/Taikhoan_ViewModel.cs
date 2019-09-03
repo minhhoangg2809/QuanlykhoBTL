@@ -154,7 +154,6 @@ namespace QLK_Dn.ViewModel
 
         #endregion
 
-
         #region Binding Data (Quantrihethong.xaml)
         private string _Tentaikhoan;
 
