@@ -35,7 +35,6 @@
 
 
     <Grid x:Name="gr_main" Opacity="1" Background="White">
-        
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>

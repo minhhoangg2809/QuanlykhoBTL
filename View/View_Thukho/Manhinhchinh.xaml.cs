@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,9 +23,11 @@ namespace QLK_Dn.View.View_Thukho
         public Manhinhchinh()
         {
             InitializeComponent();
+
             ButtonClose.Click += ButtonClose_Click;
             ButtonOpen.Click += ButtonOpen_Click;
         }
+
         void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             ButtonClose.Visibility = Visibility.Hidden;

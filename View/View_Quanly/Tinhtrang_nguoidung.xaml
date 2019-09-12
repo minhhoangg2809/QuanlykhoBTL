@@ -13,7 +13,7 @@
         DataContext="{StaticResource vm_Taikhoan}"
         x:Name="wd_tinhtrang">
 
-   <Window.Resources>
+    <Window.Resources>
         <Storyboard x:Key="Start">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gr_main">
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
@@ -27,20 +27,19 @@
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
-         
     <Window.Triggers>
         <EventTrigger RoutedEvent="Loaded" SourceName="wd_tinhtrang">
             <BeginStoryboard x:Name="Start" Storyboard="{StaticResource Start}"/>
             <BeginStoryboard x:Name="End" Storyboard="{StaticResource End}"/>
         </EventTrigger>
     </Window.Triggers>
-         
+
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding Refesh_State_Command}"/>
         </i:EventTrigger>
     </i:Interaction.Triggers>
-    
+
     <Grid x:Name="gr_main" Opacity="1">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -92,7 +91,8 @@
                 x:Name="bd_table" Margin="10" BorderBrush="Gray" BorderThickness="1.5">
                 <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
                     <ListView x:Name="lv_hienthi"
-                              ItemsSource="{Binding List_Tinhtrang}">
+                              ItemsSource="{Binding List_Tinhtrang}"
+                              SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Width="200" DisplayMemberBinding="{Binding ten_taikhoan}">
@@ -112,7 +112,7 @@
                                                                                CommandParameter="{Binding ElementName=gr_taikhoan}"/>
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
-                                                
+
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
@@ -134,7 +134,7 @@
                                                                                CommandParameter="{Binding ElementName=gr_tennhanvien}"/>
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
-                                                
+
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>
@@ -149,13 +149,13 @@
                                                 </Grid.ColumnDefinitions>
                                                 <MaterialDesign:PackIcon Kind="GithubFace"/>
                                                 <TextBlock Grid.Column="1" Text=" Tình trạng"/>
-                                                
+
                                                 <i:Interaction.Triggers>
                                                     <i:EventTrigger EventName="MouseLeftButtonDown">
                                                         <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTinhtrang_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                     </i:EventTrigger>
                                                 </i:Interaction.Triggers>
-                                                
+
                                             </Grid>
                                         </DataTemplate>
                                     </GridViewColumn.HeaderTemplate>

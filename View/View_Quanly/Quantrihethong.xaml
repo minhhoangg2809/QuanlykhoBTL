@@ -310,8 +310,7 @@
                                     Style="{DynamicResource ListviewBorder}">
                                     <ScrollViewer Style="{DynamicResource ResourceKey=ScrollViewerListViewStyle}">
                                         <ListView x:Name="lv_hienthi"
-                                              ItemsSource="{Binding List}"
-                                              SelectedItem="{Binding SelectedItem,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                                              ItemsSource="{Binding List}">
                                             <ListView.View>
                                                 <GridView>
                                                     <GridViewColumn Width="auto" >
@@ -369,13 +368,13 @@
                                                                     </Grid.ColumnDefinitions>
                                                                     <MaterialDesign:PackIcon Kind="AccountBox"/>
                                                                     <TextBlock Grid.Column="1" Text=" Tên tài khoản"/>
-                                                                    
+
                                                                     <i:Interaction.Triggers>
                                                                         <i:EventTrigger EventName="MouseLeftButtonDown">
                                                                             <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTentaikhoan_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                                         </i:EventTrigger>
                                                                     </i:Interaction.Triggers>
-                                                                    
+
                                                                 </Grid>
                                                             </DataTemplate>
                                                         </GridViewColumn.HeaderTemplate>
@@ -410,7 +409,7 @@
                                                                             <i:InvokeCommandAction Command="{Binding DataContext.OrderbyTennhanvien_Command,RelativeSource={RelativeSource AncestorType=ListView}}"/>
                                                                         </i:EventTrigger>
                                                                     </i:Interaction.Triggers>
-                                                                    
+
                                                                 </Grid>
                                                             </DataTemplate>
                                                         </GridViewColumn.HeaderTemplate>

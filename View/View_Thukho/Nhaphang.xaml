@@ -294,8 +294,7 @@
                                                 </Button>
                                                 <Button Style="{StaticResource MaterialDesignFlatButton}"
                                                     Margin="0 8 8 0"
-                                                    Command="{Binding CloseDialog_Command}"
-                                                    CommandParameter="{Binding ElementName=dil_print}">
+                                                    Command="{Binding CloseDialog_Command}">
                                                     HỦY
                                                 </Button>
                                             </StackPanel>

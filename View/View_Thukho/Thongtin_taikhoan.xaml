@@ -11,8 +11,8 @@
         BorderBrush="Gray"
         BorderThickness="2"
         x:Name="wd_thongtin">
-         
- <Window.Resources>
+
+    <Window.Resources>
         <Storyboard x:Key="Start">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="gr_main">
                 <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
@@ -34,17 +34,7 @@
     </Window.Triggers>
 
 
-    <Grid x:Name="gr_main" Opacity="1" Background="White">
-
-        <Grid.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-                <SkewTransform/>
-                <RotateTransform/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Grid.RenderTransform>
-
+    <Grid Background="White" x:Name="gr_main" Opacity="1">
         <Grid.RowDefinitions>
             <RowDefinition/>
             <RowDefinition Height="auto"/>
