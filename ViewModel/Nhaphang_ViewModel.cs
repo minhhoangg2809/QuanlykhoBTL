@@ -367,6 +367,7 @@ namespace QLK_Dn.ViewModel
             IsOpen = false;
             IsOpen_insert = false;
             IsOpen_Filter = false;
+            IsOpen_prt = false;
 
             Active_Command = new RelayCommand<object>(p =>
             {
@@ -379,12 +380,12 @@ namespace QLK_Dn.ViewModel
                 Active = false;
             });
 
-            CloseDialog_Command = new RelayCommand<MaterialDesignThemes.Wpf.DialogHost>(p =>
+            CloseDialog_Command = new RelayCommand<object>(p =>
             {
                 return true;
             }, p =>
             {
-                p.IsOpen = false;
+                IsOpen_prt = false;
             });
 
             Load_Command = new RelayCommand<object>(p =>
@@ -406,6 +407,7 @@ namespace QLK_Dn.ViewModel
                 IsOpen = false;
                 IsOpen_insert = false;
                 IsOpen_Filter = false;
+                IsOpen_prt = false;
             });
 
             #region Tao moi
@@ -648,7 +650,7 @@ namespace QLK_Dn.ViewModel
 
             });
 
-            OpenFilter_Command = new RelayCommand<object>(p => 
+            OpenFilter_Command = new RelayCommand<object>(p =>
             {
                 if (IsOpen_Filter == true || IsOpen == true || IsOpen_insert == true || IsOpen_prt == true)
                     return false;
@@ -715,7 +717,7 @@ namespace QLK_Dn.ViewModel
                 }
 
                 IsOpen_Filter = false;
-                
+
             });
             #endregion
 
@@ -878,9 +880,9 @@ namespace QLK_Dn.ViewModel
                         printDialog.PrintVisual(p, "invoice");
                     }
 
-                    MessageBox.Show("Thành công !!!","THÔNG BÁO");
+                    MessageBox.Show("Thành công !!!", "THÔNG BÁO");
                 }
-                catch (Exception) { MessageBox.Show("Có lỗi xảy ra !!!","THÔNG BÁO"); };
+                catch (Exception) { MessageBox.Show("Có lỗi xảy ra !!!", "THÔNG BÁO"); };
             });
 
             PrinterFormClose_Command = new RelayCommand<Window>(p =>

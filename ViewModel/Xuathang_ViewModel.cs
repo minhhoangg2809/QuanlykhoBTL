@@ -397,6 +397,7 @@ namespace QLK_Dn.ViewModel
             IsOpen = false;
             IsOpen_insert = false;
             IsOpen_Filter = false;
+            IsOpen_prt = false;
 
             Active_Command = new RelayCommand<object>(p =>
             {
@@ -409,12 +410,12 @@ namespace QLK_Dn.ViewModel
                 Active = false;
             });
 
-            CloseDialog_Command = new RelayCommand<MaterialDesignThemes.Wpf.DialogHost>(p =>
+            CloseDialog_Command = new RelayCommand<object>(p =>
             {
                 return true;
             }, p =>
             {
-                p.IsOpen = false;
+                IsOpen_prt = false;
             });
 
             Load_Command = new RelayCommand<object>(p =>
@@ -435,6 +436,7 @@ namespace QLK_Dn.ViewModel
                 IsOpen = false;
                 IsOpen_insert = false;
                 IsOpen_Filter = false;
+                IsOpen_prt = false;
 
                 ListLoai_Filter = new ObservableCollection<Model.LOAIHANG>(Model.DataProvider.Ins.DB.LOAIHANGs.Where(x => x.IsDeleted == false));
                 ListMathang_Filter = new ObservableCollection<Model.MATHANG>(Model.DataProvider.Ins.DB.MATHANGs.Where(x => x.IsDeleted == false));
