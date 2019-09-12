@@ -38,6 +38,7 @@ namespace QLK_Dn.ViewModel
                 win.Close();
             });
 
+
             toXuat_Command = new RelayCommand<Button>(p =>
             {
                 return true;
