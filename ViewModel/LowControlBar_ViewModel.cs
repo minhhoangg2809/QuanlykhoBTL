@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,36 +11,13 @@ namespace QLK_Dn.ViewModel
 {
     public class LowControlBar_ViewModel : BaseViewModel
     {
-        private bool _IsOpen;
-        public bool IsOpen
-        {
-            get { return _IsOpen; }
-            set { _IsOpen = value; OnPropertyChanged(); }
-        }
-
-        private string _Content;
-        public string Content
-        {
-            get { return _Content; }
-            set { _Content = value; OnPropertyChanged(); }
-        }
         public ICommand ToMain_Command { get; set; }
         public ICommand Account_Command { get; set; }
         public ICommand Logout_Command { get; set; }
-        public ICommand LogoutShow_Command { get; set; }
-        public ICommand CloseDialog_Command { get; set; } 
+        public ICommand CloseDialog_Command { get; set; }
+
         public LowControlBar_ViewModel()
         {
-            IsOpen = false;
-            Content = " Bạn muốn đăng xuất ???";
-
-            CloseDialog_Command = new RelayCommand<object>(p => 
-            {
-                return true;
-            }, p => 
-            {
-                IsOpen = false;
-            });
 
             ToMain_Command = new RelayCommand<UserControl>(p =>
             {
@@ -97,28 +74,17 @@ namespace QLK_Dn.ViewModel
                     ViewModel.Taikhoan_ViewModel.Chuyentrangthai_Dong(ViewModel.Taikhoan_ViewModel.Glo_CurrentUser);
                 }
 
-                IsOpen = false;
                 Dangnhap dangnhap = new Dangnhap();
                 dangnhap.Show();
-                
+
                 Window windowparent = getParent(p) as Window;
                 if (windowparent != null)
                 {
                     windowparent.Close();
                 }
-               
+
             });
 
-            LogoutShow_Command = new RelayCommand<UserControl>(p => 
-            {
-                if (IsOpen == true)
-                    return false;
-
-                return true;
-            }, p => 
-            {
-                IsOpen = true;
-            });
         }
         private FrameworkElement getParent(UserControl uc)
         {
